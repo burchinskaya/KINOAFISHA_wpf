@@ -1,0 +1,68 @@
+﻿<Page x:Class="Pizzaria1.MenuControl"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Pizzaria1"
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+      mc:Ignorable="d" 
+      d:DesignHeight="300" d:DesignWidth="300"
+      Title="MenuControl" Width="946" Height="566">
+
+    <Page.Resources>
+        <Style TargetType="Button">
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Background" Value="#FFEEEEEE"/>
+            <Setter Property="Foreground" Value="#FF041705"/>
+            <Setter Property="FontFamily" Value="Century Gothic"/>
+            <Setter Property="FontSize" Value="20"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="{x:Null}"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </Page.Resources>
+
+    <Grid Width="946" Height="563" Background="#FFEEEEEE">
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="48*"/>
+            <ColumnDefinition Width="246*"/>
+            <ColumnDefinition Width="273*"/>
+            <ColumnDefinition Width="190*"/>
+            <ColumnDefinition Width="189*"/>
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="45"/>
+            <RowDefinition Height="47*"/>
+            <RowDefinition Height="212*"/>
+            <RowDefinition Height="114*"/>
+            <RowDefinition Height="145*"/>
+        </Grid.RowDefinitions>
+        <Grid x:Name="GridMenu2" VerticalAlignment="Bottom" Height="45" Margin="0,0,0,0" Grid.Row="0" Background="White" Grid.ColumnSpan="5">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <materialDesign:TransitioningContent x:Name="TrainsitionigContentSlide2" OpeningEffect="{materialDesign:TransitionEffect SlideInFromBottom, Duration=0:0:0.2}" Foreground="#FF19110C"/>
+            <Button Content="Десерты" Grid.Column="0" FontSize="18" Click="Button_Click"/>
+            <Button Content="Закуски" Grid.Column="1" FontSize="18" Click="Button_Click_1"/>
+            <Button Content="Напитки" Grid.Column="2" FontSize="18" Click="Button_Click_2"/>
+            <Button Content="Паста" Grid.Column="3" FontSize="18" Height="45" VerticalAlignment="Top" Click="Button_Click_3"/>
+            <Button Content="Пицца" Grid.Column="4" FontSize="18" Click="Button_Click_4"/>
+            <Button Content="Салаты" Grid.Column="5" FontSize="18" Click="Button_Click_5"/>
+            <Button Content="Супы" Grid.Column="6" FontSize="18" Click="Button_Click_6"/>
+
+        </Grid>
+        <DataGrid x:Name="dishesGrid"  Grid.Row="2" Grid.RowSpan="2" Grid.Column="1"/>
+
+    </Grid>
+</Page>

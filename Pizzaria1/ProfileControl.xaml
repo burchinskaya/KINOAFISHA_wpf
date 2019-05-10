@@ -1,0 +1,184 @@
+﻿<UserControl x:Class="KINOwpf.ProfileControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:KINOwpf"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             mc:Ignorable="d" 
+             d:DesignHeight="800" d:DesignWidth="1500">
+
+    <UserControl.Resources>
+
+        <Style x:Key="RoundCorner" TargetType="{x:Type Button}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="#FF6C131F" CornerRadius="11" BorderThickness="1" Padding="2">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+
+                </Setter.Value>
+            </Setter>
+            <Setter Property="FontFamily" Value="Century Gothic"/>
+        </Style>
+
+        <Style x:Key="ImageTr" TargetType="{x:Type Image}">
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Trigger.EnterActions>
+                        <BeginStoryboard>
+                            <Storyboard>
+                                <ThicknessAnimation
+                                    From="0"
+                                    To="10"
+                                    Duration="0:0:0.3"
+                                    Storyboard.TargetProperty="Margin"
+                                    AutoReverse="True"/>
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </Trigger.EnterActions>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+
+    </UserControl.Resources>
+
+    <materialDesign:TransitioningContent x:Name="TrainsitionigContentSlide" OpeningEffect="{materialDesign:TransitionEffect SlideInFromLeft, Duration=0:0:1.3}">
+        <Grid Background="White">
+
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="50"/>
+                <ColumnDefinition Width="60"/>
+                <ColumnDefinition Width="233*"/>
+                <ColumnDefinition Width="440*"/>
+                <ColumnDefinition Width="60"/>
+                <ColumnDefinition Width="166*"/>
+                <ColumnDefinition Width="55*"/>
+                <ColumnDefinition Width="60"/>
+                <ColumnDefinition Width="30"/>
+                <ColumnDefinition Width="236*"/>
+                <ColumnDefinition Width="60"/>
+                <ColumnDefinition Width="50"/>
+            </Grid.ColumnDefinitions>
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="20"/>
+                <RowDefinition Height="45"/>
+                <RowDefinition Height="45"/>
+                <RowDefinition Height="45"/>
+                <RowDefinition Height="45"/>
+                <RowDefinition Height="45"/>
+                <RowDefinition Height="45"/>
+                <RowDefinition Height="45"/>
+                <RowDefinition Height="45"/>
+                <RowDefinition Height="45"/>
+                <RowDefinition Height="58"/>
+                <RowDefinition Height="39*"/>
+                <RowDefinition Height="45"/>
+                <RowDefinition Height="77*"/>
+                <RowDefinition Height="83*"/>
+                <RowDefinition Height="100"/>
+            </Grid.RowDefinitions>
+            <!-- Style="{DynamicResource ImageTr}"-->
+            <TextBlock Text="Имя: " Margin="0,10,20,10" Grid.Row="1" Grid.Column="2" FontFamily="Century Gothic" FontSize="20" FontWeight="Bold" TextAlignment="Right" VerticalAlignment="Center" Height="25"/>
+            <TextBlock Text="Фамилия: " Margin="0,10,20,10" Grid.Row="2" Grid.Column="2" FontFamily="Century Gothic" FontSize="20" FontWeight="Bold" TextAlignment="Right" VerticalAlignment="Center" Height="25"/>
+
+            <TextBlock Text="Логин: " Margin="0,10,20,10" Grid.Row="3" Grid.Column="2" FontFamily="Century Gothic" FontSize="20" FontWeight="Bold" TextAlignment="Right" VerticalAlignment="Center" Height="25"/>
+            <TextBlock Text="Старый пароль: " Margin="0,10,20,10" Grid.Row="4" Grid.Column="2" FontFamily="Century Gothic" FontSize="20" FontWeight="Bold" TextAlignment="Right" VerticalAlignment="Center" Height="25"/>
+            <TextBlock Text="Новый пароль: " Margin="0,10,20,10" Grid.Row="5" Grid.Column="2" FontFamily="Century Gothic" FontSize="20" FontWeight="Bold" TextAlignment="Right" VerticalAlignment="Center" Height="25"/>
+            <TextBlock Text="Повторите пароль: " Margin="0,10,20,10" Grid.Row="6" Grid.Column="2" FontFamily="Century Gothic" FontSize="20" FontWeight="Bold" TextAlignment="Right" VerticalAlignment="Center" Height="25"/>
+            <TextBlock Text="E-mail: " Margin="0,10,20,10" Grid.Row="7" Grid.Column="2" FontFamily="Century Gothic" FontSize="20" FontWeight="Bold" TextAlignment="Right" VerticalAlignment="Center" Height="25"/>
+
+            <TextBox x:Name="firstname" Grid.Row="1" Grid.Column="3" FontFamily="Century Gothic" FontSize="18" Margin="10,5"/>
+            <TextBox x:Name="lastname" Grid.Row="2" Grid.Column="3" FontFamily="Century Gothic" FontSize="18" Margin="10,5"/>
+            <TextBox x:Name="login" Grid.Row="3" Grid.Column="3" FontFamily="Century Gothic" FontSize="18" Margin="10,5"/>
+            <PasswordBox x:Name="oldpass" Grid.Row="4" Grid.Column="3" FontFamily="Century Gothic" FontSize="18" Margin="10,5"/>
+            <PasswordBox x:Name="newpass" Grid.Row="5" Grid.Column="3" FontFamily="Century Gothic" FontSize="18" Margin="10,5"/>
+            <PasswordBox x:Name="newpass2" Grid.Row="6" Grid.Column="3" FontFamily="Century Gothic" FontSize="18" Margin="10,5"/>
+            <TextBox x:Name="email" Grid.Row="7" Grid.Column="3" FontFamily="Century Gothic" FontSize="18" Margin="10,5"/>
+            <DataGrid x:Name="bookingsGrid" VerticalScrollBarVisibility="Visible" AutoGenerateColumns="False" Grid.ColumnSpan="4" Margin="10,10,20,10" Grid.Row="11" Grid.RowSpan="4" Background="#FFEEEEEE" FontFamily="Century Gothic" FontSize="18" Grid.Column="1" SelectionChanged="bookingsGrid_SelectionChanged">
+                <DataGrid.ColumnHeaderStyle>
+                    <Style TargetType="DataGridColumnHeader">
+                        <Setter Property="FontSize" Value="25"/>
+                        <Setter Property="Background" Value="#FFEEEEEE"/>
+                        <Setter Property="HorizontalAlignment" Value="Center"/>
+                        <Setter Property="FontFamily" Value="Century Gothic"/>
+                        <Setter Property="Height" Value="40"/>
+                    </Style>
+                </DataGrid.ColumnHeaderStyle>
+                <DataGrid.Columns>
+                    <DataGridTextColumn Binding="{Binding Path=Code}" Header="Код" Width="Auto"/>
+                    <DataGridTextColumn Binding="{Binding Path=Film}" Header="Фильм" Width="Auto"/>
+                    <DataGridTextColumn Binding="{Binding Path=Date}" Header="Дата" Width="Auto"/>
+                    <DataGridTextColumn Binding="{Binding Path=Time}" Header="Сеанс" Width="Auto"/>
+                </DataGrid.Columns>
+            </DataGrid>
+            <Button Content="Удалить бронирование" FontFamily="Century Gothic" FontSize="20" Height="Auto" Grid.Row="15" Grid.Column="3" Margin="64,22,76,22" Click="Button_Click_5"/>
+            <DataGrid x:Name="placesGrid" VerticalScrollBarVisibility="Visible" AutoGenerateColumns="False" Margin="50,10,10,10" Grid.Row="11" Grid.RowSpan="4" Background="#FFEEEEEE" FontFamily="Century Gothic" FontSize="18" Grid.Column="4" Grid.ColumnSpan="3">
+                <DataGrid.ColumnHeaderStyle>
+                    <Style TargetType="{x:Type DataGridColumnHeader}">
+                        <Setter Property="FontSize" Value="25"/>
+                        <Setter Property="Background" Value="#FFEEEEEE"/>
+                        <Setter Property="HorizontalAlignment" Value="Center"/>
+                        <Setter Property="FontFamily" Value="Century Gothic"/>
+                        <Setter Property="Height" Value="40"/>
+                    </Style>
+                </DataGrid.ColumnHeaderStyle>
+                <DataGrid.Columns>
+                    <DataGridTextColumn Binding="{Binding Range}" Header="Ряд" Width="10*"/>
+                    <DataGridTextColumn Binding="{Binding Seat}" Header="Место" Width="20*"/>
+                </DataGrid.Columns>
+            </DataGrid>
+
+            <TextBlock Text="Ваши бронирования" FontFamily="Century Gothic" FontSize="30" Height="42" TextAlignment="Center" VerticalAlignment="Center" Grid.Row="10" Grid.Column="2" Grid.ColumnSpan="4" Margin="0,8,5,8"/>
+
+            <Button Grid.Column="4" Grid.Row="1" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FF6C131F" Margin="0,7,0,6" Height="Auto" Click="Button_Click">
+                <materialDesign:PackIcon Kind="Check" Width="25" Height="25" Margin="-5"/>
+            </Button>
+            <Button Grid.Column="4" Grid.Row="2" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FF6C131F" Margin="0,7,0,6" Height="Auto" Click="Button_Click_1">
+                <materialDesign:PackIcon Kind="Check" Width="25" Height="25" Margin="-5"/>
+            </Button>
+            <Button Grid.Column="4" Grid.Row="3" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FF6C131F" Margin="0,7,0,6" Height="Auto" Click="Button_Click_2">
+                <materialDesign:PackIcon Kind="Check" Width="25" Height="25" Margin="-5"/>
+            </Button>
+            <Button Grid.Column="4" Grid.Row="6" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FF6C131F" Margin="0,7,0,6" Height="Auto" Click="Button_Click_4">
+                <materialDesign:PackIcon Kind="Check" Width="25" Height="25" Margin="-5"/>
+            </Button>
+            <Button Grid.Column="4" Grid.Row="7" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FF6C131F" Margin="0,7,0,6" Height="Auto" Click="Button_Click_3">
+                <materialDesign:PackIcon Kind="Check" Width="25" Height="25" Margin="-5"/>
+            </Button>
+            <TextBlock x:Name="submit" Text="Подтверждение: " Visibility="Collapsed" Margin="0,10" Grid.Row="4" Grid.Column="5" FontFamily="Century Gothic" FontSize="20" FontWeight="Bold" TextAlignment="Center" VerticalAlignment="Center" Height="25" Grid.ColumnSpan="2"/>
+            <TextBox x:Name="code" Grid.Row="5"  Grid.Column="5"  Visibility="Collapsed" FontFamily="Century Gothic" FontSize="18" Margin="10,5" Grid.ColumnSpan="2" TextChanged="code_TextChanged"/>
+            <TextBlock Text="Ваши подписки" FontFamily="Century Gothic" FontSize="30" Grid.Column="8" TextAlignment="Center" Grid.ColumnSpan="3" Margin="0,8,0,12" VerticalAlignment="Center" Grid.Row="10" Height="38"/>
+            <DataGrid x:Name="subscribesGrid" AutoGenerateColumns="False" Margin="0,10" Grid.Row="11" Grid.RowSpan="4" Background="#FFEEEEEE" FontFamily="Century Gothic" FontSize="18" Grid.Column="8" Grid.ColumnSpan="3">
+                <DataGrid.ColumnHeaderStyle>
+                    <Style TargetType="{x:Type DataGridColumnHeader}">
+                        <Setter Property="FontSize" Value="25"/>
+                        <Setter Property="Background" Value="#FFEEEEEE"/>
+                        <Setter Property="HorizontalAlignment" Value="Center"/>
+                        <Setter Property="FontFamily" Value="Century Gothic"/>
+                        <Setter Property="Height" Value="40"/>
+                    </Style>
+                </DataGrid.ColumnHeaderStyle>
+                <DataGrid.Columns>
+                    <DataGridTextColumn Binding="{Binding Name}" Header="Фильм" Width="10*"/>
+                </DataGrid.Columns>
+            </DataGrid>
+            <Button Content="Удалить подписку" FontFamily="Century Gothic" FontSize="20" Height="Auto" Grid.Row="15" Grid.Column="8" Margin="14,22,12,22" Grid.ColumnSpan="3"/>
+            <Image x:Name="filmposter" Source="Images/мстители.jpg" Grid.Column="8" Grid.ColumnSpan="3" Grid.Row="1" Grid.RowSpan="9"/>
+
+            <Button Grid.Column="8" Grid.Row="1" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FF6C131F" Height="Auto" Click="Button_Click_6">
+                <materialDesign:PackIcon Kind="DotsVertical"  Width="25" Height="25" Margin="-10,0,0,0"/>
+            </Button>
+            <TextBlock Text="Путь сохранения билетов: " Margin="0,10,20,10" Grid.Row="8" Grid.Column="1" FontFamily="Century Gothic" FontSize="20" FontWeight="Bold" TextAlignment="Right" VerticalAlignment="Center" Height="25" Grid.ColumnSpan="2"/>
+            <TextBox x:Name="path" Grid.Row="8" Grid.Column="3" FontFamily="Century Gothic" FontSize="18" Margin="10,5"/>
+            <Button Grid.Column="4" Grid.Row="8" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FF6C131F" Margin="0,7,0,6" Height="Auto" Click="Button_Click_7">
+                <materialDesign:PackIcon Kind="DotsHorizontal" Width="25" Height="25" Margin="-5"/>
+            </Button>
+        </Grid>
+    </materialDesign:TransitioningContent>
+</UserControl>

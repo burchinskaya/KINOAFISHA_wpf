@@ -1,0 +1,137 @@
+﻿<UserControl x:Class="KINOwpf.NewFilmControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:KINOwpf"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             mc:Ignorable="d" 
+             d:DesignHeight="800" d:DesignWidth="1500">
+
+    <UserControl.Resources>
+
+        <Style x:Key="RoundCorner" TargetType="{x:Type Button}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="#FF6C131F" CornerRadius="11" BorderThickness="1" Padding="2">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+
+                </Setter.Value>
+            </Setter>
+            <Setter Property="FontFamily" Value="Century Gothic"/>
+        </Style>
+
+        <Style x:Key="ImageTr" TargetType="{x:Type Image}">
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Trigger.EnterActions>
+                        <BeginStoryboard>
+                            <Storyboard>
+                                <ThicknessAnimation
+                                    From="0"
+                                    To="10"
+                                    Duration="0:0:0.3"
+                                    Storyboard.TargetProperty="Margin"
+                                    AutoReverse="True"/>
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </Trigger.EnterActions>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+
+    </UserControl.Resources>
+
+    <materialDesign:TransitioningContent x:Name="TrainsitionigContentSlide" OpeningEffect="{materialDesign:TransitionEffect SlideInFromLeft, Duration=0:0:1.3}">
+        <Grid Background="White">
+
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="47"/>
+                <ColumnDefinition Width="130"/>
+                <ColumnDefinition Width="68"/>
+                <ColumnDefinition Width="50"/>
+                <ColumnDefinition Width="136"/>
+                <ColumnDefinition Width="50"/>
+                <ColumnDefinition Width="179*"/>
+                <ColumnDefinition Width="22*"/>
+                <ColumnDefinition Width="429*"/>
+                <ColumnDefinition Width="176*"/>
+                <ColumnDefinition Width="177*"/>
+                <ColumnDefinition Width="30"/>
+            </Grid.ColumnDefinitions>
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="17"/>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="10*"/>
+                <RowDefinition Height="45"/>
+                <RowDefinition Height="45"/>
+                <RowDefinition Height="45"/>
+                <RowDefinition Height="45"/>
+                <RowDefinition Height="383*"/>
+                <RowDefinition Height="0*"/>
+                <RowDefinition Height="53*"/>
+                <RowDefinition Height="53*"/>
+                <RowDefinition Height="54*"/>
+                <RowDefinition Height="20"/>
+            </Grid.RowDefinitions>
+            <!-- Style="{DynamicResource ImageTr}"-->
+            <TextBlock Text="Название: " Grid.Row="3" Grid.Column="1" FontFamily="Century Gothic" FontSize="20" HorizontalAlignment="Right" VerticalAlignment="Center" FontWeight="Bold" Height="25" Margin="0,10" Width="102"/>
+            <TextBlock Text="Рейтинги: " Grid.Row="4" Grid.Column="1" FontFamily="Century Gothic" FontSize="20" HorizontalAlignment="Right" VerticalAlignment="Center" FontWeight="Bold" Height="25" Margin="0,10" Width="102"/>
+            <TextBlock Text="Слоган: " Grid.Row="5" Grid.Column="1" FontFamily="Century Gothic" FontSize="20" HorizontalAlignment="Right" VerticalAlignment="Center" FontWeight="Bold" Height="25" Margin="0,10" Width="84"/>
+            <TextBlock Text="Страна: " Grid.Row="6" Grid.Column="1" FontFamily="Century Gothic" FontSize="20" HorizontalAlignment="Right" VerticalAlignment="Center" FontWeight="Bold" Height="25" Width="89" Margin="0,10"/>
+            <TextBlock Margin="0,5,0,0" Text="Описание: " Grid.Row="7" Grid.Column="1" FontFamily="Century Gothic" FontSize="20" HorizontalAlignment="Right" VerticalAlignment="Top" FontWeight="Bold" Height="25" Width="115"/>
+
+            <TextBlock x:Name="filmrating" Margin="10,10,0,10" Text="IMDb:                Кинопоиск:           " Grid.Row="4" Grid.Column="2" FontFamily="Century Gothic" FontSize="18" HorizontalAlignment="Left" VerticalAlignment="Center" Height="25" Width="499" Grid.ColumnSpan="7"/>
+            <TextBox x:Name="filmslogan" Text="" Margin="10,5" Grid.Row="5" Grid.Column="2" FontFamily="Century Gothic" FontSize="18" Grid.ColumnSpan="5"/>
+            <TextBox x:Name="filmcountry" Margin="10,5" Text="" Grid.Row="6" Grid.Column="2" FontFamily="Century Gothic" FontSize="18" Grid.ColumnSpan="5"/>
+            <TextBox x:Name="filmdescription" Height="Auto" Margin="10,5" TextWrapping="Wrap" Text="" Grid.Row="7" Grid.Column="2" FontFamily="Century Gothic" FontSize="18" Grid.ColumnSpan="5"/>
+            <TextBox x:Name="filmIMDb" Margin="7,4,9,6" Text="" Grid.Row="4" Grid.Column="3" FontFamily="Century Gothic" FontSize="18" TextAlignment="Center"/>
+            <TextBox x:Name="filmKinopoisk" Margin="8,4,8,6" Text="" Grid.Row="4" Grid.Column="5" FontFamily="Century Gothic" FontSize="18" TextAlignment="Center"/>
+            <TextBox x:Name="filmtitle" Margin="10,5" Text="" Grid.Row="3" Grid.Column="2" FontFamily="Century Gothic" FontSize="18" Grid.ColumnSpan="5"/>
+            <Button Content="Загрузить постер" Margin="20,0,19,0" Grid.Column="8" Grid.Row="2" Grid.RowSpan="2" FontFamily="Century Gothic" FontSize="20" Height="Auto" Click="Button_Click"/>
+            <Image x:Name="filmposter"  Grid.Column="8" Grid.Row="4" Grid.RowSpan="4" Margin="0,20,175,0" Grid.ColumnSpan="2"/>
+            <TextBlock Text="Жанры фильма: " Grid.Row="3" Grid.Column="9" FontFamily="Century Gothic" FontSize="20" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.ColumnSpan="2" Margin="92,10,91,10" Height="25" Width="172"/>
+            <TextBox x:Name="filmgenre" Margin="11,5,10,5" Text="" Grid.Row="4" Grid.Column="9" FontFamily="Century Gothic" FontSize="18" Grid.ColumnSpan="2"/>
+            <Button Grid.Column="9" Grid.Row="5" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FF6C131F" HorizontalAlignment="Left" Height="Auto" Margin="129,7,0,6" Width="48" Click="Button_Click_1">
+                <materialDesign:PackIcon Kind="Plus" Width="25" Height="25" Margin="-5"/>
+            </Button>
+            <Button Grid.Column="10" Grid.Row="5" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FF6C131F" HorizontalAlignment="Left" Height="Auto" Margin="1,7,0,6" Width="46" Click="Button_Click_2">
+                <materialDesign:PackIcon Kind="Minus" Width="25" Height="25" Margin="-5"/>
+            </Button>
+            <DataGrid x:Name="genresGrid" AutoGenerateColumns="False" Grid.ColumnSpan="2" Grid.Column="9" Margin="11,10,10,10" Grid.Row="6" Grid.RowSpan="2" Background="#FFEEEEEE" FontFamily="Century Gothic" FontSize="18">
+                <DataGrid.ColumnHeaderStyle>
+                    <Style TargetType="DataGridColumnHeader">
+                        <Setter Property="FontSize" Value="25"/>
+                        <Setter Property="Background" Value="#FFEEEEEE"/>
+                        <Setter Property="HorizontalAlignment" Value="Center"/>
+                        <Setter Property="FontFamily" Value="Century Gothic"/>
+                        <Setter Property="Height" Value="40"/>
+                    </Style>
+                </DataGrid.ColumnHeaderStyle>
+                <DataGrid.Columns>
+                    <DataGridTextColumn Binding="{Binding Path=Name}" Header="Жанр" Width="*"/>
+                </DataGrid.Columns>
+            </DataGrid>
+            <Grid Grid.Row="10" Grid.RowSpan="2" Grid.ColumnSpan="12">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <Button Content="Сохранить фильм" FontFamily="Century Gothic" FontSize="20" Height="55" Grid.Column="2" Margin="10,0" Click="Button_Click_3"/>
+                <Button Content="Редактировать сеансы" FontFamily="Century Gothic" FontSize="20" Height="55" Grid.Column="1" Margin="10,0" Click="Button_Click_4"/>
+
+            </Grid>
+            <TextBlock Text="Трейлер: " Grid.Row="9" Grid.Column="1" FontFamily="Century Gothic" FontSize="20" HorizontalAlignment="Right" VerticalAlignment="Center" FontWeight="Bold" Height="25" Width="89" Margin="0,10"/>
+            <TextBox x:Name="trailer" Margin="10,5" Text="" Grid.Row="9" Grid.Column="2" FontFamily="Century Gothic" FontSize="18" Grid.ColumnSpan="5"/>
+        </Grid>
+    </materialDesign:TransitioningContent>
+</UserControl>

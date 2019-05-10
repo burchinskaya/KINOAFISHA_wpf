@@ -1,0 +1,129 @@
+﻿<UserControl x:Class="KINOwpf.Seancess"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:KINOwpf"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:WPFMediaKit="clr-namespace:WPFMediaKit.DirectShow.Controls;assembly=WPFMediaKit"
+             mc:Ignorable="d" 
+             d:DesignHeight="800" d:DesignWidth="1500">
+
+    <UserControl.Resources>
+
+        <Style x:Key="RoundCorner" TargetType="{x:Type Button}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="#FF6C131F" CornerRadius="11" BorderThickness="1" Padding="2">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+
+                </Setter.Value>
+            </Setter>
+            <Setter Property="FontFamily" Value="Century Gothic"/>
+        </Style>
+
+        <Style x:Key="ImageTr" TargetType="{x:Type Image}">
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Trigger.EnterActions>
+                        <BeginStoryboard>
+                            <Storyboard>
+                                <ThicknessAnimation
+                                    From="0"
+                                    To="10"
+                                    Duration="0:0:0.3"
+                                    Storyboard.TargetProperty="Margin"
+                                    AutoReverse="True"/>
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </Trigger.EnterActions>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+
+    </UserControl.Resources>
+
+    <materialDesign:TransitioningContent x:Name="TrainsitionigContentSlide" OpeningEffect="{materialDesign:TransitionEffect SlideInFromLeft, Duration=0:0:1.3}">
+        <Grid Background="White">
+
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="47"/>
+                <ColumnDefinition Width="156"/>
+                <ColumnDefinition Width="190"/>
+                <ColumnDefinition Width="41*"/>
+                <ColumnDefinition Width="343*"/>
+                <ColumnDefinition Width="174*"/>
+                <ColumnDefinition Width="519*"/>
+                <ColumnDefinition Width="30"/>
+            </Grid.ColumnDefinitions>
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="20"/>
+                <RowDefinition Height="59*"/>
+                <RowDefinition Height="14*"/>
+                <RowDefinition Height="45"/>
+                <RowDefinition Height="45"/>
+                <RowDefinition Height="45"/>
+                <RowDefinition Height="45"/>
+                <RowDefinition Height="293*"/>
+                <RowDefinition Height="14"/>
+                <RowDefinition Height="50*"/>
+                <RowDefinition Height="50*"/>
+                <RowDefinition Height="50*"/>
+                <RowDefinition Height="50*"/>
+                <RowDefinition Height="20"/>
+            </Grid.RowDefinitions>
+
+            <DataGrid Background="#FFEEEEEE" AutoGenerateColumns="False" x:Name="filmsGrid" Grid.Column="1" Grid.Row="1" Grid.RowSpan="8" BorderBrush="#FF6C131F" HorizontalScrollBarVisibility="Hidden" SelectionChanged="filmsGrid_SelectionChanged" Grid.ColumnSpan="2" FontFamily="Century Gothic" FontSize="18" Height="550" VerticalAlignment="Top">
+                <DataGrid.ColumnHeaderStyle>
+                    <Style TargetType="DataGridColumnHeader">
+                        <Setter Property="FontSize" Value="25"/>
+                        <Setter Property="Background" Value="#FFEEEEEE"/>
+                        <Setter Property="HorizontalAlignment" Value="Center"/>
+                        <Setter Property="FontFamily" Value="Century Gothic"/>
+                        <Setter Property="Height" Value="40"/>
+                    </Style>
+                </DataGrid.ColumnHeaderStyle>
+                <DataGrid.Columns>
+                    <DataGridTextColumn Width="347" Header="Фильм" Binding="{Binding Name}"/>
+                </DataGrid.Columns>
+            </DataGrid>
+            <Image x:Name="poster" Grid.Row="1" Grid.RowSpan="7" Grid.Column="4" Source="Images/мстители.jpg"/>
+            <!-- Style="{DynamicResource ImageTr}"-->
+            <TextBlock x:Name="filmname" Text="Мстители: Финал" Grid.Row="1" Grid.Column="5" Grid.ColumnSpan="2" FontFamily="Century Gothic" FontSize="40" TextAlignment="Center" VerticalAlignment="Center" Height="50" Margin="0,4,0,5"/>
+            <TextBlock Text="Рейтинги: " Grid.Row="3" Grid.Column="5" FontFamily="Century Gothic" FontSize="20" HorizontalAlignment="Right" VerticalAlignment="Center" FontWeight="Bold" Height="25" Margin="0,10" Width="102"/>
+            <TextBlock Text="Слоган: " Grid.Row="4" Grid.Column="5" FontFamily="Century Gothic" FontSize="20" HorizontalAlignment="Right" VerticalAlignment="Center" FontWeight="Bold" Height="25" Margin="0,10" Width="84"/>
+            <TextBlock Text="Страна: " Grid.Row="5" Grid.Column="5" FontFamily="Century Gothic" FontSize="20" HorizontalAlignment="Right" VerticalAlignment="Center" FontWeight="Bold" Height="25" Width="89" Margin="0,10"/>
+            <TextBlock Text="Жанры: " Grid.Row="6" Grid.Column="5" FontFamily="Century Gothic" FontSize="20" HorizontalAlignment="Right" VerticalAlignment="Center" FontWeight="Bold" Margin="0,10" Height="25" Width="84"/>
+            <TextBlock Margin="0,5,0,0" Text="Описание: " Grid.Row="7" Grid.Column="5" FontFamily="Century Gothic" FontSize="20" HorizontalAlignment="Right" VerticalAlignment="Top" FontWeight="Bold" Height="25" Width="115"/>
+
+            <TextBlock x:Name="filmrating" Margin="10,10,0,10" Text="IMDb: 9.1   Кинопоиск: 9.0" Grid.Row="3" Grid.Column="6" FontFamily="Century Gothic" FontSize="18" HorizontalAlignment="Left" VerticalAlignment="Center" Height="25" Width="499"/>
+            <TextBlock x:Name="filmslogan" Margin="10,12,0,11" Text="Avengers are fallen" Grid.Row="4" Grid.Column="6" FontFamily="Century Gothic" FontSize="18" HorizontalAlignment="Left" VerticalAlignment="Center" Width="499" Height="22"/>
+            <TextBlock x:Name="filmcountry" Margin="10,10,0,10" Text="США" Grid.Row="5" Grid.Column="6" FontFamily="Century Gothic" FontSize="18" HorizontalAlignment="Left" VerticalAlignment="Center" Height="25" Width="499"/>
+            <TextBlock x:Name="filmgenres" Margin="10,10,0,10" Text="приключения, боевик, фантастика" Grid.Row="6" Grid.Column="6" FontFamily="Century Gothic" FontSize="18" HorizontalAlignment="Left" VerticalAlignment="Center" Height="25" Width="499"/>
+            <TextBlock x:Name="filmdescription" Margin="10,0,0,0" TextWrapping="Wrap" Text="Локи, сводный брат Тора, возвращается, и в этот раз он не один. Земля на грани порабощения, и только лучшие из лучших могут спасти человечество. Ник Фьюри, глава международной организации Щ. И. Т., собирает выдающихся поборников справедливости и добра, чтобы отразить атаку. Под предводительством Капитана Америки Железный Человек, Тор, Невероятный Халк, Соколиный глаз и Чёрная Вдова вступают в войну с захватчиком." Grid.Row="7" Grid.Column="6" FontFamily="Century Gothic" FontSize="18"/>
+            <Button Height="55" Grid.RowSpan="2" Margin="40,0" Content="Смотреть трейлер" Grid.Column="6" Grid.Row="9" FontFamily="Century Gothic" FontSize="20" Background="#FF6C131F" BorderBrush="#FF6C131F" Foreground="White" VerticalAlignment="Bottom" Click="Button_Click_4"/>
+
+            <Label Content="Выберите дату: " Grid.Row="9" Grid.Column="4" FontFamily="Century Gothic" FontSize="22" VerticalAlignment="Bottom" Height="41" HorizontalAlignment="Center" Width="185" Margin="79,0"/>
+            <ComboBox Margin="60,0" Name="datesList" BorderThickness="0,0,0,2" Grid.Row="10" Grid.Column="4" SelectionChanged="datesList_SelectionChanged" BorderBrush="#FF6C131F" VerticalAlignment="Top" FontFamily="Century Gothic" FontSize="18" Height="34"/>
+            <Label Content="Выберите сеанс: " Grid.Row="11" Grid.Column="4" FontFamily="Century Gothic" FontSize="22" VerticalAlignment="Bottom" Height="41" HorizontalAlignment="Center" Margin="68,0" Width="207"/>
+            <ComboBox Margin="60,0" x:Name="seancesList" BorderThickness="0,0,0,2" Grid.Row="12" Grid.Column="4" BorderBrush="#FF6C131F" VerticalAlignment="Top" FontSize="18" FontFamily="Century Gothic" Height="34" SelectionChanged="seancesList_SelectionChanged"/>
+
+            <Button Height="55" Grid.RowSpan="2" Margin="40,10,40,0" Style="{DynamicResource RoundCorner}" Content="Свободные места" Grid.Column="6" Grid.Row="11" FontFamily="Century Gothic" FontSize="20" Background="#FF6C131F" BorderBrush="#FF6C131F" Foreground="White" VerticalAlignment="Top" Click="Button_Click"/>
+            <Button Grid.Column="0" Grid.Row="3" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FF6C131F" Click="Button_Click_1" Margin="0,7,0,6">
+                <materialDesign:PackIcon Kind="Plus" Width="25" Height="25" Margin="-5"/>
+            </Button>
+            <Button Grid.Column="0" Grid.Row="4" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FF6C131F" Click="Button_Click_2" HorizontalAlignment="Left" Margin="0,6,0,7" Width="47">
+                <materialDesign:PackIcon Kind="Minus" Width="25" Height="25" Margin="-5"/>
+            </Button>
+            <Button Grid.Column="0" Grid.Row="5" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FF6C131F" Click="Button_Click_3"  Margin="0,7,0,6">
+                <materialDesign:PackIcon Kind="Refresh" Width="25" Height="25" Margin="-5"/>
+            </Button>
+        </Grid>
+    </materialDesign:TransitioningContent>
+</UserControl>
