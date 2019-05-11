@@ -53,15 +53,20 @@ namespace Pizzaria1
             switch (index)
             {
                 case 0:
-                    title.Content = "Профиль";
+                    title.Text = "Профиль";
                     RefreshUserInfo();
                     GridPrincipal.Children.Clear();
                     GridPrincipal.Children.Add(new ProfileControl(this));
                     break;
                 case 1:
-                    title.Content = "Сеансы";
+                    title.Text = "Сеансы";
                     GridPrincipal.Children.Clear();
                     GridPrincipal.Children.Add(new Seancess(this));
+                    break;
+                case 3:
+                    title.Text = "Скоро на экранах";
+                    GridPrincipal.Children.Clear();
+                    GridPrincipal.Children.Add(new PremiersControl(this));
                     break;
                 default:
                     break;

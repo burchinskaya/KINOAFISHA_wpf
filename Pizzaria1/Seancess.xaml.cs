@@ -33,6 +33,7 @@ namespace KINOwpf
         public Film film;
         public MainWindow main;
         public ProfileControl profile;
+
         public Seancess(MainWindow main)
         {
             InitializeComponent();
@@ -46,7 +47,7 @@ namespace KINOwpf
         {
             using (KinoContext db = new KinoContext())
             {
-                db.Films.Load();
+                db.Films.Where(x=>x.IsPremiere == false).Load();
                 filmsGrid.ItemsSource = db.Films.Local.ToBindingList();
             }
             back.Visibility = Visibility.Collapsed;
@@ -144,7 +145,7 @@ namespace KINOwpf
         private void Button_Click(object sender, RoutedEventArgs e)
         {
 
-            main.title.Content = film.Name + "   " + date.Title.ToString("d") + "   " + seance.Title.ToString("t");
+            main.title.Text = film.Name + "   " + date.Title.ToString("d") + "   " + seance.Title.ToString("t");
             zal.user = main.User; 
             zal.seancess = this;
             
@@ -249,14 +250,14 @@ namespace KINOwpf
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
             main.GridPrincipal.Children.Clear();
-            main.GridPrincipal.Children.Add(new NewFilmControl(main, this, film));
+            main.GridPrincipal.Children.Add(new NewFilmControl(main, this, film, false));
         }
 
         private void Button_Click_3(object sender, RoutedEventArgs e)
         {
 
             main.GridPrincipal.Children.Clear();
-            main.GridPrincipal.Children.Add(new NewFilmControl(film, main, this));
+            main.GridPrincipal.Children.Add(new NewFilmControl(main, this, film, true));
 
         }
 

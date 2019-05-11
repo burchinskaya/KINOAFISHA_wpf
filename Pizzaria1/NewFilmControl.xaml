@@ -82,7 +82,7 @@
             </Grid.RowDefinitions>
             <!-- Style="{DynamicResource ImageTr}"-->
             <TextBlock Text="Название: " Grid.Row="3" Grid.Column="1" FontFamily="Century Gothic" FontSize="20" HorizontalAlignment="Right" VerticalAlignment="Center" FontWeight="Bold" Height="25" Margin="0,10" Width="102"/>
-            <TextBlock Text="Рейтинги: " Grid.Row="4" Grid.Column="1" FontFamily="Century Gothic" FontSize="20" HorizontalAlignment="Right" VerticalAlignment="Center" FontWeight="Bold" Height="25" Margin="0,10" Width="102"/>
+            <TextBlock x:Name="ratings_premier" Text="Рейтинги: " Grid.Row="4" FontFamily="Century Gothic" FontSize="20" VerticalAlignment="Center" FontWeight="Bold" Height="25" Margin="0,10" Width="177" Grid.ColumnSpan="2" TextAlignment="Right"/>
             <TextBlock Text="Слоган: " Grid.Row="5" Grid.Column="1" FontFamily="Century Gothic" FontSize="20" HorizontalAlignment="Right" VerticalAlignment="Center" FontWeight="Bold" Height="25" Margin="0,10" Width="84"/>
             <TextBlock Text="Страна: " Grid.Row="6" Grid.Column="1" FontFamily="Century Gothic" FontSize="20" HorizontalAlignment="Right" VerticalAlignment="Center" FontWeight="Bold" Height="25" Width="89" Margin="0,10"/>
             <TextBlock Margin="0,5,0,0" Text="Описание: " Grid.Row="7" Grid.Column="1" FontFamily="Century Gothic" FontSize="20" HorizontalAlignment="Right" VerticalAlignment="Top" FontWeight="Bold" Height="25" Width="115"/>
@@ -127,11 +127,12 @@
                 </Grid.ColumnDefinitions>
 
                 <Button Content="Сохранить фильм" FontFamily="Century Gothic" FontSize="20" Height="55" Grid.Column="2" Margin="10,0" Click="Button_Click_3"/>
-                <Button Content="Редактировать сеансы" FontFamily="Century Gothic" FontSize="20" Height="55" Grid.Column="1" Margin="10,0" Click="Button_Click_4"/>
+                <Button x:Name="seancesedit" Content="Редактировать сеансы" FontFamily="Century Gothic" FontSize="20" Height="55" Grid.Column="1" Margin="10,0" Click="Button_Click_4"/>
 
             </Grid>
             <TextBlock Text="Трейлер: " Grid.Row="9" Grid.Column="1" FontFamily="Century Gothic" FontSize="20" HorizontalAlignment="Right" VerticalAlignment="Center" FontWeight="Bold" Height="25" Width="89" Margin="0,10"/>
             <TextBox x:Name="trailer" Margin="10,5" Text="" Grid.Row="9" Grid.Column="2" FontFamily="Century Gothic" FontSize="18" Grid.ColumnSpan="5"/>
+            <DatePicker x:Name="filmpremier" Text="" Margin="10,5" Grid.Row="4" Visibility="Collapsed" Grid.Column="2" FontFamily="Century Gothic" FontSize="18" Grid.ColumnSpan="5"/>
         </Grid>
     </materialDesign:TransitioningContent>
 </UserControl>

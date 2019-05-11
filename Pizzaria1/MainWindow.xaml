@@ -100,7 +100,7 @@
         </StackPanel>
 
         <DockPanel Grid.Row="0" Background="#FF661111" VerticalAlignment="Stretch" Grid.ColumnSpan="2" Margin="70,27,0,0">
-            <Label x:Name="title" Content="Сеансы" Foreground="#DDFFFFFF" FontFamily="Century Gothic" FontSize="30" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+            <TextBlock x:Name="title" Text="Сеансы" Foreground="#DDFFFFFF" FontFamily="Century Gothic" FontSize="30" TextAlignment="Center" VerticalAlignment="Center"/>
 
         </DockPanel >
 

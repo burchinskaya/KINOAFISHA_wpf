@@ -124,8 +124,8 @@
             <Button Grid.Column="0" Grid.Row="5" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FF6C131F" Click="Button_Click_3"  Margin="0,7,0,6">
                 <materialDesign:PackIcon Kind="Refresh" Width="25" Height="25" Margin="-5"/>
             </Button>
-            <Button x:Name="back" Grid.Column="0" Grid.Row="1" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FF6C131F" Click="Button_Click_3"  Margin="0,7,0,6">
-                <materialDesign:PackIcon Kind="ArrowLeft" Visibility="Collapsed" Width="25" Height="25" Margin="-5"/>
+            <Button x:Name="back" Grid.Column="0" Visibility="Collapsed" Grid.Row="1" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FF6C131F" Click="back_Click"  Margin="0,7,0,6">
+                <materialDesign:PackIcon Kind="ArrowLeft" Width="25" Height="25" Margin="-5"/>
             </Button>
         </Grid>
     </materialDesign:TransitioningContent>

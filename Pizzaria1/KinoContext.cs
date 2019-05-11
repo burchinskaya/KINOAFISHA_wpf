@@ -16,7 +16,6 @@ namespace KINOwpf
         public DbSet<User> Users { get; set; }
         public DbSet<Admin> Admins { get; set; }
         public DbSet<Film> Films { get; set; }
-        public DbSet<FuturePremier> FuturePremiers { get; set; }
         public DbSet<Date> Dates { get; set; }
         public DbSet<Seance> Seances { get; set; }
         public DbSet<Genre> Genres { get; set; }
@@ -26,20 +25,26 @@ namespace KINOwpf
         public DbSet<ReservationCode> ReservationCodes { get; set; }
         public DbSet<ReservationPlace> ReservationPlaces { get; set; }
     }
-
-    public class FuturePremier
+    
+    public class Film
     {
         public int Id { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
+        public string Poster { get; set; }
         public byte[] PosterByte { get; set; }
         public string Trailer { get; set; }
         public string Country { get; set; }
+        public float RatingIMDb { get; set; }
+        public float RatingKinopoisk { get; set; }
         public string Slogan { get; set; }
+        public bool IsPremiere { get; set; }
         public DateTime PremierDate { get; set; }
         public virtual ICollection<FilmsGenres> FilmsGenres { get; set; }
-        public FuturePremier()
+        public virtual ICollection<FilmsDates> FilmsDates { get; set; }
+        public Film()
         {
+            FilmsDates = new List<FilmsDates>();
             FilmsGenres = new List<FilmsGenres>();
         }
     }
@@ -83,26 +88,7 @@ namespace KINOwpf
         public string Password { get; set; }
     }
 
-    public class Film
-    {
-        public int Id { get; set; }
-        public string Name { get; set; }
-        public string Description { get; set; }
-        public string Poster { get; set; }
-        public byte[] PosterByte { get; set; }
-        public string Trailer { get; set; }
-        public string Country { get; set; }
-        public float RatingIMDb { get; set; }
-        public float RatingKinopoisk { get; set; }
-        public string Slogan { get; set; }
-        public virtual ICollection<FilmsGenres> FilmsGenres { get; set; }
-        public virtual ICollection<FilmsDates> FilmsDates { get; set; }
-        public Film()
-        {
-            FilmsDates = new List<FilmsDates>();
-            FilmsGenres = new List<FilmsGenres>();
-        }
-    }
+   
 
     public class Date
     {

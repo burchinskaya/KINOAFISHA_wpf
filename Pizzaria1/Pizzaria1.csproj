@@ -124,6 +124,14 @@
     <Compile Include="Migrations\201905111141400_Premiers.Designer.cs">
       <DependentUpon>201905111141400_Premiers.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201905111624374_delete-premiers.cs" />
+    <Compile Include="Migrations\201905111624374_delete-premiers.Designer.cs">
+      <DependentUpon>201905111624374_delete-premiers.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201905111629129_ispremier.cs" />
+    <Compile Include="Migrations\201905111629129_ispremier.Designer.cs">
+      <DependentUpon>201905111629129_ispremier.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="DateSeancesControl.xaml.cs">
       <DependentUpon>DateSeancesControl.xaml</DependentUpon>
@@ -142,6 +150,9 @@
     </Compile>
     <Compile Include="NewFilmControl.xaml.cs">
       <DependentUpon>NewFilmControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="PremiersControl.xaml.cs">
+      <DependentUpon>PremiersControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Seancess.xaml.cs">
       <DependentUpon>Seancess.xaml</DependentUpon>
@@ -199,6 +210,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="NewFilmControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="PremiersControl.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -266,6 +281,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201905111141400_Premiers.resx">
       <DependentUpon>201905111141400_Premiers.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201905111624374_delete-premiers.resx">
+      <DependentUpon>201905111624374_delete-premiers.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201905111629129_ispremier.resx">
+      <DependentUpon>201905111629129_ispremier.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
