@@ -120,6 +120,10 @@
     <Compile Include="Migrations\201905110544199_PAth.Designer.cs">
       <DependentUpon>201905110544199_PAth.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201905111141400_Premiers.cs" />
+    <Compile Include="Migrations\201905111141400_Premiers.Designer.cs">
+      <DependentUpon>201905111141400_Premiers.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="DateSeancesControl.xaml.cs">
       <DependentUpon>DateSeancesControl.xaml</DependentUpon>
@@ -259,6 +263,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201905110544199_PAth.resx">
       <DependentUpon>201905110544199_PAth.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201905111141400_Premiers.resx">
+      <DependentUpon>201905111141400_Premiers.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

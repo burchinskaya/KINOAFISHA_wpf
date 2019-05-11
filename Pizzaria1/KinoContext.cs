@@ -16,6 +16,7 @@ namespace KINOwpf
         public DbSet<User> Users { get; set; }
         public DbSet<Admin> Admins { get; set; }
         public DbSet<Film> Films { get; set; }
+        public DbSet<FuturePremier> FuturePremiers { get; set; }
         public DbSet<Date> Dates { get; set; }
         public DbSet<Seance> Seances { get; set; }
         public DbSet<Genre> Genres { get; set; }
@@ -26,7 +27,7 @@ namespace KINOwpf
         public DbSet<ReservationPlace> ReservationPlaces { get; set; }
     }
 
-    public class FuturePremiers
+    public class FuturePremier
     {
         public int Id { get; set; }
         public string Name { get; set; }
@@ -37,7 +38,7 @@ namespace KINOwpf
         public string Slogan { get; set; }
         public DateTime PremierDate { get; set; }
         public virtual ICollection<FilmsGenres> FilmsGenres { get; set; }
-        public FuturePremiers()
+        public FuturePremier()
         {
             FilmsGenres = new List<FilmsGenres>();
         }
