@@ -132,15 +132,19 @@
     <Compile Include="Migrations\201905111629129_ispremier.Designer.cs">
       <DependentUpon>201905111629129_ispremier.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201905112000123_subcriptions.cs" />
+    <Compile Include="Migrations\201905112000123_subcriptions.Designer.cs">
+      <DependentUpon>201905112000123_subcriptions.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="DateSeancesControl.xaml.cs">
       <DependentUpon>DateSeancesControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ProfileControl.xaml.cs">
-      <DependentUpon>ProfileControl.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Profile.xaml.cs">
       <DependentUpon>Profile.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ProfileControl.xaml.cs">
+      <DependentUpon>ProfileControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="AuthorizationControl.xaml.cs">
       <DependentUpon>AuthorizationControl.xaml</DependentUpon>
@@ -193,13 +197,13 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="ProfileControl.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
     <Page Include="Profile.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ProfileControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="AuthorizationControl.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -287,6 +291,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201905111629129_ispremier.resx">
       <DependentUpon>201905111629129_ispremier.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201905112000123_subcriptions.resx">
+      <DependentUpon>201905112000123_subcriptions.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

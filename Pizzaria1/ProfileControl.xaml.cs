@@ -45,18 +45,21 @@ namespace KINOwpf
         public Seancess seancess;
         public User user;
         List<Booking> bookings = new List<Booking>();
+        List<Subscription> subscriptions = new List<Subscription>();
+        List<Film> subsource = new List<Film>();
 
         public ProfileControl(MainWindow main)
         {
             InitializeComponent();
             this.main = main;
-            user = this.main.User;
+            user = this.main.user;
             firstname.Text = user.FirstName;
             lastname.Text = user.LastName;
             email.Text = user.Email;
             login.Text = user.Login;
             path.Text = user.PathForTickets;
             BookingsRefresh();
+            SubscriptionsRefresh();
         }
 
         public void BookingsRefresh()
@@ -93,6 +96,25 @@ namespace KINOwpf
 
                 bookingsGrid.ItemsSource = null;
                 bookingsGrid.ItemsSource = bookings;
+            }
+        }
+
+        public void SubscriptionsRefresh()
+        {
+            List<int> filmsids = new List<int>();
+            subscriptions = new List<Subscription>();
+            subsource = new List<Film>();
+            using (KinoContext db = new KinoContext())
+            {
+                subscriptions = db.Subscriptions.Where(x => x.UserId == user.Id).ToList();
+
+                foreach (var x in subscriptions)
+                    filmsids.Add((int)x.FilmId);
+
+                subsource.AddRange(db.Films.Where(x => filmsids.Contains(x.Id)));
+
+                subscriptionsGrid.ItemsSource = null;
+                subscriptionsGrid.ItemsSource = subsource;
             }
         }
 
@@ -284,6 +306,18 @@ namespace KINOwpf
                     db.Users.First(x => x.Id == user.Id).PathForTickets = path.Text;
                     db.SaveChanges();
                 }
+            }
+        }
+
+        private void Button_Click_8(object sender, RoutedEventArgs e)
+        {
+            Film selected = (Film)subscriptionsGrid.SelectedItem;
+
+            using (KinoContext db = new KinoContext())
+            {
+                db.Subscriptions.RemoveRange(db.Subscriptions.Where(x => x.FilmId == selected.Id && x.UserId == user.Id));
+                db.SaveChanges();
+                SubscriptionsRefresh();
             }
         }
     }

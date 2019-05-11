@@ -37,9 +37,17 @@ namespace KINOwpf
         public Seancess(MainWindow main)
         {
             InitializeComponent();
+            if (main.user != null)
+            {
+                plus.Visibility = Visibility.Collapsed;
+                minus.Visibility = Visibility.Collapsed;
+                edit.Visibility = Visibility.Collapsed;
+                profile = new ProfileControl(main);
+            }
+            
             filmsGridRefresh();
             this.main = main;
-            profile = new ProfileControl(main);
+            
 
         }
 
@@ -146,7 +154,7 @@ namespace KINOwpf
         {
 
             main.title.Text = film.Name + "   " + date.Title.ToString("d") + "   " + seance.Title.ToString("t");
-            zal.user = main.User; 
+            zal.user = main.user; 
             zal.seancess = this;
             
 

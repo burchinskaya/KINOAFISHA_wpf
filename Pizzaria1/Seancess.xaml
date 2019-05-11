@@ -115,13 +115,13 @@
             <ComboBox Margin="60,0" x:Name="seancesList" BorderThickness="0,0,0,2" Grid.Row="12" Grid.Column="4" BorderBrush="#FF6C131F" VerticalAlignment="Top" FontSize="18" FontFamily="Century Gothic" Height="34" SelectionChanged="seancesList_SelectionChanged"/>
 
             <Button Height="55" Grid.RowSpan="2" Margin="40,10,40,0" Style="{DynamicResource RoundCorner}" Content="Свободные места" Grid.Column="6" Grid.Row="11" FontFamily="Century Gothic" FontSize="20" Background="#FF6C131F" BorderBrush="#FF6C131F" Foreground="White" VerticalAlignment="Top" Click="Button_Click"/>
-            <Button Grid.Column="0" Grid.Row="3" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FF6C131F" Click="Button_Click_1" Margin="0,7,0,6">
+            <Button x:Name="plus" Grid.Column="0" Grid.Row="3" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FF6C131F" Click="Button_Click_1" Margin="0,7,0,6">
                 <materialDesign:PackIcon Kind="Plus" Width="25" Height="25" Margin="-5"/>
             </Button>
-            <Button Grid.Column="0" Grid.Row="4" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FF6C131F" Click="Button_Click_2" HorizontalAlignment="Left" Margin="0,6,0,7" Width="47">
+            <Button x:Name="minus" Grid.Column="0" Grid.Row="4" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FF6C131F" Click="Button_Click_2" HorizontalAlignment="Left" Margin="0,6,0,7" Width="47">
                 <materialDesign:PackIcon Kind="Minus" Width="25" Height="25" Margin="-5"/>
             </Button>
-            <Button Grid.Column="0" Grid.Row="5" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FF6C131F" Click="Button_Click_3"  Margin="0,7,0,6">
+            <Button x:Name="edit" Grid.Column="0" Grid.Row="5" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FF6C131F" Click="Button_Click_3"  Margin="0,7,0,6">
                 <materialDesign:PackIcon Kind="Refresh" Width="25" Height="25" Margin="-5"/>
             </Button>
             <Button x:Name="back" Grid.Column="0" Visibility="Collapsed" Grid.Row="1" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FF6C131F" Click="back_Click"  Margin="0,7,0,6">

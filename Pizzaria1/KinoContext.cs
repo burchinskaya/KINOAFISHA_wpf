@@ -19,6 +19,7 @@ namespace KINOwpf
         public DbSet<Date> Dates { get; set; }
         public DbSet<Seance> Seances { get; set; }
         public DbSet<Genre> Genres { get; set; }
+        public DbSet<Subscription> Subscriptions { get; set; }
         public DbSet<FilmsGenres> FilmsGenres { get; set; }
         public DbSet<FilmsDates> FilmsDates { get; set; }
         public DbSet<FilmsDatesSeances> FilmsDatesSeances { get; set; }
@@ -49,6 +50,15 @@ namespace KINOwpf
         }
     }
 
+    public class Subscription
+    {
+        public int Id { get; set; }
+        public int? UserId { get; set; }
+        public int? FilmId { get; set; }
+        public virtual User User { get; set; }
+        public virtual Film Film { get; set; }
+    }
+
     public class ReservationPlace
     {
         public int Id { get; set; }
@@ -56,6 +66,15 @@ namespace KINOwpf
         public int Place { get; set; }
         public int? CodeId { get; set; }
         public virtual ReservationCode ReservationCode { get; set; }
+    }
+
+    public class SoldPlace
+    {
+        public int Id { get; set; }
+        public int Range { get; set; }
+        public int Place { get; set; }
+        public int? FilmDateSeanceId { get; set; }
+        public virtual FilmsDatesSeances FilmDateSeance { get; set; }
     }
 
     public class ReservationCode
@@ -70,7 +89,7 @@ namespace KINOwpf
     }
 
 
-    public class User
+    public class User : IPerson
     {
         public int Id { get; set; }
         public string Login { get; set; }
@@ -81,7 +100,7 @@ namespace KINOwpf
         public string PathForTickets { get; set; }
     }
 
-    public class Admin
+    public class Admin : IPerson
     {
         public int Id { get; set; }
         public string Login { get; set; }

@@ -37,9 +37,19 @@ namespace KINOwpf
 
         public PremiersControl(MainWindow main)
         {
+            InitializeComponent();
+            if (main.user != null)
+            {
+                plus.Visibility = Visibility.Collapsed;
+                minus.Visibility = Visibility.Collapsed;
+                refresh.Visibility = Visibility.Collapsed;
+                save.Visibility = Visibility.Collapsed;
+            }
+            else subscribe.IsEnabled = false;
+
             this.main = main;
             timer = new DispatcherTimer();
-            InitializeComponent();
+            
             films = new List<Film>();
 
             using (KinoContext db = new KinoContext())
@@ -99,11 +109,12 @@ namespace KINOwpf
         {
             using (KinoContext db = new KinoContext())
             {
+                db.Subscriptions.RemoveRange(db.Subscriptions.Where(x => x.FilmId == selectedfilm.Id));
                 db.FilmsGenres.RemoveRange(db.FilmsGenres.Where(x => x.FilmId == selectedfilm.Id));
                 db.Films.Remove(db.Films.First(x => x.Id == selectedfilm.Id));
                 db.SaveChanges();
                 films = db.Films.Where(x => x.IsPremiere == true).ToList();
-                selectedfilm = films.ElementAt(0);
+                selectedfilm = db.Films.First(x => x.IsPremiere == true);
             }
 
             FilmRefresh();
@@ -126,6 +137,18 @@ namespace KINOwpf
                 main.GridPrincipal.Children.Clear();
             main.GridPrincipal.Children.Add(new NewFilmControl(main, new Seancess(main), selectedfilm, true));
             main.title.Text = "Добавление фильма в сеансы";
+        }
+
+        private void Button_Click_4(object sender, RoutedEventArgs e)
+        {
+            using (KinoContext db = new KinoContext())
+            {
+                var userid = db.Users.First(x => x.Id == main.user.Id).Id;
+                var filmid = db.Films.First(x => x.Id == selectedfilm.Id).Id;
+
+                db.Subscriptions.Add(new Subscription { UserId = userid, FilmId = filmid });
+                db.SaveChanges();
+            }
         }
 
         public void FilmRefresh()
@@ -222,9 +245,12 @@ namespace KINOwpf
 
         private void tickevent(object sender, EventArgs e)
         {
-            using (KinoContext db = new KinoContext())
-            filmrating.Text = ($"{db.Films.First(x=>x.Id == selectedfilm.Id).PremierDate.ToString("d")}  ({days} : {hours.ToString("00")} : {minutes.ToString("00")} : {seconds.ToString("00")})");
-
+            try
+            {
+                using (KinoContext db = new KinoContext())
+                    filmrating.Text = ($"{db.Films.First(x => x.Id == selectedfilm.Id).PremierDate.ToString("d")}  ({days} : {hours.ToString("00")} : {minutes.ToString("00")} : {seconds.ToString("00")})");
+            }
+            catch { }
             if (seconds - 1 >= 0)
                 seconds--;
             else if (minutes - 1 >= 0)

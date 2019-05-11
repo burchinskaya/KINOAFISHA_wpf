@@ -21,17 +21,31 @@ namespace Pizzaria1
     /// </summary>
     public partial class MainWindow : Window
     {
-        public User User;
-        public MainWindow()
+        public User user;
+        public Admin admin;
+
+        public MainWindow(IPerson person)
         {
             InitializeComponent();
+
+            if (person is Admin)
+                admin = (Admin)person;
+            else if (person is User)
+                user = (User)person;
+
+            if (user == null)
+                MessageBox.Show("Admin");
+            else MessageBox.Show("User");
+
+
+            GridPrincipal.Children.Clear();
         }
 
         public void RefreshUserInfo()
         {
             using (KinoContext db = new KinoContext())
             {
-                User = db.Users.First(x => x.Id == User.Id);
+                user = db.Users.First(x => x.Id == user.Id);
             }
         }
 
@@ -54,9 +68,13 @@ namespace Pizzaria1
             {
                 case 0:
                     title.Text = "Профиль";
-                    RefreshUserInfo();
                     GridPrincipal.Children.Clear();
-                    GridPrincipal.Children.Add(new ProfileControl(this));
+
+                    if (user != null)
+                    {
+                        RefreshUserInfo();
+                        GridPrincipal.Children.Add(new ProfileControl(this));
+                    }
                     break;
                 case 1:
                     title.Text = "Сеансы";

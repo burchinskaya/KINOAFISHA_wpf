@@ -25,28 +25,21 @@ namespace KINOwpf
         public AuthorizationControl()
         {
             InitializeComponent();
-            main = new MainWindow();
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            using (KinoContext db = new KinoContext())
+            Auth_Reg a = new Auth_Reg();
+
+            if (a.Auth(loginfield.Text, passwordfield.Password) == null)
             {
-                var count = db.Users.Where(x => x.Login == loginfield.Text && x.Password == passwordfield.Password).Count();
+                MessageBox.Show("Что-то пошло не так.");
+            }
 
-                if (count == 1)
-                {
-                    main.User = db.Users.First(x => x.Login == loginfield.Text && x.Password == passwordfield.Password);
-                    main.Show();
-                }
-                else
-                {
-                    User newuser = new User { Login = loginfield.Text, Password = passwordfield.Password };
-                    db.Users.Add(newuser);
-                    db.SaveChanges();
-                    MessageBox.Show("Пользователь успешно добавлен." + db.Users.Count());
-
-                }
+            else
+            {
+                MainWindow m = new MainWindow(a.Auth(loginfield.Text, passwordfield.Password));
+                m.Show();
             }
         }
 

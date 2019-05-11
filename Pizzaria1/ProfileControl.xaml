@@ -154,7 +154,7 @@
             <TextBlock x:Name="submit" Text="Подтверждение: " Visibility="Collapsed" Margin="0,10" Grid.Row="4" Grid.Column="5" FontFamily="Century Gothic" FontSize="20" FontWeight="Bold" TextAlignment="Center" VerticalAlignment="Center" Height="25" Grid.ColumnSpan="2"/>
             <TextBox x:Name="code" Grid.Row="5"  Grid.Column="5"  Visibility="Collapsed" FontFamily="Century Gothic" FontSize="18" Margin="10,5" Grid.ColumnSpan="2" TextChanged="code_TextChanged"/>
             <TextBlock Text="Ваши подписки" FontFamily="Century Gothic" FontSize="30" Grid.Column="8" TextAlignment="Center" Grid.ColumnSpan="3" Margin="0,8,0,12" VerticalAlignment="Center" Grid.Row="10" Height="38"/>
-            <DataGrid x:Name="subscribesGrid" AutoGenerateColumns="False" Margin="0,10" Grid.Row="11" Grid.RowSpan="4" Background="#FFEEEEEE" FontFamily="Century Gothic" FontSize="18" Grid.Column="8" Grid.ColumnSpan="3">
+            <DataGrid x:Name="subscriptionsGrid" AutoGenerateColumns="False" Margin="0,10" Grid.Row="11" Grid.RowSpan="4" Background="#FFEEEEEE" FontFamily="Century Gothic" FontSize="18" Grid.Column="8" Grid.ColumnSpan="3">
                 <DataGrid.ColumnHeaderStyle>
                     <Style TargetType="{x:Type DataGridColumnHeader}">
                         <Setter Property="FontSize" Value="25"/>
@@ -168,7 +168,7 @@
                     <DataGridTextColumn Binding="{Binding Name}" Header="Фильм" Width="10*"/>
                 </DataGrid.Columns>
             </DataGrid>
-            <Button Content="Удалить подписку" FontFamily="Century Gothic" FontSize="20" Height="Auto" Grid.Row="15" Grid.Column="8" Margin="14,22,12,22" Grid.ColumnSpan="3"/>
+            <Button Content="Удалить подписку" FontFamily="Century Gothic" FontSize="20" Height="Auto" Grid.Row="15" Grid.Column="8" Margin="14,22,12,22" Grid.ColumnSpan="3" Click="Button_Click_8"/>
             <Image x:Name="filmposter" Source="Images/мстители.jpg" Grid.Column="8" Grid.ColumnSpan="3" Grid.Row="1" Grid.RowSpan="9"/>
 
             <Button Grid.Column="8" Grid.Row="1" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FF6C131F" Height="Auto" Click="Button_Click_6">
