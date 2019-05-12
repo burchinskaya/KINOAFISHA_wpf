@@ -52,10 +52,9 @@ namespace KINOwpf
             
             films = new List<Film>();
 
-            using (KinoContext db = new KinoContext())
-            {
-                films = db.Films.Where(x => x.IsPremiere == true).ToList();
-            }
+            
+            films = main.allfilms.Where(x => x.IsPremiere == true).ToList();
+            
             selectedfilm = films.ElementAt(0);
             FilmRefresh();
 
@@ -132,6 +131,7 @@ namespace KINOwpf
             {
                 db.Films.First(x => x.Id == selectedfilm.Id).IsPremiere = false;
                 db.SaveChanges();
+                selectedfilm.ChangeState();
             }
 
                 main.GridPrincipal.Children.Clear();
@@ -141,23 +141,34 @@ namespace KINOwpf
 
         private void Button_Click_4(object sender, RoutedEventArgs e)
         {
-            using (KinoContext db = new KinoContext())
+            /*using (KinoContext db = new KinoContext())
             {
                 var userid = db.Users.First(x => x.Id == main.user.Id).Id;
                 var filmid = db.Films.First(x => x.Id == selectedfilm.Id).Id;
 
                 db.Subscriptions.Add(new Subscription { UserId = userid, FilmId = filmid });
                 db.SaveChanges();
+            }*/
+
+            var subs = selectedfilm.Subscribers;
+
+            bool reg = true;
+            foreach (User x in subs)
+            {
+                if (x.Id == main.user.Id)
+                {
+                    reg = false;
+                    MessageBox.Show("Вы уже подписаны на этот фильм.");
+                }
             }
+            if (reg)
+            selectedfilm.RegisterObserver(main.user);
         }
 
         public void FilmRefresh()
         {
-            using (KinoContext db = new KinoContext())
-            {
-                films = db.Films.Where(x => x.IsPremiere == true).ToList();
-                time2 = db.Films.First(x => x.Id == selectedfilm.Id).PremierDate;
-            }
+            time2 = films.First(x => x.Id == selectedfilm.Id).PremierDate;
+            
             timer.Stop();
             timer = new DispatcherTimer();
             StartClock();
@@ -166,13 +177,13 @@ namespace KINOwpf
             {
                 using (KinoContext db = new KinoContext())
                 {
-                    filmname.Text = db.Films.First(x => x.Id == selectedfilm.Id).Name;
-                    filmcountry.Text = db.Films.First(x => x.Id == selectedfilm.Id).Country;
-                    filmdescription.Text = db.Films.First(x => x.Id == selectedfilm.Id).Description;
-                    filmslogan.Text = db.Films.First(x => x.Id == selectedfilm.Id).Slogan;
-                    filmcountry.Text = db.Films.First(x => x.Id == selectedfilm.Id).Country;
-                    filmcountry.Text = db.Films.First(x => x.Id == selectedfilm.Id).Country;
-                    poster.Source = ToImage(db.Films.First(x => x.Id == selectedfilm.Id).PosterByte);
+                    filmname.Text = films.First(x => x.Id == selectedfilm.Id).Name;
+                    filmcountry.Text = films.First(x => x.Id == selectedfilm.Id).Country;
+                    filmdescription.Text = films.First(x => x.Id == selectedfilm.Id).Description;
+                    filmslogan.Text = films.First(x => x.Id == selectedfilm.Id).Slogan;
+                    filmcountry.Text = films.First(x => x.Id == selectedfilm.Id).Country;
+                    filmcountry.Text = films.First(x => x.Id == selectedfilm.Id).Country;
+                    poster.Source = ToImage(films.First(x => x.Id == selectedfilm.Id).PosterByte);
                     var genres = db.FilmsGenres.Where(x => x.FilmId == selectedfilm.Id).Select(x => x.GenreId).ToArray();
                     var genress = db.Genres.Where(x => genres.Contains(x.Id)).Select(x => x.Name);
                     StringBuilder s = new StringBuilder();
@@ -185,6 +196,7 @@ namespace KINOwpf
                 }
             }
             catch { }
+            
             
         }
 

@@ -11,9 +11,10 @@ namespace KINOwpf
     {
         public MainWindow MainWindow { get; set; }
 
-        public void Launch(IPerson person)
+        public void Launch(IPerson person, List<Film> allfilms)
         {
-            MainWindow = MainWindow.getInstance(person);
+            MainWindow = MainWindow.getInstance(person, allfilms);
+
         }
     }
         

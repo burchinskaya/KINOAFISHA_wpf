@@ -21,6 +21,7 @@ namespace KINOwpf
     /// </summary>
     public partial class AuthorizationControl : UserControl
     {
+        public List<Film> allfilms;
         public MainWindow main;
         public AuthorizationControl()
         {
@@ -38,10 +39,30 @@ namespace KINOwpf
 
             else
             {
+                Update();
+
                 SingleWindow window = new SingleWindow();
-                window.Launch(a.Auth(loginfield.Text, passwordfield.Password));
+                window.Launch(a.Auth(loginfield.Text, passwordfield.Password), allfilms);
                 main = window.MainWindow;
                 main.Show();
+                
+            }
+        }
+
+        public void Update()
+        {
+            using (KinoContext db = new KinoContext())
+            {
+                allfilms = db.Films.ToList();
+
+                foreach (var x in allfilms.ToList())
+                {
+                    var subs = db.Subscriptions.Where(s => s.FilmId == x.Id);
+                    foreach (var s in subs.ToList())
+                    {
+                        x.RegisterObserver(db.Users.First(u => u.Id == s.UserId));
+                    }
+                }
             }
         }
 

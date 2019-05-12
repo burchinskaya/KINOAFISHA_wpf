@@ -23,10 +23,11 @@ namespace Pizzaria1
     {
         public User user;
         public Admin admin;
+        public List<Film> allfilms;
 
         private static MainWindow instance;
         
-        protected MainWindow(IPerson person)
+        protected MainWindow(IPerson person, List<Film> allfilms)
         {
             InitializeComponent();
 
@@ -39,13 +40,14 @@ namespace Pizzaria1
                 MessageBox.Show("Admin");
             else MessageBox.Show("User");
 
+            this.allfilms = allfilms;
             GridPrincipal.Children.Clear();
         }
 
-        public static MainWindow getInstance(IPerson person)
+        public static MainWindow getInstance(IPerson person, List<Film> films)
         {
             if (instance == null)
-                instance = new MainWindow(person);
+                instance = new MainWindow(person, films);
             return instance;
         }
 
@@ -59,7 +61,22 @@ namespace Pizzaria1
 
         private void ButtonFechar_Click(object sender, RoutedEventArgs e)
         {
-            Application.Current.Shutdown();
+            using (KinoContext db = new KinoContext())
+            {
+                db.Subscriptions.RemoveRange(db.Subscriptions);
+                db.SaveChanges();
+
+                foreach (var x in allfilms.ToList())
+                {
+                    var subs = x.Subscribers;
+                    foreach (User s in subs.ToList())
+                    {
+                        db.Subscriptions.Add(new Subscription { UserId = s.Id, FilmId = x.Id });
+                        db.SaveChanges();
+                    }
+                }
+            }
+                Application.Current.Shutdown();
         }
 
         private void Grid_MouseDown(object sender, MouseButtonEventArgs e)

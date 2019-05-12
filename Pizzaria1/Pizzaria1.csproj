@@ -144,6 +144,10 @@
     <Compile Include="Migrations\201905112344402_prices.Designer.cs">
       <DependentUpon>201905112344402_prices.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201905122249289_notifications.cs" />
+    <Compile Include="Migrations\201905122249289_notifications.Designer.cs">
+      <DependentUpon>201905122249289_notifications.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="DateSeancesControl.xaml.cs">
       <DependentUpon>DateSeancesControl.xaml</DependentUpon>
@@ -317,6 +321,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201905112344402_prices.resx">
       <DependentUpon>201905112344402_prices.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201905122249289_notifications.resx">
+      <DependentUpon>201905122249289_notifications.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

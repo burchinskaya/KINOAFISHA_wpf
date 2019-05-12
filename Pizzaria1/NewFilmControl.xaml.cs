@@ -196,6 +196,20 @@ namespace KINOwpf
         private void Button_Click_3(object sender, RoutedEventArgs e)
         {
             SaveFilm();
+            using (KinoContext db = new KinoContext())
+            {
+                main.allfilms = db.Films.ToList();
+
+                foreach (var x in main.allfilms.ToList())
+                {
+                    var subs = db.Subscriptions.Where(s => s.FilmId == x.Id);
+                    foreach (var s in subs.ToList())
+                    {
+                        x.RegisterObserver(db.Users.First(u => u.Id == s.UserId));
+                    }
+                }
+            }
+           
         }
 
         private void SaveFilm()

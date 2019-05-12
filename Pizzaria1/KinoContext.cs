@@ -26,10 +26,33 @@ namespace KINOwpf
         public DbSet<FilmsDatesSeances> FilmsDatesSeances { get; set; }
         public DbSet<ReservationCode> ReservationCodes { get; set; }
         public DbSet<ReservationPlace> ReservationPlaces { get; set; }
+        public DbSet<Notification> Notifications { get; set; }
         public DbSet<Price> Prices { get; set; } 
     }
-    
-    public class Film
+
+    public class Notification
+    {
+        public int Id { get; set; }
+        public string Message { get; set; }
+        public int? UserId { get; set; }
+        public string Time { get; set; }
+
+        public virtual User User { get; set; }
+    }
+
+    public interface IObserver
+    {
+        void Update(Object ob);
+    }
+
+    public interface IObservable
+    {
+        void RegisterObserver(IObserver o);
+        void RemoveObserver(IObserver o);
+        void NotifyObservers();
+    }
+
+    public class Film : IObservable
     {
         public int Id { get; set; }
         public string Name { get; set; }
@@ -43,12 +66,38 @@ namespace KINOwpf
         public string Slogan { get; set; }
         public bool IsPremiere { get; set; }
         public DateTime PremierDate { get; set; }
+        public virtual ICollection<IObserver> Subscribers { get; set; }
         public virtual ICollection<FilmsGenres> FilmsGenres { get; set; }
         public virtual ICollection<FilmsDates> FilmsDates { get; set; }
         public Film()
         {
             FilmsDates = new List<FilmsDates>();
             FilmsGenres = new List<FilmsGenres>();
+            Subscribers = new List<IObserver>();
+        }
+
+        public void RegisterObserver(IObserver o)
+        {
+            Subscribers.Add(o);
+        }
+
+        public void RemoveObserver(IObserver o)
+        {
+            Subscribers.Remove(o);
+        }
+
+        public void NotifyObservers()
+        {
+            foreach (IObserver o in Subscribers)
+            {
+                o.Update(this);
+            }
+        }
+
+        public void ChangeState()
+        {
+            IsPremiere = false;
+            NotifyObservers();
         }
     }
 
@@ -98,7 +147,7 @@ namespace KINOwpf
     }
 
 
-    public class User : IPerson
+    public class User : IPerson, IObserver
     {
         public int Id { get; set; }
         public string Login { get; set; }
@@ -107,6 +156,16 @@ namespace KINOwpf
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string PathForTickets { get; set; }
+
+        public void Update(object ob)
+        {
+            Film film = (Film)ob;
+            using (KinoContext db = new KinoContext())
+            {
+                db.Notifications.Add(new Notification { Message = $"Привет, {this.FirstName}!\nФильм {film.Name} уже в прокате, проверьте вкладку \"Сеансы\".\nУспейте забронировать билет!", Time = $"{DateTime.Now.Day.ToString("00")}.{DateTime.Now.Month.ToString("00")}\n{DateTime.Now.Hour.ToString("00")}:{DateTime.Now.Minute.ToString("00")}", UserId = this.Id });
+                db.SaveChanges();
+            }
+        }
     }
 
     public class Admin : IPerson

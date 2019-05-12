@@ -101,7 +101,25 @@ namespace KINOwpf
 
         public void SubscriptionsRefresh()
         {
-            List<int> filmsids = new List<int>();
+            var subs = new List<Film>();
+                var films = main.allfilms;
+
+            foreach (var x in films)
+            {
+                var subscr = x.Subscribers;
+
+                foreach (User s in subscr)
+                {
+                    if (s.Id == user.Id)
+                    subs.Add(x);
+                }
+            }
+
+            subscriptionsGrid.ItemsSource = null;
+            subscriptionsGrid.ItemsSource = subs;
+
+
+            /*List<int> filmsids = new List<int>();
             subscriptions = new List<Subscription>();
             subsource = new List<Film>();
             using (KinoContext db = new KinoContext())
@@ -115,7 +133,7 @@ namespace KINOwpf
 
                 subscriptionsGrid.ItemsSource = null;
                 subscriptionsGrid.ItemsSource = subsource;
-            }
+            }*/
         }
 
         private void bookingsGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -313,12 +331,13 @@ namespace KINOwpf
         {
             Film selected = (Film)subscriptionsGrid.SelectedItem;
 
-            using (KinoContext db = new KinoContext())
+            var films = main.allfilms.First(x => x.Id == selected.Id);
+            foreach (User x in films.Subscribers.ToList())
             {
-                db.Subscriptions.RemoveRange(db.Subscriptions.Where(x => x.FilmId == selected.Id && x.UserId == user.Id));
-                db.SaveChanges();
-                SubscriptionsRefresh();
+                if (x.Id == user.Id)
+                    films.RemoveObserver(x);
             }
+            SubscriptionsRefresh();
         }
     }
 }
