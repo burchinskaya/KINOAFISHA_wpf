@@ -52,11 +52,11 @@
 
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="300"/>
-                <ColumnDefinition Width="200*"/>
-                <ColumnDefinition Width="200*"/>
-                <ColumnDefinition Width="100"/>
-                <ColumnDefinition Width="200*"/>
-                <ColumnDefinition Width="200*"/>
+                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="2*"/>
                 <ColumnDefinition Width="300"/>
             </Grid.ColumnDefinitions>
 
@@ -125,7 +125,6 @@
                 <Button Content="Отменить и вернуться" FontFamily="Century Gothic" FontSize="20" Height="55" Grid.Column="1" Margin="10,0" Click="Button_Click"/>
 
             </Grid>
-            <TextBox x:Name="trailer" Margin="10,5" Text="" Grid.Row="9" Grid.Column="2" FontFamily="Century Gothic" FontSize="18" Grid.ColumnSpan="5"/>
             <TextBox x:Name="seance" Margin="11,5,10,5" Text="" Grid.Row="4" Grid.Column="4" FontFamily="Century Gothic" FontSize="18" Grid.ColumnSpan="2"/>
 
             <Button Grid.Column="4" Grid.Row="5" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FF6C131F" HorizontalAlignment="Left" Height="Auto" Margin="129,7,0,6" Width="48" Click="Button_Click_2">

@@ -161,16 +161,14 @@ namespace KINOwpf
 
             using (KinoContext db = new KinoContext())
             {
-                 var codes = db.ReservationCodes.Where(x => x.FilmDateSeanceId == filmdateseance.Id).Count();
-
-                if (codes != 0)
+                try
                 {
                     var codeList = db.ReservationCodes.Where(x => x.FilmDateSeanceId == filmdateseance.Id);
 
                     foreach (var code in codeList.ToList())
                     {
                         var reservedplaces = db.ReservationPlaces.Where(x => x.CodeId == code.Id);
-                        var soldplaces = db.SoldPlaces.Where(x => x.FilmDateSeanceId == filmdateseance.Id);
+                       
                         foreach (var x in reservedplaces.ToList())
                         {
                             switch (x.Range)
@@ -186,22 +184,26 @@ namespace KINOwpf
                             }
                         }
 
-                        foreach (var x in soldplaces.ToList())
+                        
+                    }
+
+                    var soldplaces = db.SoldPlaces.Where(x => x.FilmDateSeanceId == filmdateseance.Id);
+                    foreach (var x in soldplaces.ToList())
+                    {
+                        switch (x.Range)
                         {
-                            switch (x.Range)
-                            {
-                                case 1: Buttons(zal.first, x.Place, "RoundCornerSold"); break;
-                                case 2: Buttons(zal.second, x.Place, "RoundCornerSold"); break;
-                                case 3: Buttons(zal.third, x.Place, "RoundCornerSold"); break;
-                                case 4: Buttons(zal.fourth, x.Place, "RoundCornerSold"); break;
-                                case 5: Buttons(zal.fifth, x.Place, "RoundCornerSold"); break;
-                                case 6: Buttons(zal.sixth, x.Place, "RoundCornerSold"); break;
-                                case 7: Buttons(zal.seventh, x.Place, "RoundCornerSold"); break;
-                                case 8: Buttons(zal.eighth, x.Place, "RoundCornerSold"); break;
-                            }
+                            case 1: Buttons(zal.first, x.Place, "RoundCornerSold"); break;
+                            case 2: Buttons(zal.second, x.Place, "RoundCornerSold"); break;
+                            case 3: Buttons(zal.third, x.Place, "RoundCornerSold"); break;
+                            case 4: Buttons(zal.fourth, x.Place, "RoundCornerSold"); break;
+                            case 5: Buttons(zal.fifth, x.Place, "RoundCornerSold"); break;
+                            case 6: Buttons(zal.sixth, x.Place, "RoundCornerSold"); break;
+                            case 7: Buttons(zal.seventh, x.Place, "RoundCornerSold"); break;
+                            case 8: Buttons(zal.eighth, x.Place, "RoundCornerSold"); break;
                         }
                     }
                 }
+                catch { }
             }
             main.GridPrincipal.Children.Clear();
             main.GridPrincipal.Children.Add(zal);
@@ -229,25 +231,28 @@ namespace KINOwpf
        
         private void seancesList_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            try
-            {
+           // try
+            //{
                 using (KinoContext db = new KinoContext())
                 {
                     seance = new Seance();
-
+                    MessageBox.Show(filmdate.Id + "   " + seance.Id + "             ");
                     foreach (var x in db.Seances)
                     {
                         if (x.Title.ToString().Contains(seancesList.SelectedValue.ToString()) == true)
                         {
+                            MessageBox.Show(x.Title.ToString() + "       " + seancesList.SelectedValue.ToString());
                             seance = x;
+                        MessageBox.Show(seance.Id.ToString());
                             break;
                         }
                     }
+                MessageBox.Show(filmdate.Id + "           " + seance.Id);
                     filmdateseance = db.FilmsDatesSeances.First(x => x.FilmsDatesId == filmdate.Id && x.SeanceId == seance.Id);
                     MessageBox.Show(filmdateseance.Id.ToString());
                 }
-            }
-            catch (Exception) { }
+            //}
+            //catch (Exception) { }
         }
 
         private void Button_Click_2(object sender, RoutedEventArgs e)

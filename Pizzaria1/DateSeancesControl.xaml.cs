@@ -114,7 +114,10 @@ namespace KINOwpf
 
             foreach (var x in datesname)
                 if (x.InFormat == newdate)
+                {
                     dublicate = true;
+                    break;
+                }
 
             if (!dublicate)
             {
@@ -128,14 +131,24 @@ namespace KINOwpf
         {
             bool dublicate = false;
             DateTime newseance = DateTime.Parse(seance.Text);
-           
-            foreach (var x in seancesname)
-                if (x.SeanceInFormat == newseance && x.InFormat == currdate.InFormat)
-                    dublicate = true;
 
+            foreach (var x in seancesname)
+            {
+                if (x.Title.ToString() == seance.Text.ToString() && x.InFormat == currdate.InFormat)
+                {
+                    dublicate = true;
+                    break;
+                }
+            }
+
+
+            
             if (!dublicate)
             {
                 seancesname.Add(new SeanceMy { SeanceInFormat = DateTime.Parse(seance.Text), InFormat = currdate.InFormat, Title = DateTime.Parse(seance.Text).ToString("t") });
+
+                SeanceMy temp = seancesname.ElementAt(seancesname.Count - 1);
+                
 
                 currentdate = new List<SeanceMy>();
 
@@ -198,24 +211,40 @@ namespace KINOwpf
 
                     var dateid = db.Dates.First(d => d.Title == x.InFormat).Id;
 
+                    MessageBox.Show(dateid.ToString());
                     if (db.FilmsDates.Where(fd => fd.DateId == dateid && fd.FilmId == film.Id).Count() == 0)
                     {
                         db.FilmsDates.Add(new FilmsDates { DateId = dateid, FilmId = film.Id });
                         db.SaveChanges();
+                        MessageBox.Show(dateid.ToString() + "        " + film.Id);
                     }
 
                     foreach (var y in seancesname)
                     {
+                        int seanceid =-1;
+                        var dub = false;
+                        var seancesdb = db.Seances;
                         if (y.InFormat == x.InFormat)
                         {
-                            if (db.Seances.Where(s => s.Title == y.SeanceInFormat).Count() == 0)
+                            foreach (var ss in seancesdb)
+                            {
+                                if (ss.Title.ToString().Contains(y.Title))
+                                {
+                                    dub = true;
+                                    seanceid = ss.Id;
+                                    break;
+                                }
+                            }
+                            if (!dub)
                             {
                                 db.Seances.Add(new Seance { Title = y.SeanceInFormat });
                                 db.SaveChanges();
                             }
-
+                            
                             var filmdateid = db.FilmsDates.First(fd => fd.FilmId == film.Id && fd.DateId == dateid).Id;
-                            var seanceid = db.Seances.First(s => s.Title == y.SeanceInFormat).Id;
+
+                            if (seanceid == -1)
+                            seanceid = db.Seances.First(s => s.Title == y.SeanceInFormat).Id;
 
                             if (db.FilmsDatesSeances.Where(fds => fds.FilmsDatesId == filmdateid && fds.SeanceId == seanceid).Count() == 0)
                             {
