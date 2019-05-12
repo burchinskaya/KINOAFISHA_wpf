@@ -19,6 +19,11 @@ using System.Windows.Shapes;
 
 namespace KINOwpf
 {
+    public class SeanceFDS
+    {
+        public DateTime date { get; set; }
+        public DateTime time { get; set; }
+    }
     /// <summary>
     /// Логика взаимодействия для Seancess.xaml
     /// </summary>
@@ -257,27 +262,86 @@ namespace KINOwpf
 
         private void Button_Click_2(object sender, RoutedEventArgs e)
         {
-            Film selectedfilm = (Film)filmsGrid.SelectedItem;
+                bool delete = true;
+                Film selectedfilm = (Film)filmsGrid.SelectedItem;
 
-            using (KinoContext db = new KinoContext())
-            {
-                var selectedfilmdate = db.FilmsDates.Where(x => x.FilmId == selectedfilm.Id);
-                var selectedfilmdateids = new List<int>();
-                foreach (var x in selectedfilmdate)
+                using (KinoContext db = new KinoContext())
                 {
-                    selectedfilmdateids.Add(x.Id);
+                    List<SeanceFDS> seanceFDs = new List<SeanceFDS>();
+                    var selectedfilmdate = db.FilmsDates.Where(x => x.FilmId == selectedfilm.Id);
+                    
+                    foreach (var x in selectedfilmdate.ToList())
+                    {
+                        var selecteddate = db.Dates.First(d => d.Id == x.DateId);
+
+                        List<FilmsDatesSeances> filmdateseances = new List<FilmsDatesSeances>();
+                        filmdateseances = db.FilmsDatesSeances.Where(fds => fds.FilmsDatesId == x.Id).ToList();
+
+                        foreach (var fds in filmdateseances.ToList())
+                        {
+                            var selectedseance = db.Seances.First(s => s.Id == fds.SeanceId);
+                            seanceFDs.Add(new SeanceFDS { date = selecteddate.Title, time = selectedseance.Title });
+                        }
+                    }
+
+                    foreach (var x in seanceFDs.ToList())
+                    {
+                        var date = x.time.ToString("t").Split(':');
+                        var time = x.date.ToString("d").Split('.');
+                        DateTime a = DateTime.Now;
+                        DateTime b = new DateTime(int.Parse(time[2]), int.Parse(time[1]), int.Parse(time[0]), int.Parse(date[0]), int.Parse(date[1]), 0);
+                        var diff = b.Subtract(a).TotalMinutes;
+
+                        MessageBox.Show(diff.ToString());
+                        if (diff > 0)
+                        {
+                            delete = false;
+                            break;
+                        }
+                    }
+
+                    if (delete)
+                    {
+                        var selectedfilmdateids = new List<int>();
+                        foreach (var x in selectedfilmdate.ToList())
+                        {
+                            List<FilmsDatesSeances> filmdateseances = new List<FilmsDatesSeances>();
+                            filmdateseances = db.FilmsDatesSeances.Where(fds => fds.FilmsDatesId == x.Id).ToList();
+
+                            foreach (var fds in filmdateseances)
+                            {
+                                var reservations = db.ReservationCodes.Where(r => r.FilmDateSeanceId == fds.Id);
+                                var reservcodes = new List<int>();
+                                foreach (var r in reservations)
+                                {
+                                    reservcodes.Add(r.Id);
+                                }
+
+                                foreach (var rc in reservcodes)
+                                {
+                                    db.ReservationPlaces.RemoveRange(db.ReservationPlaces.Where(rp => rp.CodeId == rc));
+                                    db.SaveChanges();
+                                }
+                                db.ReservationCodes.RemoveRange(db.ReservationCodes.Where(rc => rc.FilmDateSeanceId == fds.Id));
+                                db.SaveChanges();
+
+                                db.SoldPlaces.RemoveRange(db.SoldPlaces.Where(s => s.FilmDateSeanceId == fds.Id));
+                            }
+
+                            db.FilmsDatesSeances.RemoveRange(filmdateseances);
+
+                        }
+                        db.FilmsDates.RemoveRange(selectedfilmdate);
+                        db.FilmsGenres.RemoveRange(db.FilmsGenres.Where(g => g.FilmId == selectedfilm.Id));
+                        db.Films.Remove(db.Films.First(g => g.Id == selectedfilm.Id));
+
+                        db.SaveChanges();
+                        filmsGridRefresh();
+                    }
+                    else MessageBox.Show("Нельзя удалить выбранный фильм, так как сеансы еще не прошли.");
+                        
                 }
-
-                var selectedfilmdateseance = db.FilmsDatesSeances.Where(x => selectedfilmdateids.Contains((int)x.FilmsDatesId));
-
-                db.FilmsDatesSeances.RemoveRange(selectedfilmdateseance);
-                db.FilmsDates.RemoveRange(selectedfilmdate);
-                db.FilmsGenres.RemoveRange(db.FilmsGenres.Where(x => x.FilmId == selectedfilm.Id));
-                db.Films.Remove(db.Films.First(x=>x.Id == selectedfilm.Id));
-                
-                db.SaveChanges();
-                filmsGridRefresh();
-            }
+            
         }
 
         private void Button_Click_1(object sender, RoutedEventArgs e)

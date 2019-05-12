@@ -148,6 +148,7 @@
     <Compile Include="DateSeancesControl.xaml.cs">
       <DependentUpon>DateSeancesControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Order.cs" />
     <Compile Include="Profile.xaml.cs">
       <DependentUpon>Profile.xaml</DependentUpon>
     </Compile>

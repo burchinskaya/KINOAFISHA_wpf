@@ -116,6 +116,11 @@ namespace KINOwpf
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
             var num = 1;
+            var date = seancess.seance.Title.ToString("t").Split(':');
+            var time = seancess.date.Title.ToString("d").Split('.');
+            DateTime a = DateTime.Now;
+            DateTime b = new DateTime(int.Parse(time[2]), int.Parse(time[1]), int.Parse(time[0]), int.Parse(date[0]), int.Parse(date[1]), 0);
+            var diff = b.Subtract(a).TotalMinutes;
 
             if (seancess.main.user == null)
             {
@@ -154,8 +159,11 @@ namespace KINOwpf
                 }
             }
 
-            else
+
+
+            else if (diff > 15)
             {
+
                 var dir = "KINOAFISHA " + DateTime.Now.ToString("dd-mm-yy hh-mm");
                 using (KinoContext db = new KinoContext())
                 {
@@ -173,7 +181,6 @@ namespace KINOwpf
 
                 using (KinoContext db = new KinoContext())
                 {
-                    MessageBox.Show(db.Users.First(x => x.Id == user.Id).PathForTickets);
                     Directory.CreateDirectory(db.Users.First(x => x.Id == user.Id).PathForTickets + "\\" + dir);
 
                     var number = 0;
@@ -241,6 +248,7 @@ namespace KINOwpf
                 }
 
             }
+            else MessageBox.Show("Бронировать билеты можно не позже, чем за 15 минут до начала сеанса.");
         }
     }
 }

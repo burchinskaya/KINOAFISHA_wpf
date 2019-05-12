@@ -186,75 +186,81 @@ namespace KINOwpf
 
             using (KinoContext db = new KinoContext())
             {
-                var filmdate = db.FilmsDates.Where(x => x.FilmId == film.Id);
-                var selectedfilmdate = db.FilmsDates.Where(x => x.FilmId == film.Id);
-                var selectedfilmdateids = new List<int>();
-                foreach (var x in filmdate)
+                try
                 {
-                    selectedfilmdateids.Add(x.Id);
-                }
-
-                var selectedfilmdateseance = db.FilmsDatesSeances.Where(x => selectedfilmdateids.Contains((int)x.FilmsDatesId));
-
-                db.FilmsDatesSeances.RemoveRange(selectedfilmdateseance);
-                db.FilmsDates.RemoveRange(selectedfilmdate);
-
-                db.SaveChanges();
-
-                foreach (var x in datesname)
-                {
-                    if (db.Dates.Where(d=>d.Title == x.InFormat).Count() == 0)
+                    var filmdate = db.FilmsDates.Where(x => x.FilmId == film.Id);
+                    var selectedfilmdate = db.FilmsDates.Where(x => x.FilmId == film.Id);
+                    var selectedfilmdateids = new List<int>();
+                    foreach (var x in filmdate)
                     {
-                        db.Dates.Add(new Date { Title = x.InFormat });
-                        db.SaveChanges();
+                        selectedfilmdateids.Add(x.Id);
                     }
 
-                    var dateid = db.Dates.First(d => d.Title == x.InFormat).Id;
+                    var selectedfilmdateseance = db.FilmsDatesSeances.Where(x => selectedfilmdateids.Contains((int)x.FilmsDatesId));
 
-                    MessageBox.Show(dateid.ToString());
-                    if (db.FilmsDates.Where(fd => fd.DateId == dateid && fd.FilmId == film.Id).Count() == 0)
-                    {
-                        db.FilmsDates.Add(new FilmsDates { DateId = dateid, FilmId = film.Id });
-                        db.SaveChanges();
-                        MessageBox.Show(dateid.ToString() + "        " + film.Id);
-                    }
+                    db.FilmsDatesSeances.RemoveRange(selectedfilmdateseance);
+                    db.FilmsDates.RemoveRange(selectedfilmdate);
 
-                    foreach (var y in seancesname)
+                    db.SaveChanges();
+
+
+
+                    foreach (var x in datesname)
                     {
-                        int seanceid =-1;
-                        var dub = false;
-                        var seancesdb = db.Seances;
-                        if (y.InFormat == x.InFormat)
+                        if (db.Dates.Where(d => d.Title == x.InFormat).Count() == 0)
                         {
-                            foreach (var ss in seancesdb)
+                            db.Dates.Add(new Date { Title = x.InFormat });
+                            db.SaveChanges();
+                        }
+
+                        var dateid = db.Dates.First(d => d.Title == x.InFormat).Id;
+
+                        MessageBox.Show(dateid.ToString());
+                        if (db.FilmsDates.Where(fd => fd.DateId == dateid && fd.FilmId == film.Id).Count() == 0)
+                        {
+                            db.FilmsDates.Add(new FilmsDates { DateId = dateid, FilmId = film.Id });
+                            db.SaveChanges();
+                            MessageBox.Show(dateid.ToString() + "        " + film.Id);
+                        }
+
+                        foreach (var y in seancesname)
+                        {
+                            int seanceid = -1;
+                            var dub = false;
+                            var seancesdb = db.Seances;
+                            if (y.InFormat == x.InFormat)
                             {
-                                if (ss.Title.ToString().Contains(y.Title))
+                                foreach (var ss in seancesdb)
                                 {
-                                    dub = true;
-                                    seanceid = ss.Id;
-                                    break;
+                                    if (ss.Title.ToString().Contains(y.Title))
+                                    {
+                                        dub = true;
+                                        seanceid = ss.Id;
+                                        break;
+                                    }
+                                }
+                                if (!dub)
+                                {
+                                    db.Seances.Add(new Seance { Title = y.SeanceInFormat });
+                                    db.SaveChanges();
+                                }
+
+                                var filmdateid = db.FilmsDates.First(fd => fd.FilmId == film.Id && fd.DateId == dateid).Id;
+
+                                if (seanceid == -1)
+                                    seanceid = db.Seances.First(s => s.Title == y.SeanceInFormat).Id;
+
+                                if (db.FilmsDatesSeances.Where(fds => fds.FilmsDatesId == filmdateid && fds.SeanceId == seanceid).Count() == 0)
+                                {
+                                    db.FilmsDatesSeances.Add(new FilmsDatesSeances { FilmsDatesId = filmdateid, SeanceId = seanceid });
+                                    db.SaveChanges();
                                 }
                             }
-                            if (!dub)
-                            {
-                                db.Seances.Add(new Seance { Title = y.SeanceInFormat });
-                                db.SaveChanges();
-                            }
-                            
-                            var filmdateid = db.FilmsDates.First(fd => fd.FilmId == film.Id && fd.DateId == dateid).Id;
-
-                            if (seanceid == -1)
-                            seanceid = db.Seances.First(s => s.Title == y.SeanceInFormat).Id;
-
-                            if (db.FilmsDatesSeances.Where(fds => fds.FilmsDatesId == filmdateid && fds.SeanceId == seanceid).Count() == 0)
-                            {
-                                db.FilmsDatesSeances.Add(new FilmsDatesSeances { FilmsDatesId = filmdateid, SeanceId = seanceid });
-                                db.SaveChanges();
-                            }
                         }
+
                     }
-                  
-                }       
+                }
+                catch { }
             }
         }
 
