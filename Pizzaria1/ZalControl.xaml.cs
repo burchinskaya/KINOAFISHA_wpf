@@ -198,7 +198,7 @@ namespace KINOwpf
 
                     var codeid = db.ReservationCodes.First(x => x.UserId == user.Id && x.FilmDateSeanceId == seancess.filmdateseance.Id).Id;
 
-                    List<ReservationPlace> places = new List<ReservationPlace>();
+                    List<Order> orders = new List<Order>();
                     for (int i = 0; i < panels.Count(); i++)
                     {
                         var grids = panels.ElementAt(i).Children.OfType<Grid>();
@@ -211,40 +211,71 @@ namespace KINOwpf
                             {
                                 if (z.Style == (Style)FindResource("RoundCornerChosed"))
                                 {
-                                    places.Add(new ReservationPlace { CodeId = codeid, Range = i + 1, Place = int.Parse(z.Content.ToString()) });
-                                    Ticket t = new Ticket(user);
-                                    t.path = folder;
-                                    t.filmname.Text = seancess.film.Name;
-                                    t.filmcode.Text = db.ReservationCodes.First(x => x.UserId == user.Id && x.FilmDateSeanceId == seancess.filmdateseance.Id).Code.ToString();
-                                    t.filmdate.Text = seancess.date.Title.ToString("d");
-                                    t.filmplace.Text = z.Content.ToString();
-                                    t.filmrange.Text = (i + 1).ToString();
-                                    t.filmseance.Text = seancess.seance.Title.ToString("t");
-
+                                    int price = 0;
                                     switch (i)
                                     {
-                                        case 0: t.filmprice.Text = firstf.Text; break;
-                                        case 1: t.filmprice.Text = secondf.Text; break;
-                                        case 2: t.filmprice.Text = thirdf.Text; break;
-                                        case 3: t.filmprice.Text = fourthf.Text; break;
-                                        case 4: t.filmprice.Text = fifthf.Text; break;
-                                        case 5: t.filmprice.Text = sixf.Text; break;
-                                        case 6: t.filmprice.Text = seventhf.Text; break;
-                                        case 7: t.filmprice.Text = eighthf.Text; break;
+                                        case 0: price = int.Parse(firstf.Text); break;
+                                        case 1: price = int.Parse(secondf.Text); break;
+                                        case 2: price = int.Parse(thirdf.Text); break;
+                                        case 3: price = int.Parse(fourthf.Text); break;
+                                        case 4: price = int.Parse(fifthf.Text); break;
+                                        case 5: price = int.Parse(sixf.Text); break;
+                                        case 6: price = int.Parse(seventhf.Text); break;
+                                        case 7: price = int.Parse(eighthf.Text); break;
 
                                     }
-                                    t.dir = dir;
-                                    t.number = num.ToString();
-                                    t.Show();
+
+                                    if (student.IsChecked == true)
+                                    {
+                                        orders.Add(new StudentOrder(i + 1, int.Parse(z.Content.ToString()), codeid, price));
+                                    }
+
+                                    else if (retiree.IsChecked == true)
+                                    {
+                                        orders.Add(new RetireeOrder(i + 1, int.Parse(z.Content.ToString()), codeid, price));
+                                    }
                                     num++;
                                 }
                             }
                         }
                     }
 
+                    if (orders.Count() >= 5)
+                    {
+                        if (orders.Count() >= 10)
+                        {
+                            for (int i=0; i<orders.Count(); i++)
+                                orders[i] = new MoreThan10Decorator(orders[i]);
+                        }
+                        else
+                        {
+                            for (int i = 0; i < orders.Count(); i++)
+                                orders[i] = new MoreThan5Decorator(orders[i]);
+                        }
+                    }
 
-                    db.ReservationPlaces.AddRange(places);
-                    db.SaveChanges();
+                    num = 1;
+                    foreach (var x in orders)
+                    {
+                        db.ReservationPlaces.Add(new ReservationPlace { CodeId = x.Code, Place = x.Place, Range = x.Range});
+                        db.SaveChanges();
+
+                        Ticket t = new Ticket(user);
+                        t.path = folder;
+                        t.filmname.Text = seancess.film.Name;
+                        t.filmcode.Text = db.ReservationCodes.First(r => r.UserId == user.Id && r.FilmDateSeanceId == seancess.filmdateseance.Id).Code.ToString();
+                        t.filmdate.Text = seancess.date.Title.ToString("d");
+                        t.filmplace.Text = x.Place.ToString();
+                        t.filmrange.Text = x.Range.ToString();
+                        t.filmseance.Text = seancess.seance.Title.ToString("t");
+                        t.filmprice.Text = x.GetCost().ToString();
+                        t.dir = dir;
+                        t.number = num.ToString();
+                        t.Show();
+                        num++;
+                    }
+
+                    
                 }
 
             }

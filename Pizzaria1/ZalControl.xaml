@@ -471,7 +471,7 @@
             <Label Content="Ряд №6             грн" Margin="15,0,0,0" FontSize="20" Grid.Row="6" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="1" Grid.ColumnSpan="2"/>
             <Label Content="Ряд №7             грн" Margin="15,0,0,0" FontSize="20" Grid.Row="7" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="1" Grid.ColumnSpan="2"/>
             <Label Content="Ряд №8             грн" Margin="15,0,0,0" FontSize="20" Grid.Row="8" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="1" Grid.ColumnSpan="2"/>
-            
+
             <!--<Label Content=" Ряд №1 " FontSize="20" Grid.Column="5" Grid.Row="1" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="0,18"/>
             <Label Content=" Ряд №2 " FontSize="20" Grid.Column="5" Grid.Row="2" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="0,18"/>
             <Label Content=" Ряд №3 " FontSize="20" Grid.Column="5" Grid.Row="3" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="0,18"/>
@@ -500,6 +500,8 @@
             <TextBox IsReadOnly="True" Grid.Column="4"  Height="30" Grid.Row="8" Text="{Binding ElementName=eighthf,Path=Text}" Margin="20,22,20,21" FontSize="18" TextAlignment="Center" BorderBrush="#FF5D171A" FontFamily="Century Gothic"/>-->
             <Button Margin="20,0,0,0" Content="Вернуться" Grid.Column="4" Grid.Row="4" VerticalAlignment="Center" Height="50" Click="Button_Click_1" Grid.ColumnSpan="2"/>
             <Button Margin="20,0,0,0" Content="Забронировать" Grid.Column="4" Grid.Row="5" VerticalAlignment="Center" Height="50" Click="Button_Click_1" Grid.ColumnSpan="2"/>
+            <CheckBox x:Name="student" Content="CheckBox" Grid.Column="4" HorizontalAlignment="Left" Margin="0,21,0,0" Grid.Row="2" VerticalAlignment="Top" Grid.ColumnSpan="2" Height="34" Width="244"/>
+            <CheckBox x:Name="retiree" Content="CheckBox" Grid.Column="4" HorizontalAlignment="Left" Margin="0,17,0,0" Grid.Row="3" VerticalAlignment="Top" Grid.ColumnSpan="2" Height="34" Width="244"/>
         </Grid>
     </materialDesign:TransitioningContent>
 </UserControl>

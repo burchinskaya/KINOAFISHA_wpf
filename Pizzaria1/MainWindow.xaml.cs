@@ -36,8 +36,7 @@ namespace Pizzaria1
             if (user == null)
                 MessageBox.Show("Admin");
             else MessageBox.Show("User");
-
-
+            
             GridPrincipal.Children.Clear();
         }
 
