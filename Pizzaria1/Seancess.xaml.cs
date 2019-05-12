@@ -24,10 +24,11 @@ namespace KINOwpf
     /// </summary>
     public partial class Seancess : UserControl
     {
-        ZalControl zal = new ZalControl();
+        
         public FilmsDatesSeances filmdateseance = new FilmsDatesSeances();
         FilmsDates filmdate;
-       
+
+        public ZalControl zal;
         public Seance seance;
         public Date date;
         public Film film;
@@ -47,8 +48,8 @@ namespace KINOwpf
             
             filmsGridRefresh();
             this.main = main;
-            
 
+            zal = new ZalControl(this);
         }
 
         public void filmsGridRefresh()
@@ -164,22 +165,40 @@ namespace KINOwpf
 
                 if (codes != 0)
                 {
-                    var code = db.ReservationCodes.First(x=>x.FilmDateSeanceId == filmdateseance.Id).Id;
+                    var codeList = db.ReservationCodes.Where(x => x.FilmDateSeanceId == filmdateseance.Id);
 
-                    var reservedplaces = db.ReservationPlaces.Where(x => x.CodeId == code);
-
-                    foreach (var x in reservedplaces)
+                    foreach (var code in codeList.ToList())
                     {
-                        switch (x.Range)
+                        var reservedplaces = db.ReservationPlaces.Where(x => x.CodeId == code.Id);
+                        var soldplaces = db.SoldPlaces.Where(x => x.FilmDateSeanceId == filmdateseance.Id);
+                        foreach (var x in reservedplaces.ToList())
                         {
-                            case 1: Buttons(zal.first, x.Place); break;
-                            case 2: Buttons(zal.second, x.Place); break;
-                            case 3: Buttons(zal.third, x.Place); break;
-                            case 4: Buttons(zal.fourth, x.Place); break;
-                            case 5: Buttons(zal.fifth, x.Place); break;
-                            case 6: Buttons(zal.sixth, x.Place); break;
-                            case 7: Buttons(zal.seventh, x.Place); break;
-                            case 8: Buttons(zal.eighth, x.Place); break;
+                            switch (x.Range)
+                            {
+                                case 1: Buttons(zal.first, x.Place, "RoundCornerReserved"); break;
+                                case 2: Buttons(zal.second, x.Place, "RoundCornerReserved"); break;
+                                case 3: Buttons(zal.third, x.Place, "RoundCornerReserved"); break;
+                                case 4: Buttons(zal.fourth, x.Place, "RoundCornerReserved"); break;
+                                case 5: Buttons(zal.fifth, x.Place, "RoundCornerReserved"); break;
+                                case 6: Buttons(zal.sixth, x.Place, "RoundCornerReserved"); break;
+                                case 7: Buttons(zal.seventh, x.Place, "RoundCornerReserved"); break;
+                                case 8: Buttons(zal.eighth, x.Place, "RoundCornerReserved"); break;
+                            }
+                        }
+
+                        foreach (var x in soldplaces.ToList())
+                        {
+                            switch (x.Range)
+                            {
+                                case 1: Buttons(zal.first, x.Place, "RoundCornerSold"); break;
+                                case 2: Buttons(zal.second, x.Place, "RoundCornerSold"); break;
+                                case 3: Buttons(zal.third, x.Place, "RoundCornerSold"); break;
+                                case 4: Buttons(zal.fourth, x.Place, "RoundCornerSold"); break;
+                                case 5: Buttons(zal.fifth, x.Place, "RoundCornerSold"); break;
+                                case 6: Buttons(zal.sixth, x.Place, "RoundCornerSold"); break;
+                                case 7: Buttons(zal.seventh, x.Place, "RoundCornerSold"); break;
+                                case 8: Buttons(zal.eighth, x.Place, "RoundCornerSold"); break;
+                            }
                         }
                     }
                 }
@@ -188,7 +207,7 @@ namespace KINOwpf
             main.GridPrincipal.Children.Add(zal);
         }
 
-        public void Buttons(StackPanel panel, int place)
+        public void Buttons(StackPanel panel, int place, string Style)
         {
             
             var grid = panel.Children.OfType<Grid>();
@@ -200,13 +219,14 @@ namespace KINOwpf
                 foreach (var y in buttons)
                     if (y.Content.ToString() == place.ToString())
                     {
-                        y.Style = (Style)zal.FindResource("RoundCornerReserved");
+                        y.Style = (Style)zal.FindResource(Style);
                         break;
                     }
             }
 
         }
 
+       
         private void seancesList_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             try

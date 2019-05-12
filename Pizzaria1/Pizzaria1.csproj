@@ -136,6 +136,14 @@
     <Compile Include="Migrations\201905112000123_subcriptions.Designer.cs">
       <DependentUpon>201905112000123_subcriptions.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201905112203168_soldplaces.cs" />
+    <Compile Include="Migrations\201905112203168_soldplaces.Designer.cs">
+      <DependentUpon>201905112203168_soldplaces.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201905112344402_prices.cs" />
+    <Compile Include="Migrations\201905112344402_prices.Designer.cs">
+      <DependentUpon>201905112344402_prices.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="DateSeancesControl.xaml.cs">
       <DependentUpon>DateSeancesControl.xaml</DependentUpon>
@@ -294,6 +302,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201905112000123_subcriptions.resx">
       <DependentUpon>201905112000123_subcriptions.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201905112203168_soldplaces.resx">
+      <DependentUpon>201905112203168_soldplaces.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201905112344402_prices.resx">
+      <DependentUpon>201905112344402_prices.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

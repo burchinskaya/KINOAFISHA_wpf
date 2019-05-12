@@ -112,7 +112,7 @@
 
     </UserControl.Resources>
     <materialDesign:TransitioningContent x:Name="TrainsitionigContentSlide" OpeningEffect="{materialDesign:TransitionEffect SlideInFromLeft, Duration=0:0:1.3}">
-        <Grid  x:Name="main">
+        <Grid  x:Name="main" Background="white">
 
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="70"/>
@@ -463,16 +463,16 @@
                 </Grid>
             </StackPanel>
 
-            <Label Content="Ряд №1 " FontSize="20" Grid.Row="1" HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Column="1" Margin="0,18"/>
-            <Label Content="Ряд №2 " FontSize="20" Grid.Row="2" HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Column="1" Margin="0,18"/>
-            <Label Content="Ряд №3 " FontSize="20" Grid.Row="3" HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Column="1" Margin="0,18"/>
-            <Label Content="Ряд №4 " FontSize="20" Grid.Row="4" HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Column="1" Margin="0,18"/>
-            <Label Content="Ряд №5 " FontSize="20" Grid.Row="5" HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Column="1" Margin="0,18"/>
-            <Label Content="Ряд №6 " FontSize="20" Grid.Row="6" HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Column="1" Margin="0,18"/>
-            <Label Content="Ряд №7 " FontSize="20" Grid.Row="7" HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Column="1" Margin="0,18"/>
-            <Label Content="Ряд №8 " FontSize="20" Grid.Row="8" HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Column="1" Margin="0,18"/>
-
-            <Label Content=" Ряд №1 " FontSize="20" Grid.Column="5" Grid.Row="1" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="0,18"/>
+            <Label Content="Ряд №1             грн" Margin="15,0,0,0" FontSize="20" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="1" Grid.ColumnSpan="2"/>
+            <Label Content="Ряд №2             грн" Margin="15,0,0,0" FontSize="20" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="1" Grid.ColumnSpan="2"/>
+            <Label Content="Ряд №3             грн" Margin="15,0,0,0" FontSize="20" Grid.Row="3" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="1" Grid.ColumnSpan="2"/>
+            <Label Content="Ряд №4             грн" Margin="15,0,0,0" FontSize="20" Grid.Row="4" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="1" Grid.ColumnSpan="2"/>
+            <Label Content="Ряд №5             грн" Margin="15,0,0,0" FontSize="20" Grid.Row="5" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="1" Grid.ColumnSpan="2"/>
+            <Label Content="Ряд №6             грн" Margin="15,0,0,0" FontSize="20" Grid.Row="6" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="1" Grid.ColumnSpan="2"/>
+            <Label Content="Ряд №7             грн" Margin="15,0,0,0" FontSize="20" Grid.Row="7" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="1" Grid.ColumnSpan="2"/>
+            <Label Content="Ряд №8             грн" Margin="15,0,0,0" FontSize="20" Grid.Row="8" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="1" Grid.ColumnSpan="2"/>
+            
+            <!--<Label Content=" Ряд №1 " FontSize="20" Grid.Column="5" Grid.Row="1" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="0,18"/>
             <Label Content=" Ряд №2 " FontSize="20" Grid.Column="5" Grid.Row="2" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="0,18"/>
             <Label Content=" Ряд №3 " FontSize="20" Grid.Column="5" Grid.Row="3" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="0,18"/>
             <Label Content=" Ряд №4 " FontSize="20" Grid.Column="5" Grid.Row="4" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="0,18"/>
@@ -480,25 +480,26 @@
             <Label Content=" Ряд №6 " FontSize="20" Grid.Column="5" Grid.Row="6" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="0,18"/>
             <Label Content=" Ряд №7 " FontSize="20" Grid.Column="5" Grid.Row="7" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="0,18"/>
             <Label Content=" Ряд №8" FontSize="20" Grid.Column="5" Grid.Row="8" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="0,18"/>
+-->
+            <TextBox x:Name="firstf" Grid.Column="2"  Height="30" Grid.Row="1" Text="60" Margin="10,21,70,22" FontSize="18" TextAlignment="Center" BorderBrush="#FF5D171A" FontFamily="Century Gothic"/>
+            <TextBox x:Name="secondf" Grid.Column="2"  Height="30" Grid.Row="2" Text="60" Margin="10,21,70,22" FontSize="18" TextAlignment="Center" BorderBrush="#FF5D171A" FontFamily="Century Gothic"/>
+            <TextBox x:Name="thirdf" Grid.Column="2"  Height="30" Grid.Row="3" Text="65" Margin="10,21,70,22" FontSize="18" TextAlignment="Center" BorderBrush="#FF5D171A" FontFamily="Century Gothic"/>
+            <TextBox x:Name="fourthf" Grid.Column="2"  Height="30" Grid.Row="4" Text="65" Margin="10,21,70,22" FontSize="18" TextAlignment="Center" BorderBrush="#FF5D171A" FontFamily="Century Gothic"/>
+            <TextBox x:Name="fifthf" Grid.Column="2"  Height="30" Grid.Row="5" Text="65" Margin="10,21,70,22" FontSize="18" TextAlignment="Center" BorderBrush="#FF5D171A" FontFamily="Century Gothic"/>
+            <TextBox x:Name="sixf" Grid.Column="2"  Height="30" Grid.Row="6" Text="65" Margin="10,21,70,22" FontSize="18" TextAlignment="Center" BorderBrush="#FF5D171A" FontFamily="Century Gothic"/>
+            <TextBox x:Name="seventhf" Grid.Column="2"  Height="30" Grid.Row="7" Text="70" Margin="10,21,70,22" FontSize="18" TextAlignment="Center" BorderBrush="#FF5D171A" FontFamily="Century Gothic"/>
+            <TextBox x:Name="eighthf" Grid.Column="2"  Height="30" Grid.Row="8" Text="70" Margin="10,21,70,22" FontSize="18" TextAlignment="Center" BorderBrush="#FF5D171A" FontFamily="Century Gothic"/>
 
-            <TextBox x:Name="firstf" Grid.Column="2"  Height="30" Grid.Row="1" Text="60 грн" Margin="20,21,20,22" FontSize="18" TextAlignment="Center" BorderBrush="#FF5D171A" FontFamily="Century Gothic"/>
-            <TextBox x:Name="secondf" Grid.Column="2"  Height="30" Grid.Row="2" Text="60 грн" Margin="20,22,20,21" FontSize="18" TextAlignment="Center" BorderBrush="#FF5D171A" FontFamily="Century Gothic"/>
-            <TextBox x:Name="thirdf" Grid.Column="2"  Height="30" Grid.Row="3" Text="65 грн" Margin="20,21,20,22" FontSize="18" TextAlignment="Center" BorderBrush="#FF5D171A" FontFamily="Century Gothic"/>
-            <TextBox x:Name="fourthf" Grid.Column="2"  Height="30" Grid.Row="4" Text="65 грн" Margin="20,22,20,21" FontSize="18" TextAlignment="Center" BorderBrush="#FF5D171A" FontFamily="Century Gothic"/>
-            <TextBox x:Name="fifthf" Grid.Column="2"  Height="30" Grid.Row="5" Text="65 грн" Margin="20,21,20,22" FontSize="18" TextAlignment="Center" BorderBrush="#FF5D171A" FontFamily="Century Gothic"/>
-            <TextBox x:Name="sixf" Grid.Column="2"  Height="30" Grid.Row="6" Text="65 грн" Margin="20,22,20,21" FontSize="18" TextAlignment="Center" BorderBrush="#FF5D171A" FontFamily="Century Gothic"/>
-            <TextBox x:Name="seventhf" Grid.Column="2"  Height="30" Grid.Row="7" Text="70 грн" Margin="20,21,20,22" FontSize="18" TextAlignment="Center" BorderBrush="#FF5D171A" FontFamily="Century Gothic"/>
-            <TextBox x:Name="eighthf" Grid.Column="2"  Height="30" Grid.Row="8" Text="70 грн" Margin="20,22,20,21" FontSize="18" TextAlignment="Center" BorderBrush="#FF5D171A" FontFamily="Century Gothic"/>
-
-            <TextBox Grid.Column="4"  Height="30" Grid.Row="1" Text="60 грн" Margin="20,21,20,22" FontSize="18" TextAlignment="Center" BorderBrush="#FF5D171A" FontFamily="Century Gothic"/>
-            <TextBox Grid.Column="4"  Height="30" Grid.Row="2" Text="60 грн" Margin="20,22,20,21" FontSize="18" TextAlignment="Center" BorderBrush="#FF5D171A" FontFamily="Century Gothic"/>
-            <TextBox Grid.Column="4"  Height="30" Grid.Row="3" Text="65 грн" Margin="20,21,20,22" FontSize="18" TextAlignment="Center" BorderBrush="#FF5D171A" FontFamily="Century Gothic"/>
-            <TextBox Grid.Column="4"  Height="30" Grid.Row="4" Text="65 грн" Margin="20,22,20,21" FontSize="18" TextAlignment="Center" BorderBrush="#FF5D171A" FontFamily="Century Gothic"/>
-            <TextBox Grid.Column="4"  Height="30" Grid.Row="5" Text="65 грн" Margin="20,21,20,22" FontSize="18" TextAlignment="Center" BorderBrush="#FF5D171A" FontFamily="Century Gothic"/>
-            <TextBox Grid.Column="4"  Height="30" Grid.Row="6" Text="65 грн" Margin="20,22,20,21" FontSize="18" TextAlignment="Center" BorderBrush="#FF5D171A" FontFamily="Century Gothic"/>
-            <TextBox Grid.Column="4"  Height="30" Grid.Row="7" Text="70 грн" Margin="20,21,20,22" FontSize="18" TextAlignment="Center" BorderBrush="#FF5D171A" FontFamily="Century Gothic"/>
-            <TextBox Grid.Column="4"  Height="30" Grid.Row="8" Text="70 грн" Margin="20,22,20,21" FontSize="18" TextAlignment="Center" BorderBrush="#FF5D171A" FontFamily="Century Gothic"/>
-            <Button Content="Button" Grid.Column="3" HorizontalAlignment="Left" Margin="273,39,0,0" Grid.Row="9" VerticalAlignment="Top" Width="168" Height="56" Grid.RowSpan="2" Click="Button_Click_1"/>
+            <!-- <TextBox x:Name="firstf2" Grid.Column="4" Height="30" Grid.Row="1" Text="{Binding ElementName=firstf,Path=Text, Mode=TwoWay}" Margin="20,21,20,22" FontSize="18" TextAlignment="Center" BorderBrush="#FF5D171A" FontFamily="Century Gothic"/>
+            <TextBox IsReadOnly="True" Grid.Column="4"  Height="30" Grid.Row="2" Text="{Binding ElementName=secondf,Path=Text}" Margin="20,22,20,21" FontSize="18" TextAlignment="Center" BorderBrush="#FF5D171A" FontFamily="Century Gothic"/>
+            <TextBox IsReadOnly="True" Grid.Column="4"  Height="30" Grid.Row="3" Text="{Binding ElementName=thirdf,Path=Text}" Margin="20,21,20,22" FontSize="18" TextAlignment="Center" BorderBrush="#FF5D171A" FontFamily="Century Gothic"/>
+            <TextBox IsReadOnly="True" Grid.Column="4"  Height="30" Grid.Row="4" Text="{Binding ElementName=fourthf,Path=Text}" Margin="20,22,20,21" FontSize="18" TextAlignment="Center" BorderBrush="#FF5D171A" FontFamily="Century Gothic"/>
+            <TextBox IsReadOnly="True" Grid.Column="4"  Height="30" Grid.Row="5" Text="{Binding ElementName=fifthf,Path=Text}" Margin="20,21,20,22" FontSize="18" TextAlignment="Center" BorderBrush="#FF5D171A" FontFamily="Century Gothic"/>
+            <TextBox IsReadOnly="True" Grid.Column="4"  Height="30" Grid.Row="6" Text="{Binding ElementName=sixthf,Path=Text}" Margin="20,22,20,21" FontSize="18" TextAlignment="Center" BorderBrush="#FF5D171A" FontFamily="Century Gothic"/>
+            <TextBox IsReadOnly="True" Grid.Column="4"  Height="30" Grid.Row="7" Text="{Binding ElementName=seventhf,Path=Text}" Margin="20,21,20,22" FontSize="18" TextAlignment="Center" BorderBrush="#FF5D171A" FontFamily="Century Gothic"/>
+            <TextBox IsReadOnly="True" Grid.Column="4"  Height="30" Grid.Row="8" Text="{Binding ElementName=eighthf,Path=Text}" Margin="20,22,20,21" FontSize="18" TextAlignment="Center" BorderBrush="#FF5D171A" FontFamily="Century Gothic"/>-->
+            <Button Margin="20,0,0,0" Content="Вернуться" Grid.Column="4" Grid.Row="4" VerticalAlignment="Center" Height="50" Click="Button_Click_1" Grid.ColumnSpan="2"/>
+            <Button Margin="20,0,0,0" Content="Забронировать" Grid.Column="4" Grid.Row="5" VerticalAlignment="Center" Height="50" Click="Button_Click_1" Grid.ColumnSpan="2"/>
         </Grid>
     </materialDesign:TransitioningContent>
 </UserControl>

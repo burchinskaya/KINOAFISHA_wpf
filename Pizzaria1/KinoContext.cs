@@ -19,12 +19,14 @@ namespace KINOwpf
         public DbSet<Date> Dates { get; set; }
         public DbSet<Seance> Seances { get; set; }
         public DbSet<Genre> Genres { get; set; }
+        public DbSet<SoldPlace> SoldPlaces { get; set; }
         public DbSet<Subscription> Subscriptions { get; set; }
         public DbSet<FilmsGenres> FilmsGenres { get; set; }
         public DbSet<FilmsDates> FilmsDates { get; set; }
         public DbSet<FilmsDatesSeances> FilmsDatesSeances { get; set; }
         public DbSet<ReservationCode> ReservationCodes { get; set; }
         public DbSet<ReservationPlace> ReservationPlaces { get; set; }
+        public DbSet<Price> Prices { get; set; } 
     }
     
     public class Film
@@ -48,6 +50,13 @@ namespace KINOwpf
             FilmsDates = new List<FilmsDates>();
             FilmsGenres = new List<FilmsGenres>();
         }
+    }
+
+    public class Price
+    {
+        public int Id { get; set; }
+        public int Range { get; set; }
+        public int Cost { get; set; }
     }
 
     public class Subscription
