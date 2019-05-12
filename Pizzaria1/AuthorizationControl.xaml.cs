@@ -38,8 +38,10 @@ namespace KINOwpf
 
             else
             {
-                MainWindow m = new MainWindow(a.Auth(loginfield.Text, passwordfield.Password));
-                m.Show();
+                SingleWindow window = new SingleWindow();
+                window.Launch(a.Auth(loginfield.Text, passwordfield.Password));
+                main = window.MainWindow;
+                main.Show();
             }
         }
 

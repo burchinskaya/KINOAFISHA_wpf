@@ -173,6 +173,7 @@
     <Compile Include="Seancess.xaml.cs">
       <DependentUpon>Seancess.xaml</DependentUpon>
     </Compile>
+    <Compile Include="SingleWindow.cs" />
     <Compile Include="Ticket.xaml.cs">
       <DependentUpon>Ticket.xaml</DependentUpon>
     </Compile>

@@ -24,7 +24,9 @@ namespace Pizzaria1
         public User user;
         public Admin admin;
 
-        public MainWindow(IPerson person)
+        private static MainWindow instance;
+        
+        protected MainWindow(IPerson person)
         {
             InitializeComponent();
 
@@ -36,8 +38,15 @@ namespace Pizzaria1
             if (user == null)
                 MessageBox.Show("Admin");
             else MessageBox.Show("User");
-            
+
             GridPrincipal.Children.Clear();
+        }
+
+        public static MainWindow getInstance(IPerson person)
+        {
+            if (instance == null)
+                instance = new MainWindow(person);
+            return instance;
         }
 
         public void RefreshUserInfo()
