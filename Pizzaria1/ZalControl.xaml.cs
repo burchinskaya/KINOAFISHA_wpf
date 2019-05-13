@@ -281,6 +281,11 @@ namespace KINOwpf
                         totalprice += x.Price;
                     }
                     db.ReservationCodes.First(r => r.Id == codeid).TotalPrice = totalprice;
+
+                    Auth_Reg auth = new Auth_Reg();
+                    auth.SendMail($"Привет, {user.FirstName}! Ваше бронирование №{db.ReservationCodes.First(r => r.Id == codeid).Code} на сумму {totalprice} было успешно оформлено. Основная информация про заказ: фильм - {seancess.film.Name}, дата - {seancess.date.Title.ToString("d")}, сеанс - {seancess.seance.Title.ToString("t")}. Для более детальной информации просмотрите вкладку \"Профиль\" в нашем приложении KINOAFISHA. Спасибо за бронирование!", user.Email);
+                    MessageBox.Show($"Письмо о бронировании было отправлено на Вашу электронную почту, в папке {folder} были сохранены электронные билеты. Спасибо за бронирование!");
+
                     db.SaveChanges();
 
                 }

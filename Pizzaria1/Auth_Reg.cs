@@ -85,7 +85,7 @@ namespace KINOwpf
             try
             {
                 // отправитель - устанавливаем адрес и отображаемое в письме имя
-                MailAddress from = new MailAddress("dimaalimonov1@gmail.com", "uLimona");
+                MailAddress from = new MailAddress("steam.faq.rus@gmail.com", "KINOAFISHA");
                 // кому отправляем
                 MailAddress to = new MailAddress(email);
                 // создаем объект сообщения

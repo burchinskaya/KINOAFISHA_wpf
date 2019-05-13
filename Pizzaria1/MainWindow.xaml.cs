@@ -89,6 +89,9 @@ namespace Pizzaria1
                     allbookings.Add(new Booking { UserId = (int)curr.UserId, Code = curr.Code, User = db.Users.First(u => u.Id == curr.UserId).FirstName + " " + db.Users.First(u => u.Id == curr.UserId).LastName, Date = date.Title.ToString("d"), Film = film.Name, Time = s.Title.ToString("t"), places = currplaces, TotalCost = curr.TotalPrice, FDS = fds.Id });
                 }
             }
+
+            if (user == null)
+                notifications.Visibility = Visibility.Collapsed;
         }
 
         protected MainWindow(IPerson person, List<Film> allfilms)
@@ -185,6 +188,11 @@ namespace Pizzaria1
                     GridPrincipal.Children.Clear();
                     GridPrincipal.Children.Add(new PremiersControl(this));
                     break;
+                case 4:
+                    title.Text = "Оповещения";
+                    GridPrincipal.Children.Clear();
+                    GridPrincipal.Children.Add(new NotificationsControl(this));
+                    break;
                 default:
                     break;
             }
@@ -192,8 +200,6 @@ namespace Pizzaria1
 
         public void Reg()
         {
-            GridPrincipal.Children.Clear();
-            GridPrincipal.Children.Add(new RegistrationControl());
         }
 
         private void MoveCursorMenu(int index)

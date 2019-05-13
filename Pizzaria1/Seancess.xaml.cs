@@ -334,7 +334,7 @@ namespace KINOwpf
                         db.FilmsDates.RemoveRange(selectedfilmdate);
                         db.FilmsGenres.RemoveRange(db.FilmsGenres.Where(g => g.FilmId == selectedfilm.Id));
                         db.Films.Remove(db.Films.First(g => g.Id == selectedfilm.Id));
-
+                        db.Subscriptions.RemoveRange(db.Subscriptions.Where(x => x.FilmId == selectedfilm.Id));
                         db.SaveChanges();
                         filmsGridRefresh();
                     }

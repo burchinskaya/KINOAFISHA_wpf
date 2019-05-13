@@ -29,9 +29,20 @@
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
-            <Label Content="Авторизация" Cursor="Hand" Foreground="#F8FFFFFF" FontSize="30" Grid.ColumnSpan="2" HorizontalAlignment="Center" Grid.RowSpan="2" Margin="98,34,10,33" VerticalAlignment="Center" FontFamily="Century Gothic" MouseDoubleClick="Label_MouseDoubleClick" Width="288"/>
-            <Label Content="Регистрация" Cursor="Hand"  Foreground="#F8FFFFFF" FontSize="30" Grid.ColumnSpan="2" HorizontalAlignment="Center" Grid.RowSpan="2" Margin="98,34,10,33" VerticalAlignment="Center" FontFamily="Century Gothic" Grid.Column="2" MouseDoubleClick="Label_MouseDoubleClick_1" Width="288"/>
+            <Button x:Name="auth" Visibility="Collapsed" BorderThickness="0" Content="Авторизация" Cursor="Hand" Background="{x:Null}" FontSize="30" Grid.ColumnSpan="2" VerticalAlignment="Center" FontFamily="Century Gothic"  Click="auth_Click" Grid.Column="1" Grid.Row="4" Height="50"/>
+            <Button x:Name="reg" Visibility="Collapsed" BorderThickness="0" Content="Регистрация" Cursor="Hand" Background="{x:Null}" FontSize="30" Grid.ColumnSpan="2" VerticalAlignment="Center" FontFamily="Century Gothic"  Click="reg_Click" Grid.Column="1" Grid.Row="5" Height="50"/>
             <Grid x:Name="GridPrincipal" Grid.ColumnSpan="4" HorizontalAlignment="Left" Height="457" Grid.RowSpan="8" VerticalAlignment="Top" Width="792"/>
+
+            <Grid.Background>
+                <VisualBrush>
+                    <VisualBrush.Visual>
+                        <StackPanel Background="White">
+                            <MediaElement LoadedBehavior="Manual" x:Name="intro" Source="Images/sashaall.mp4" Grid.ColumnSpan="6" HorizontalAlignment="Left" Grid.RowSpan="8" Width="800" IsMuted="True"></MediaElement>
+                        </StackPanel>
+                    </VisualBrush.Visual>
+                </VisualBrush>
+            </Grid.Background>
+
 
         </Grid>
     </materialDesign:TransitioningContent>

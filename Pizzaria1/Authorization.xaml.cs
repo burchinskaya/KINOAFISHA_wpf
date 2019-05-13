@@ -12,6 +12,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.Windows.Threading;
 
 namespace KINOwpf
 {
@@ -20,11 +21,31 @@ namespace KINOwpf
     /// </summary>
     public partial class Authorization : Window
     {
+        int num = 0;
+        DispatcherTimer timer;
         public Authorization()
         {
             InitializeComponent();
-            GridPrincipal.Children.Clear();
-            GridPrincipal.Children.Add(new AuthorizationControl());
+            intro.Play();
+
+            timer = new DispatcherTimer();
+            Start();
+        }
+
+        public void Start()
+        {
+            timer.Interval = TimeSpan.FromSeconds(11);
+
+            timer.Tick += tickevent;
+            timer.Start();
+        }
+
+        private void tickevent(object sender, EventArgs e)
+        {
+                auth.Visibility = Visibility.Visible;
+                reg.Visibility = Visibility.Visible;
+
+                timer.Stop();
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -36,17 +57,20 @@ namespace KINOwpf
         {
             
         }
+        
 
-        private void Label_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        private void auth_Click(object sender, RoutedEventArgs e)
         {
+            auth.Visibility = Visibility.Hidden;
+            reg.Visibility = Visibility.Hidden;
             GridPrincipal.Children.Clear();
-            GridPrincipal.Children.Add(new AuthorizationControl());
+            GridPrincipal.Children.Add(new AuthorizationControl(this));
         }
 
-        private void Label_MouseDoubleClick_1(object sender, MouseButtonEventArgs e)
+        private void reg_Click(object sender, RoutedEventArgs e)
         {
             GridPrincipal.Children.Clear();
-            GridPrincipal.Children.Add(new RegistrationControl());
+            GridPrincipal.Children.Add(new RegistrationControl(this));
         }
     }
 }

@@ -76,6 +76,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="NotificationsControl.xaml.cs">
+      <DependentUpon>NotificationsControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Auth_Reg.cs" />
     <Compile Include="Game.xaml.cs">
       <DependentUpon>Game.xaml</DependentUpon>
@@ -210,10 +213,15 @@
     </Compile>
     <Compile Include="Authorization.xaml.cs">
       <DependentUpon>Authorization.xaml</DependentUpon>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
     <Compile Include="ZalControl.xaml.cs">
       <DependentUpon>ZalControl.xaml</DependentUpon>
     </Compile>
+    <Page Include="NotificationsControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Game.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -281,6 +289,7 @@
     <Page Include="Authorization.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Page>
     <Page Include="ZalControl.xaml">
       <SubType>Designer</SubType>
@@ -423,6 +432,11 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\hlop.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Images\sashaall.mp4">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\WPFMediaKit.2.2.0\build\WPFMediaKit.targets" Condition="Exists('..\packages\WPFMediaKit.2.2.0\build\WPFMediaKit.targets')" />

@@ -24,10 +24,11 @@ namespace KINOwpf
     {
         public List<Film> allfilms;
         public MainWindow main;
-
-        public AuthorizationControl()
+        public Authorization auth;
+        public AuthorizationControl(Authorization auth)
         {
             InitializeComponent();
+            this.auth = auth;
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -71,6 +72,11 @@ namespace KINOwpf
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
             main.Reg();
+        }
+
+        private void TrainsitionigContentSlide_ContextMenuClosing(object sender, ContextMenuEventArgs e)
+        {
+
         }
     }
 }
