@@ -19,13 +19,18 @@ namespace KINOwpf
         public int Range { get; protected set; }
         public int Place { get; protected set; }
         public int Code { get; protected set; }
+        public bool Student { get; set; }
+        public bool Retiree { get; set; }
+        public int Price { get; set; }
         public abstract int GetCost();
     }
 
     class SimpleOrder : Order
     {
         public SimpleOrder(int Range, int Place, int Code, int Cost) : base(Range, Place, Code, Cost)
-        { }
+        {
+            this.Price = GetCost();
+        }
         public override int GetCost()
         {
             return Cost;
@@ -35,7 +40,10 @@ namespace KINOwpf
     class StudentOrder : Order
     {
         public StudentOrder(int Range, int Place, int Code, int Cost) : base(Range, Place, Code, Cost)
-        { }
+        {
+            this.Price = GetCost();
+            this.Student = true;
+        }
         public override int GetCost()
         {
             return Cost - 10;
@@ -45,7 +53,10 @@ namespace KINOwpf
     class RetireeOrder : Order
     {
         public RetireeOrder(int Range, int Place, int Code, int Cost) : base(Range, Place, Code, Cost)
-        { }
+        {
+            this.Price = GetCost();
+            this.Retiree = true;
+        }
         public override int GetCost()
         {
             return Cost - 20;
@@ -65,7 +76,9 @@ namespace KINOwpf
     {
         public MoreThan5Decorator(Order order)
             : base(order.Range, order.Place, order.Code, order.Cost, order)
-        { }
+        {
+            this.Price = GetCost();
+        }
 
         public override int GetCost()
         {
@@ -77,7 +90,9 @@ namespace KINOwpf
     {
         public MoreThan10Decorator(Order order)
             : base(order.Range, order.Place, order.Code, order.Cost, order)
-        { }
+        {
+            this.Price = GetCost();
+        }
 
         public override int GetCost()
         {

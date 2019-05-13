@@ -500,8 +500,8 @@
             <TextBox IsReadOnly="True" Grid.Column="4"  Height="30" Grid.Row="8" Text="{Binding ElementName=eighthf,Path=Text}" Margin="20,22,20,21" FontSize="18" TextAlignment="Center" BorderBrush="#FF5D171A" FontFamily="Century Gothic"/>-->
             <Button Margin="20,0,0,0" Content="Вернуться" Grid.Column="4" Grid.Row="4" VerticalAlignment="Center" Height="50" Click="Button_Click_1" Grid.ColumnSpan="2"/>
             <Button Margin="20,0,0,0" Content="Забронировать" Grid.Column="4" Grid.Row="5" VerticalAlignment="Center" Height="50" Click="Button_Click_1" Grid.ColumnSpan="2"/>
-            <CheckBox x:Name="student" Content="CheckBox" Grid.Column="4" HorizontalAlignment="Left" Margin="0,21,0,0" Grid.Row="2" VerticalAlignment="Top" Grid.ColumnSpan="2" Height="34" Width="244"/>
-            <CheckBox x:Name="retiree" Content="CheckBox" Grid.Column="4" HorizontalAlignment="Left" Margin="0,17,0,0" Grid.Row="3" VerticalAlignment="Top" Grid.ColumnSpan="2" Height="34" Width="244"/>
+            <CheckBox Margin="60,0,0,0" x:Name="student" Content="Я студент" Grid.Column="4" HorizontalAlignment="Left" Grid.Row="2" VerticalAlignment="Bottom" Grid.ColumnSpan="2" Height="34"  FontFamily="Century Gothic" FontSize="16" Checked="student_Checked"/>
+            <CheckBox Margin="60,0,0,0" x:Name="retiree" Content="Я пенсионер" Grid.Column="4" HorizontalAlignment="Left" Grid.Row="3" VerticalAlignment="Top" Grid.ColumnSpan="2" Height="34"  FontFamily="Century Gothic" FontSize="16" Checked="retiree_Checked"/>
         </Grid>
     </materialDesign:TransitioningContent>
 </UserControl>

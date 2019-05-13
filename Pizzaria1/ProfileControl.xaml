@@ -115,10 +115,11 @@
                     <DataGridTextColumn Binding="{Binding Path=Film}" Header="Фильм" Width="Auto"/>
                     <DataGridTextColumn Binding="{Binding Path=Date}" Header="Дата" Width="Auto"/>
                     <DataGridTextColumn Binding="{Binding Path=Time}" Header="Сеанс" Width="Auto"/>
+                    <DataGridTextColumn Binding="{Binding Path=TotalCost}" Header="Сумма" Width="*"/>
                 </DataGrid.Columns>
             </DataGrid>
             <Button Content="Удалить бронирование" FontFamily="Century Gothic" FontSize="20" Height="Auto" Grid.Row="15" Grid.Column="3" Margin="64,22,76,22" Click="Button_Click_5"/>
-            <DataGrid x:Name="placesGrid" VerticalScrollBarVisibility="Visible" AutoGenerateColumns="False" Margin="50,10,10,10" Grid.Row="11" Grid.RowSpan="4" Background="#FFEEEEEE" FontFamily="Century Gothic" FontSize="18" Grid.Column="4" Grid.ColumnSpan="3">
+            <DataGrid x:Name="placesGrid" VerticalScrollBarVisibility="Visible" AutoGenerateColumns="False" Margin="50,10,0,10" Grid.Row="11" Grid.RowSpan="4" Background="#FFEEEEEE" FontFamily="Century Gothic" FontSize="18" Grid.Column="4" Grid.ColumnSpan="3">
                 <DataGrid.ColumnHeaderStyle>
                     <Style TargetType="{x:Type DataGridColumnHeader}">
                         <Setter Property="FontSize" Value="25"/>
@@ -129,8 +130,9 @@
                     </Style>
                 </DataGrid.ColumnHeaderStyle>
                 <DataGrid.Columns>
-                    <DataGridTextColumn Binding="{Binding Range}" Header="Ряд" Width="10*"/>
-                    <DataGridTextColumn Binding="{Binding Seat}" Header="Место" Width="20*"/>
+                    <DataGridTextColumn Binding="{Binding Range}" Header="Ряд" Width="Auto"/>
+                    <DataGridTextColumn Binding="{Binding Seat}" Header="Место" Width="Auto"/>
+                    <DataGridTextColumn Binding="{Binding Price}" Header="Цена" Width="Auto"/>
                 </DataGrid.Columns>
             </DataGrid>
 

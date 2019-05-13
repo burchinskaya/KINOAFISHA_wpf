@@ -148,6 +148,30 @@
     <Compile Include="Migrations\201905122249289_notifications.Designer.cs">
       <DependentUpon>201905122249289_notifications.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201905130736549_PriceForPlace.cs" />
+    <Compile Include="Migrations\201905130736549_PriceForPlace.Designer.cs">
+      <DependentUpon>201905130736549_PriceForPlace.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201905130752288_Student-Retiree3.cs" />
+    <Compile Include="Migrations\201905130752288_Student-Retiree3.Designer.cs">
+      <DependentUpon>201905130752288_Student-Retiree3.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201905130756106_test.cs" />
+    <Compile Include="Migrations\201905130756106_test.Designer.cs">
+      <DependentUpon>201905130756106_test.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201905130756526_str.cs" />
+    <Compile Include="Migrations\201905130756526_str.Designer.cs">
+      <DependentUpon>201905130756526_str.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201905130759077_str2.cs" />
+    <Compile Include="Migrations\201905130759077_str2.Designer.cs">
+      <DependentUpon>201905130759077_str2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201905130812249_str3.cs" />
+    <Compile Include="Migrations\201905130812249_str3.Designer.cs">
+      <DependentUpon>201905130812249_str3.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="DateSeancesControl.xaml.cs">
       <DependentUpon>DateSeancesControl.xaml</DependentUpon>
@@ -324,6 +348,24 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201905122249289_notifications.resx">
       <DependentUpon>201905122249289_notifications.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201905130736549_PriceForPlace.resx">
+      <DependentUpon>201905130736549_PriceForPlace.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201905130752288_Student-Retiree3.resx">
+      <DependentUpon>201905130752288_Student-Retiree3.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201905130756106_test.resx">
+      <DependentUpon>201905130756106_test.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201905130756526_str.resx">
+      <DependentUpon>201905130756526_str.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201905130759077_str2.resx">
+      <DependentUpon>201905130759077_str2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201905130812249_str3.resx">
+      <DependentUpon>201905130812249_str3.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

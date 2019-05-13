@@ -90,8 +90,8 @@
                 <RowDefinition Height="20"/>
             </Grid.RowDefinitions>
 
-            <DataGrid RowStyle="{StaticResource rowStyle}" AutoGenerateColumns="False" x:Name="filmsGrid" Grid.Column="1" Grid.Row="1" Grid.RowSpan="8" HorizontalScrollBarVisibility="Hidden" SelectionChanged="filmsGrid_SelectionChanged" Grid.ColumnSpan="2" FontFamily="Century Gothic" FontSize="18" Height="550" VerticalAlignment="Top">
-                <!--<DataGrid.ColumnHeaderStyle>
+            <DataGrid Background="#FFEEEEEE" AutoGenerateColumns="False" x:Name="filmsGrid" Grid.Column="1" Grid.Row="1" Grid.RowSpan="8" HorizontalScrollBarVisibility="Hidden" SelectionChanged="filmsGrid_SelectionChanged" Grid.ColumnSpan="2" FontFamily="Century Gothic" FontSize="18" Height="550" VerticalAlignment="Top">
+                <DataGrid.ColumnHeaderStyle>
                     <Style TargetType="DataGridColumnHeader">
                         <Setter Property="FontSize" Value="25"/>
                         <Setter Property="Background" Value="#FFEEEEEE"/>
@@ -100,19 +100,6 @@
                         <Setter Property="Height" Value="40"/>
                     </Style>
                 </DataGrid.ColumnHeaderStyle>
-                <DataGrid.RowStyle>
-                    <Style TargetType="DataGridRow">
-                        <Setter Property="Background"
-                        Value="Red" />
-                        <Setter Property="BorderThickness"
-                        Value="10" />
-                        <Setter Property="BorderBrush"
-                        Value="White" />
-
-                    </Style>
-                    
-                </DataGrid.RowStyle>
-                -->
                 <DataGrid.Columns>
                     <DataGridTextColumn Width="347" Header="Фильм" Binding="{Binding Name}"/>
                 </DataGrid.Columns>

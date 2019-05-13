@@ -16,6 +16,7 @@ using System.Windows.Shapes;
 
 namespace KINOwpf
 {
+    
     /// <summary>
     /// Логика взаимодействия для RegistrationControl.xaml
     /// </summary>
@@ -23,6 +24,7 @@ namespace KINOwpf
     {
         public List<Film> allfilms;
         public MainWindow main;
+
         public AuthorizationControl()
         {
             InitializeComponent();
@@ -65,7 +67,7 @@ namespace KINOwpf
                 }
             }
         }
-
+        
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
             main.Reg();

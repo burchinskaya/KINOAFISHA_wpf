@@ -16,17 +16,80 @@ using System.Windows.Shapes;
 
 namespace Pizzaria1
 {
+    public class Place
+    {
+        public int Range { get; set; }
+        public int Seat { get; set; }
+        public bool Student { get; set; }
+        public bool Retiree { get; set; }
+        public string Price { get; set; }
+    }
+
+    public class Booking
+    {
+        public int Code { get; set; }
+        public string Film { get; set; }
+        public string Date { get; set; }
+        public string Time { get; set; }
+        public string User { get; set; }
+        public int UserId { get; set; }
+        public int TotalCost { get; set; }
+        public List<Place> places { get; set; }
+    }
     /// <summary>
     /// Interação lógica para MainWindow.xam
     /// </summary>
     public partial class MainWindow : Window
     {
+        public List<Booking> allbookings;
         public User user;
         public Admin admin;
         public List<Film> allfilms;
 
         private static MainWindow instance;
-        
+
+        public void RefreshBookings()
+        {
+            using (KinoContext db = new KinoContext())
+            {
+                allbookings = new List<Booking>();
+
+                var bookingsdb = db.ReservationCodes;
+                var bookingsids = new List<int>();
+                foreach (var x in bookingsdb)
+                    bookingsids.Add(x.Id);
+
+                foreach (var x in bookingsids)
+                {
+                    List<Place> currplaces = new List<Place>();
+                    ReservationCode curr = db.ReservationCodes.First(r => r.Id == x);
+
+                    FilmsDatesSeances fds = db.FilmsDatesSeances.First(f => f.Id == curr.FilmDateSeanceId);
+                    FilmsDates fd = db.FilmsDates.First(f => f.Id == fds.FilmsDatesId);
+                    Seance s = db.Seances.First(f => f.Id == fds.SeanceId);
+                    Film film = db.Films.First(fi => fi.Id == fd.FilmId);
+                    Date date = db.Dates.First(da => da.Id == fd.DateId);
+
+                    var placesdb = db.ReservationPlaces.Where(pl => pl.CodeId == x);
+
+                    foreach (var place in placesdb)
+                    {
+                        Place temp = new Place { Range = place.Range, Seat = place.Place, Retiree = place.Retiree, Student = place.Student };
+
+                        if (place.Student)
+                            temp.Price = place.Price + " (студент)";
+                        else if (place.Retiree)
+                            temp.Price = place.Price + " (пенсионер)";
+                        else temp.Price = place.Price.ToString();
+
+                        currplaces.Add(temp);
+                    }
+
+                    allbookings.Add(new Booking { UserId = (int)curr.UserId, Code = curr.Code, User = db.Users.First(u => u.Id == curr.UserId).FirstName + " " + db.Users.First(u => u.Id == curr.UserId).LastName, Date = date.Title.ToString("d"), Film = film.Name, Time = s.Title.ToString("t"), places = currplaces, TotalCost = curr.TotalPrice });
+                }
+            }
+        }
+
         protected MainWindow(IPerson person, List<Film> allfilms)
         {
             InitializeComponent();
@@ -42,6 +105,7 @@ namespace Pizzaria1
 
             this.allfilms = allfilms;
             GridPrincipal.Children.Clear();
+            RefreshBookings();
         }
 
         public static MainWindow getInstance(IPerson person, List<Film> films)
@@ -53,10 +117,14 @@ namespace Pizzaria1
 
         public void RefreshUserInfo()
         {
-            using (KinoContext db = new KinoContext())
+            try
             {
-                user = db.Users.First(x => x.Id == user.Id);
+                using (KinoContext db = new KinoContext())
+                {
+                    user = db.Users.First(x => x.Id == user.Id);
+                }
             }
+            catch { }
         }
 
         private void ButtonFechar_Click(object sender, RoutedEventArgs e)
@@ -99,6 +167,11 @@ namespace Pizzaria1
                     {
                         RefreshUserInfo();
                         GridPrincipal.Children.Add(new ProfileControl(this));
+                    }
+                    else
+                    {
+                        RefreshUserInfo();
+                        GridPrincipal.Children.Add(new AdminProfileControl(this));
                     }
                     break;
                 case 1:

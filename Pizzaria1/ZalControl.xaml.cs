@@ -126,7 +126,6 @@ namespace KINOwpf
             {
                 using (KinoContext db = new KinoContext())
                 {
-                    //db.SoldPlaces.Add(new SoldPlace { m})
                     for (int i = 0; i < panels.Count(); i++)
                     {
                         var grids = panels.ElementAt(i).Children.OfType<Grid>();
@@ -234,6 +233,11 @@ namespace KINOwpf
                                     {
                                         orders.Add(new RetireeOrder(i + 1, int.Parse(z.Content.ToString()), codeid, price));
                                     }
+
+                                    else
+                                    {
+                                        orders.Add(new SimpleOrder(i + 1, int.Parse(z.Content.ToString()), codeid, price));
+                                    }
                                     num++;
                                 }
                             }
@@ -255,9 +259,10 @@ namespace KINOwpf
                     }
 
                     num = 1;
+                    var totalprice = db.ReservationCodes.First(r => r.Id == codeid).TotalPrice;
                     foreach (var x in orders)
                     {
-                        db.ReservationPlaces.Add(new ReservationPlace { CodeId = x.Code, Place = x.Place, Range = x.Range});
+                        db.ReservationPlaces.Add(new ReservationPlace { CodeId = x.Code, Place = x.Place, Range = x.Range, Price = x.Price, Retiree = x.Retiree, Student = x.Student});
                         db.SaveChanges();
 
                         Ticket t = new Ticket(user);
@@ -273,13 +278,25 @@ namespace KINOwpf
                         t.number = num.ToString();
                         t.Show();
                         num++;
+                        totalprice += x.Price;
                     }
+                    db.ReservationCodes.First(r => r.Id == codeid).TotalPrice = totalprice;
+                    db.SaveChanges();
 
-                    
                 }
 
             }
             else MessageBox.Show("Бронировать билеты можно не позже, чем за 15 минут до начала сеанса.");
+        }
+
+        private void student_Checked(object sender, RoutedEventArgs e)
+        {
+            retiree.IsChecked = false;
+        }
+
+        private void retiree_Checked(object sender, RoutedEventArgs e)
+        {
+            student.IsChecked = false;
         }
     }
 }

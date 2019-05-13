@@ -122,6 +122,9 @@ namespace KINOwpf
         public int Id { get; set; }
         public int Range { get; set; }
         public int Place { get; set; }
+        public int Price { get; set; }
+        public bool Student { get; set; }
+        public bool Retiree { get; set; }
         public int? CodeId { get; set; }
         public virtual ReservationCode ReservationCode { get; set; }
     }
@@ -131,6 +134,7 @@ namespace KINOwpf
         public int Id { get; set; }
         public int Range { get; set; }
         public int Place { get; set; }
+        
         public int? FilmDateSeanceId { get; set; }
         public virtual FilmsDatesSeances FilmDateSeance { get; set; }
     }
@@ -139,6 +143,7 @@ namespace KINOwpf
     {
         public int Id { get; set; }
         public int Code { get; set; }
+        public int TotalPrice { get; set; }
         public int? UserId { get; set; }
         public int? FilmDateSeanceId { get; set; }
         public virtual User User { get; set; }

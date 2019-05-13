@@ -19,20 +19,6 @@ using System.Windows.Shapes;
 
 namespace KINOwpf
 {
-    public class Booking
-    {
-        public int Code { get; set; }
-        public string Film { get; set; }
-        public string Date { get; set; }
-        public string Time { get; set; }
-        public List<Place> places { get; set; }
-    }
-
-    public class Place
-    {
-        public int Range { get; set; }
-        public int Seat { get; set; }
-    }
     /// <summary>
     /// Логика взаимодействия для Seancess.xaml
     /// </summary>
@@ -58,11 +44,22 @@ namespace KINOwpf
             email.Text = user.Email;
             login.Text = user.Login;
             path.Text = user.PathForTickets;
-            BookingsRefresh();
+            
             SubscriptionsRefresh();
+            main.RefreshBookings();
+            BookingsGridRefresh();
         }
 
-        public void BookingsRefresh()
+
+
+        public void BookingsGridRefresh()
+        {
+            main.RefreshBookings();
+            bookingsGrid.ItemsSource = null;
+            bookingsGrid.ItemsSource = main.allbookings.Where(x=>x.UserId == user.Id);
+        }
+
+       /* public void BookingsRefresh()
         {
             bookings = new List<Booking>();
             using (KinoContext db = new KinoContext())
@@ -94,10 +91,9 @@ namespace KINOwpf
 
                 }
 
-                bookingsGrid.ItemsSource = null;
-                bookingsGrid.ItemsSource = bookings;
+               
             }
-        }
+        }*/
 
         public void SubscriptionsRefresh()
         {
@@ -267,7 +263,7 @@ namespace KINOwpf
             }
             catch { }
 
-            BookingsRefresh();
+            BookingsGridRefresh();
         }
 
         private void Button_Click_6(object sender, RoutedEventArgs e)
