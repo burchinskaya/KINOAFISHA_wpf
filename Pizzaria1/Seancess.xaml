@@ -23,6 +23,7 @@
             </Setter>
         </Style>
         <Style x:Key="RoundCorner" TargetType="{x:Type Button}">
+            <Setter Property="Cursor" Value="Hand"/>
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="Button">
@@ -34,6 +35,11 @@
                 </Setter.Value>
             </Setter>
             <Setter Property="FontFamily" Value="Century Gothic"/>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="Blue"/>
+                </Trigger>
+            </Style.Triggers>
         </Style>
 
         <Style x:Key="ImageTr" TargetType="{x:Type Image}">
@@ -118,7 +124,7 @@
             <TextBlock x:Name="filmcountry" Margin="10,10,0,10" Text="США" Grid.Row="5" Grid.Column="6" FontFamily="Century Gothic" FontSize="18" HorizontalAlignment="Left" VerticalAlignment="Center" Height="25" Width="499"/>
             <TextBlock x:Name="filmgenres" Margin="10,10,0,10" Text="приключения, боевик, фантастика" Grid.Row="6" Grid.Column="6" FontFamily="Century Gothic" FontSize="18" HorizontalAlignment="Left" VerticalAlignment="Center" Height="25" Width="499"/>
             <TextBlock x:Name="filmdescription" Margin="10,0,0,0" TextWrapping="Wrap" Text="Локи, сводный брат Тора, возвращается, и в этот раз он не один. Земля на грани порабощения, и только лучшие из лучших могут спасти человечество. Ник Фьюри, глава международной организации Щ. И. Т., собирает выдающихся поборников справедливости и добра, чтобы отразить атаку. Под предводительством Капитана Америки Железный Человек, Тор, Невероятный Халк, Соколиный глаз и Чёрная Вдова вступают в войну с захватчиком." Grid.Row="7" Grid.Column="6" FontFamily="Century Gothic" FontSize="18"/>
-            <Button Height="55" Grid.RowSpan="2" Margin="40,0" Content="Смотреть трейлер" Grid.Column="6" Grid.Row="9" FontFamily="Century Gothic" FontSize="20" Background="#FF6C131F" BorderBrush="#FF6C131F" Foreground="White" VerticalAlignment="Bottom" Click="Button_Click_4"/>
+            <Button  Style="{DynamicResource RoundCorner}" Height="55" Grid.RowSpan="2" Margin="40,0" Content="Смотреть трейлер" Grid.Column="6" Grid.Row="9" FontFamily="Century Gothic" FontSize="20" Background="#FF6C131F" BorderBrush="#FF6C131F" Foreground="White" VerticalAlignment="Bottom" Click="Button_Click_4"/>
 
             <Label Content="Выберите дату: " Grid.Row="9" Grid.Column="4" FontFamily="Century Gothic" FontSize="22" VerticalAlignment="Bottom" Height="41" HorizontalAlignment="Center" Width="185" Margin="79,0"/>
             <ComboBox Margin="60,0" Name="datesList" BorderThickness="0,0,0,2" Grid.Row="10" Grid.Column="4" SelectionChanged="datesList_SelectionChanged" BorderBrush="#FF6C131F" VerticalAlignment="Top" FontFamily="Century Gothic" FontSize="18" Height="34"/>

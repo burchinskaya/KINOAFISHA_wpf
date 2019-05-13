@@ -252,8 +252,11 @@ namespace KINOwpf
 
             using (KinoContext db = new KinoContext())
             {
+                var film = db.Films.First(x => x.Name == selectedbooking.Film);
                 db.ReservationPlaces.RemoveRange(db.ReservationPlaces.Where(x => x.CodeId == selectedbooking.Code));
                 db.ReservationCodes.Remove(db.ReservationCodes.First(x => x.Code == selectedbooking.Code));
+                db.Notifications.Add(new Notification { Message = $"Привет, {user.FirstName}!\nВы отменили бронирование №{selectedbooking.Code} на сумму {selectedbooking.TotalCost} грн.\n\nФильм: {film.Name}\nДата: {selectedbooking.Date}\nСеанс:  {selectedbooking.Time}", Time = $"{DateTime.Now.Day.ToString("00")}.{DateTime.Now.Month.ToString("00")}\n{DateTime.Now.Hour.ToString("00")}:{DateTime.Now.Minute.ToString("00")}", UserId = user.Id });
+
                 db.SaveChanges();
             }
 
