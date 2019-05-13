@@ -34,6 +34,7 @@ namespace Pizzaria1
         public string User { get; set; }
         public int UserId { get; set; }
         public int TotalCost { get; set; }
+        public int FDS { get; set; }
         public List<Place> places { get; set; }
     }
     /// <summary>
@@ -85,7 +86,7 @@ namespace Pizzaria1
                         currplaces.Add(temp);
                     }
 
-                    allbookings.Add(new Booking { UserId = (int)curr.UserId, Code = curr.Code, User = db.Users.First(u => u.Id == curr.UserId).FirstName + " " + db.Users.First(u => u.Id == curr.UserId).LastName, Date = date.Title.ToString("d"), Film = film.Name, Time = s.Title.ToString("t"), places = currplaces, TotalCost = curr.TotalPrice });
+                    allbookings.Add(new Booking { UserId = (int)curr.UserId, Code = curr.Code, User = db.Users.First(u => u.Id == curr.UserId).FirstName + " " + db.Users.First(u => u.Id == curr.UserId).LastName, Date = date.Title.ToString("d"), Film = film.Name, Time = s.Title.ToString("t"), places = currplaces, TotalCost = curr.TotalPrice, FDS = fds.Id });
                 }
             }
         }

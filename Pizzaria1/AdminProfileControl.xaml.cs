@@ -91,17 +91,68 @@ namespace KINOwpf
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
+            foreach (var x in main.allbookings)
+            {
+                var time = x.Time.Split(':');
+                var date = x.Date.Split('.');
+                DateTime a = DateTime.Now;
+                DateTime b = new DateTime(int.Parse(date[2]), int.Parse(date[1]), int.Parse(date[0]), int.Parse(time[0]), int.Parse(time[1]), 0);
+                var diff = b.Subtract(a).TotalMinutes;
 
+                if (diff < 15)
+                {
+                    DeleteOrder(x);
+                }
+            }
+            
         }
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
+            Booking booking = (Booking)bookingsGrid.SelectedItem;
+            DeleteOrder(booking);
+        }
 
+        public void DeleteOrder(Booking booking)
+        {
+            using (KinoContext db = new KinoContext())
+            {
+                var reserv = db.ReservationCodes.First(x => x.Code == booking.Code);
+                db.ReservationPlaces.RemoveRange(db.ReservationPlaces.Where(x => x.CodeId == booking.Code));
+                db.ReservationCodes.Remove(db.ReservationCodes.Find(reserv.Id));
+                db.SaveChanges();
+            }
+            main.RefreshBookings();
+            BookingsGridRefresh();
         }
 
         private void bookingsGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             PlacesGridRefresh();
+        }
+
+        private void Button_Click_2(object sender, RoutedEventArgs e)
+        {
+            Booking booking = (Booking)bookingsGrid.SelectedItem;
+
+            using (KinoContext db = new KinoContext())
+            {
+                var reserv = db.ReservationCodes.First(x => x.Code == booking.Code);
+
+                var places = db.ReservationPlaces.Where(x => x.CodeId == reserv.Id);
+                
+                foreach (var x in places.ToList())
+                {
+                    db.SoldPlaces.Add(new SoldPlace { FilmDateSeanceId = booking.FDS, Place = x.Place, Range = x.Range });
+                    db.SaveChanges();
+                }
+
+                db.ReservationPlaces.RemoveRange(db.ReservationPlaces.Where(x => x.CodeId == booking.Code));
+                db.ReservationCodes.Remove(db.ReservationCodes.Find(reserv.Id));
+                db.SaveChanges();
+            }
+            main.RefreshBookings();
+            BookingsGridRefresh();
         }
     }
 }

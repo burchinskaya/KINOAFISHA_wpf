@@ -58,10 +58,10 @@
                 <ColumnDefinition Width="214*"/>
                 <ColumnDefinition Width="177"/>
                 <ColumnDefinition Width="60*"/>
-                <ColumnDefinition Width="268*"/>
+                <ColumnDefinition Width="235*"/>
                 <ColumnDefinition Width="0"/>
-                <ColumnDefinition Width="0"/>
-                <ColumnDefinition Width="133*"/>
+                <ColumnDefinition Width="8"/>
+                <ColumnDefinition Width="158*"/>
                 <ColumnDefinition Width="76"/>
                 <ColumnDefinition Width="34"/>
             </Grid.ColumnDefinitions>
@@ -102,9 +102,9 @@
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
 
-                <Button Content="Куплено" FontFamily="Century Gothic" FontSize="20" Height="65" Grid.Row="5" Grid.Column="0" Margin="20,0" Click="Button_Click_1"/>
-                <Button Content="Освободить" FontFamily="Century Gothic" FontSize="20" Height="65" Grid.Row="5" Grid.Column="1" Margin="20,0"/>
-                <Button Content="Обновить" FontFamily="Century Gothic" FontSize="20" Height="65" Grid.Row="5" Grid.Column="2" Margin="20,0" Click="Button_Click"/>
+                <Button Content="Куплено" FontFamily="Century Gothic" FontSize="20" Height="55" Grid.Row="5" Grid.Column="0" Margin="20,0" Click="Button_Click_2" />
+                <Button Content="Освободить" FontFamily="Century Gothic" FontSize="20" Height="55" Grid.Row="5" Grid.Column="1" Margin="20,0" Click="Button_Click_1"/>
+                <Button Content="Обновить" FontFamily="Century Gothic" FontSize="20" Height="55" Grid.Row="5" Grid.Column="2" Margin="20,0" Click="Button_Click"/>
             </Grid>
             <DataGrid x:Name="placesGrid" VerticalScrollBarVisibility="Visible" AutoGenerateColumns="False" Margin="10" Grid.Row="1" Background="#FFEEEEEE" FontFamily="Century Gothic" FontSize="18" Grid.Column="6" Grid.RowSpan="4" Grid.ColumnSpan="2">
                 <DataGrid.ColumnHeaderStyle>
@@ -117,15 +117,15 @@
                     </Style>
                 </DataGrid.ColumnHeaderStyle>
                 <DataGrid.Columns>
-                    <DataGridTextColumn Binding="{Binding Range}" Header="Р" Width="Auto"/>
-                    <DataGridTextColumn Binding="{Binding Seat}" Header="М" Width="Auto"/>
+                    <DataGridTextColumn Binding="{Binding Range}" Header="Ряд" Width="Auto"/>
+                    <DataGridTextColumn Binding="{Binding Seat}" Header="Место" Width="Auto"/>
                     <DataGridTextColumn Binding="{Binding Price}" Header="Цена" Width="Auto"/>
                 </DataGrid.Columns>
             </DataGrid>
             <TextBlock x:Name="submit" Text="Подтверждение: " Visibility="Collapsed" Margin="0,5,0,1" Grid.Row="4" Grid.Column="6" FontFamily="Century Gothic" FontSize="20" FontWeight="Bold" TextAlignment="Center" VerticalAlignment="Center" Height="24" Grid.ColumnSpan="2"/>
             <TextBox x:Name="code" Grid.Row="5"  Grid.Column="6"  Visibility="Collapsed" FontFamily="Century Gothic" FontSize="18" Margin="10,5" Grid.ColumnSpan="2"/>
 
-            <Image x:Name="filmposter" Source="Images/мстители.jpg" Grid.Column="9" Grid.Row="1" Grid.RowSpan="4" Grid.ColumnSpan="3"/>
+            <Image x:Name="filmposter" Source="Images/мстители.jpg" Grid.Column="10" Grid.Row="1" Grid.RowSpan="4" Grid.ColumnSpan="2"/>
         </Grid>
     </materialDesign:TransitioningContent>
 </UserControl>
