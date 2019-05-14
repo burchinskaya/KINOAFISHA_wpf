@@ -12,6 +12,7 @@
     <UserControl.Resources>
 
         <Style x:Key="RoundCorner" TargetType="{x:Type Button}">
+            <Setter Property="Cursor" Value="Hand"/>
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="Button">
@@ -19,10 +20,15 @@
                             <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
                         </Border>
                     </ControlTemplate>
-
                 </Setter.Value>
             </Setter>
             <Setter Property="FontFamily" Value="Century Gothic"/>
+            <Style.Triggers>
+                <Trigger Property="Control.IsMouseOver" Value="True">
+                    <Setter Property="Control.Foreground" Value="LightYellow" />
+                    <Setter Property="Control.FontWeight" Value="Bold" />
+                </Trigger>
+            </Style.Triggers>
         </Style>
 
         <Style x:Key="ImageTr" TargetType="{x:Type Image}">
@@ -43,7 +49,20 @@
                 </Trigger>
             </Style.Triggers>
         </Style>
-
+        <Style x:Key="SmallButton" TargetType="{x:Type Button}">
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Foreground" Value="#FF6C131F"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="White">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="FontFamily" Value="Century Gothic"/>
+        </Style>
 
     </UserControl.Resources>
 
@@ -93,28 +112,28 @@
             <TextBlock x:Name="filmcountry" Margin="10,10,0,10" Text="США" Grid.Row="5" Grid.Column="7" FontFamily="Century Gothic" FontSize="18" HorizontalAlignment="Left" VerticalAlignment="Center" Height="25" Width="499" Grid.ColumnSpan="2"/>
             <TextBlock x:Name="filmgenres" Margin="10,10,0,10" Text="приключения, боевик, фантастика" Grid.Row="6" Grid.Column="7" FontFamily="Century Gothic" FontSize="18" HorizontalAlignment="Left" VerticalAlignment="Center" Height="25" Width="499" Grid.ColumnSpan="2"/>
             <TextBlock x:Name="filmdescription" Margin="10,0,0,0" TextWrapping="Wrap" Text="Локи, сводный брат Тора, возвращается, и в этот раз он не один. Земля на грани порабощения, и только лучшие из лучших могут спасти человечество. Ник Фьюри, глава международной организации Щ. И. Т., собирает выдающихся поборников справедливости и добра, чтобы отразить атаку. Под предводительством Капитана Америки Железный Человек, Тор, Невероятный Халк, Соколиный глаз и Чёрная Вдова вступают в войну с захватчиком." Grid.Row="7" Grid.Column="7" FontFamily="Century Gothic" FontSize="18"/>
-            <Button Height="55" Grid.RowSpan="2" Margin="40,0" Content="Смотреть трейлер" Grid.Column="7" Grid.Row="9" FontFamily="Century Gothic" FontSize="20" Background="#FF6C131F" BorderBrush="#FF6C131F" Foreground="White" VerticalAlignment="Bottom" Click="Button_Click_3"/>
+            <Button Style="{DynamicResource RoundCorner}" Height="55" Grid.RowSpan="2" Margin="40,0" Content="Смотреть трейлер" Grid.Column="7" Grid.Row="9" FontFamily="Century Gothic" FontSize="20" Background="#FF6C131F" BorderBrush="#FF6C131F" Foreground="White" VerticalAlignment="Bottom" Click="Button_Click_3"/>
 
-            <Button x:Name="subscribe" Height="55" Grid.RowSpan="2" Margin="40,10,40,0" Style="{DynamicResource RoundCorner}" Content="Подписаться на фильм" Grid.Column="7" Grid.Row="11" FontFamily="Century Gothic" FontSize="20" Background="#FF6C131F" BorderBrush="#FF6C131F" Foreground="White" VerticalAlignment="Top" Click="Button_Click_4"/>
-            <Button x:Name="plus" Grid.Column="1" Grid.Row="3" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FF6C131F" Margin="0,7,0,6" Height="Auto" Click="Button_Click">
+            <Button Style="{DynamicResource RoundCorner}" x:Name="subscribe" Height="55" Grid.RowSpan="2" Margin="40,10,40,0" Content="Подписаться на фильм" Grid.Column="7" Grid.Row="11" FontFamily="Century Gothic" FontSize="20" Background="#FF6C131F" BorderBrush="#FF6C131F" Foreground="White" VerticalAlignment="Top" Click="Button_Click_4"/>
+            <Button Style="{DynamicResource SmallButton}" x:Name="plus" Grid.Column="1" Grid.Row="3" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FF6C131F" Margin="0,7,0,6" Height="Auto" Click="Button_Click">
                 <materialDesign:PackIcon Kind="Plus" Width="25" Height="25" Margin="-5"/>
             </Button>
-            <Button x:Name="minus" Grid.Column="1" Grid.Row="4" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FF6C131F" HorizontalAlignment="Left" Margin="0,6,0,7" Width="47" Height="Auto" Click="Button_Click_2">
+            <Button Style="{DynamicResource SmallButton}" x:Name="minus" Grid.Column="1" Grid.Row="4" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FF6C131F" HorizontalAlignment="Left" Margin="0,6,0,7" Width="47" Height="Auto" Click="Button_Click_2">
                 <materialDesign:PackIcon Kind="Minus" Width="25" Height="25" Margin="-3,-5"/>
             </Button>
-            <Button x:Name="refresh" Grid.Column="1" Grid.Row="5" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FF6C131F"  Margin="0,7,0,6" Height="Auto" Click="Button_Click_1">
+            <Button Style="{DynamicResource SmallButton}" x:Name="refresh" Grid.Column="1" Grid.Row="5" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FF6C131F"  Margin="0,7,0,6" Height="Auto" Click="Button_Click_1">
                 <materialDesign:PackIcon Kind="Refresh" Width="25" Height="25" Margin="-5"/>
             </Button>
-            <Button x:Name="back" Grid.Column="0" Visibility="Collapsed" Grid.Row="1" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FF6C131F" Margin="0,14,0,13" Height="Auto" Grid.ColumnSpan="2">
+            <Button Style="{DynamicResource SmallButton}" x:Name="back" Grid.Column="0" Visibility="Collapsed" Grid.Row="1" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FF6C131F" Margin="0,14,0,13" Height="Auto" Grid.ColumnSpan="2">
                 <materialDesign:PackIcon Kind="ArrowLeft" Width="25" Height="25" Margin="-3,-5"/>
             </Button>
-            <Button x:Name="up" Grid.Column="3" Grid.Row="1" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FF6C131F" Height="Auto" Click="up_Click">
+            <Button Style="{DynamicResource SmallButton}" x:Name="up" Grid.Column="3" Grid.Row="1" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FF6C131F" Height="Auto" Click="up_Click">
                 <materialDesign:PackIcon Kind="ArrowUpDropCircleOutline" Width="30" Height="30" Margin="-7"/>
             </Button>
-            <Button x:Name="down" Grid.Column="3" Grid.Row="12" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FF6C131F" Height="Auto" Click="down_Click">
+            <Button Style="{DynamicResource SmallButton}" x:Name="down" Grid.Column="3" Grid.Row="12" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FF6C131F" Height="Auto" Click="down_Click">
                 <materialDesign:PackIcon Kind="ArrowDownDropCircleOutline" Width="30" Height="30" Margin="-7"/>
             </Button>
-            <Button x:Name="save" Grid.Column="1" Grid.Row="6" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FF6C131F" Height="Auto" Click="save_Click">
+            <Button Style="{DynamicResource SmallButton}" x:Name="save" Grid.Column="1" Grid.Row="6" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FF6C131F" Height="Auto" Click="save_Click">
                 <materialDesign:PackIcon Kind="Movie" Width="30" Height="30" Margin="-7"/>
             </Button>
         </Grid>

@@ -11,6 +11,7 @@
     <UserControl.Resources>
 
         <Style x:Key="RoundCorner" TargetType="{x:Type Button}">
+            <Setter Property="Cursor" Value="Hand"/>
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="Button">
@@ -18,10 +19,15 @@
                             <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
                         </Border>
                     </ControlTemplate>
-
                 </Setter.Value>
             </Setter>
             <Setter Property="FontFamily" Value="Century Gothic"/>
+            <Style.Triggers>
+                <Trigger Property="Control.IsMouseOver" Value="True">
+                    <Setter Property="Control.Foreground" Value="LightYellow" />
+                    <Setter Property="Control.FontWeight" Value="Bold" />
+                </Trigger>
+            </Style.Triggers>
         </Style>
 
         <Style x:Key="ImageTr" TargetType="{x:Type Image}">
@@ -102,9 +108,9 @@
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
 
-                <Button Content="Куплено" FontFamily="Century Gothic" FontSize="20" Height="55" Grid.Row="5" Grid.Column="0" Margin="20,0" Click="Button_Click_2" />
-                <Button Content="Освободить" FontFamily="Century Gothic" FontSize="20" Height="55" Grid.Row="5" Grid.Column="1" Margin="20,0" Click="Button_Click_1"/>
-                <Button Content="Обновить" FontFamily="Century Gothic" FontSize="20" Height="55" Grid.Row="5" Grid.Column="2" Margin="20,0" Click="Button_Click"/>
+                <Button Style="{DynamicResource RoundCorner}" Height="55" Content="Куплено" FontFamily="Century Gothic" FontSize="20" Grid.Row="5" Grid.Column="0" Margin="20,0" Click="Button_Click_2" Foreground="White" />
+                <Button Style="{DynamicResource RoundCorner}" Content="Освободить" FontFamily="Century Gothic" FontSize="20" Height="55" Grid.Row="5" Grid.Column="1" Margin="20,0" Click="Button_Click_1" Foreground="White"/>
+                <Button Style="{DynamicResource RoundCorner}" Content="Обновить" FontFamily="Century Gothic" FontSize="20" Height="55" Grid.Row="5" Grid.Column="2" Margin="20,0" Click="Button_Click" Foreground="White"/>
             </Grid>
             <DataGrid x:Name="placesGrid" VerticalScrollBarVisibility="Visible" AutoGenerateColumns="False" Margin="10" Grid.Row="1" Background="#FFEEEEEE" FontFamily="Century Gothic" FontSize="18" Grid.Column="6" Grid.RowSpan="4" Grid.ColumnSpan="2">
                 <DataGrid.ColumnHeaderStyle>

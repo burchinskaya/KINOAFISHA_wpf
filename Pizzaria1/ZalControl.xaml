@@ -9,6 +9,26 @@
              d:DesignHeight="450" d:DesignWidth="800" Width="1500" Height="800">
 
     <UserControl.Resources>
+        <Style x:Key="RoundCorner2" TargetType="{x:Type Button}">
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="#FF6C131F" CornerRadius="11" BorderThickness="1" Padding="2">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="FontFamily" Value="Century Gothic"/>
+            <Style.Triggers>
+                <Trigger Property="Control.IsMouseOver" Value="True">
+                    <Setter Property="Control.Foreground" Value="LightYellow" />
+                    <Setter Property="Control.FontWeight" Value="Bold" />
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+        
         <Style x:Key="RoundCorner" TargetType="{x:Type Button}">
             <Setter Property="Template">
                 <Setter.Value>
@@ -498,10 +518,10 @@
             <TextBox IsReadOnly="True" Grid.Column="4"  Height="30" Grid.Row="6" Text="{Binding ElementName=sixthf,Path=Text}" Margin="20,22,20,21" FontSize="18" TextAlignment="Center" BorderBrush="#FF5D171A" FontFamily="Century Gothic"/>
             <TextBox IsReadOnly="True" Grid.Column="4"  Height="30" Grid.Row="7" Text="{Binding ElementName=seventhf,Path=Text}" Margin="20,21,20,22" FontSize="18" TextAlignment="Center" BorderBrush="#FF5D171A" FontFamily="Century Gothic"/>
             <TextBox IsReadOnly="True" Grid.Column="4"  Height="30" Grid.Row="8" Text="{Binding ElementName=eighthf,Path=Text}" Margin="20,22,20,21" FontSize="18" TextAlignment="Center" BorderBrush="#FF5D171A" FontFamily="Century Gothic"/>-->
-            <Button Margin="20,0,0,0" Content="Вернуться" Grid.Column="4" Grid.Row="4" VerticalAlignment="Center" Height="50" Click="Button_Click_1" Grid.ColumnSpan="2"/>
-            <Button Margin="20,0,0,0" Content="Забронировать" Grid.Column="4" Grid.Row="5" VerticalAlignment="Center" Height="50" Click="Button_Click_1" Grid.ColumnSpan="2"/>
-            <CheckBox Margin="60,0,0,0" x:Name="student" Content="Я студент" Grid.Column="4" HorizontalAlignment="Left" Grid.Row="2" VerticalAlignment="Bottom" Grid.ColumnSpan="2" Height="34"  FontFamily="Century Gothic" FontSize="16" Checked="student_Checked"/>
-            <CheckBox Margin="60,0,0,0" x:Name="retiree" Content="Я пенсионер" Grid.Column="4" HorizontalAlignment="Left" Grid.Row="3" VerticalAlignment="Top" Grid.ColumnSpan="2" Height="34"  FontFamily="Century Gothic" FontSize="16" Checked="retiree_Checked"/>
+            <Button Style="{DynamicResource RoundCorner2}" Foreground="White" FontSize="20" Height="55" Margin="20,0,0,0" Content="Вернуться" Grid.Column="4" Grid.Row="4" VerticalAlignment="Center" Click="Button_Click_1" Grid.ColumnSpan="2"/>
+            <Button Style="{DynamicResource RoundCorner2}" Foreground="White" FontSize="20" Margin="20,0,0,0" Content="Забронировать" Grid.Column="4" Grid.Row="5" VerticalAlignment="Center" Height="55" Click="Button_Click_1" Grid.ColumnSpan="2"/>
+            <CheckBox FontSize="20" Margin="60,0,0,0" x:Name="student" Content="Я студент" Grid.Column="4" HorizontalAlignment="Left" Grid.Row="2" VerticalAlignment="Bottom" Grid.ColumnSpan="2" Height="34"  FontFamily="Century Gothic" Checked="student_Checked"/>
+            <CheckBox Margin="60,0,0,0" x:Name="retiree" Content="Я пенсионер" Grid.Column="4" HorizontalAlignment="Left" Grid.Row="3" VerticalAlignment="Top" Grid.ColumnSpan="2" Height="34"  FontFamily="Century Gothic" FontSize="20" Checked="retiree_Checked"/>
         </Grid>
     </materialDesign:TransitioningContent>
 </UserControl>
