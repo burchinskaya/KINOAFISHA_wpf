@@ -58,43 +58,7 @@ namespace KINOwpf
             bookingsGrid.ItemsSource = null;
             bookingsGrid.ItemsSource = main.allbookings.Where(x=>x.UserId == user.Id);
         }
-
-       /* public void BookingsRefresh()
-        {
-            bookings = new List<Booking>();
-            using (KinoContext db = new KinoContext())
-            {
-                var bookingsdb = db.ReservationCodes.Where(x => x.UserId == user.Id);
-                var bookingsids = new List<int>();
-                foreach (var x in bookingsdb)
-                    bookingsids.Add(x.Id);
-
-                foreach (var x in bookingsids)
-                {
-                    List<Place> currplaces = new List<Place>();
-                    ReservationCode curr = db.ReservationCodes.First(r => r.Id == x);
-
-                    FilmsDatesSeances fds = db.FilmsDatesSeances.First(f => f.Id == curr.FilmDateSeanceId);
-                    FilmsDates fd = db.FilmsDates.First(f => f.Id == fds.FilmsDatesId);
-                    Seance s = db.Seances.First(f => f.Id == fds.SeanceId);
-                    Film film = db.Films.First(fi => fi.Id == fd.FilmId);
-                    Date date = db.Dates.First(da => da.Id == fd.DateId);
-
-                    var placesdb = db.ReservationPlaces.Where(pl => pl.CodeId == x);
-
-                    foreach (var place in placesdb)
-                    {
-                        currplaces.Add(new Place { Range = place.Range, Seat = place.Place });
-                    }
-
-                    bookings.Add(new Booking { Code = curr.Code, Date = date.Title.ToString("d"), Film = film.Name, Time = s.Title.ToString("t"), places = currplaces });
-
-                }
-
-               
-            }
-        }*/
-
+        
         public void SubscriptionsRefresh()
         {
             var subs = new List<Film>();
@@ -113,23 +77,7 @@ namespace KINOwpf
 
             subscriptionsGrid.ItemsSource = null;
             subscriptionsGrid.ItemsSource = subs;
-
-
-            /*List<int> filmsids = new List<int>();
-            subscriptions = new List<Subscription>();
-            subsource = new List<Film>();
-            using (KinoContext db = new KinoContext())
-            {
-                subscriptions = db.Subscriptions.Where(x => x.UserId == user.Id).ToList();
-
-                foreach (var x in subscriptions)
-                    filmsids.Add((int)x.FilmId);
-
-                subsource.AddRange(db.Films.Where(x => filmsids.Contains(x.Id)));
-
-                subscriptionsGrid.ItemsSource = null;
-                subscriptionsGrid.ItemsSource = subsource;
-            }*/
+            
         }
 
         private void bookingsGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -166,7 +114,7 @@ namespace KINOwpf
             }
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void ChangeFirstName(object sender, RoutedEventArgs e)
         {
             using (KinoContext db = new KinoContext())
             {
@@ -176,7 +124,7 @@ namespace KINOwpf
             }
         }
 
-        private void Button_Click_1(object sender, RoutedEventArgs e)
+        private void ChangeLastName(object sender, RoutedEventArgs e)
         {
             using (KinoContext db = new KinoContext())
             {
@@ -186,7 +134,7 @@ namespace KINOwpf
             }
         }
 
-        private void Button_Click_2(object sender, RoutedEventArgs e)
+        private void ChangeLogin(object sender, RoutedEventArgs e)
         {
             using (KinoContext db = new KinoContext())
             {
@@ -196,7 +144,7 @@ namespace KINOwpf
             }
         }
 
-        private void Button_Click_3(object sender, RoutedEventArgs e)
+        private void ChangeEmail(object sender, RoutedEventArgs e)
         {
             Random rnd = new Random();
 
@@ -216,7 +164,7 @@ namespace KINOwpf
         }
     
         
-        private void Button_Click_4(object sender, RoutedEventArgs e)
+        private void ChangePassword(object sender, RoutedEventArgs e)
         {
             using (KinoContext db = new KinoContext())
             {
@@ -246,7 +194,7 @@ namespace KINOwpf
 
         }
 
-        private void Button_Click_5(object sender, RoutedEventArgs e)
+        private void DeleteOrder(object sender, RoutedEventArgs e)
         {
             Booking selectedbooking = (Booking)bookingsGrid.SelectedItem;
 
@@ -258,6 +206,7 @@ namespace KINOwpf
                 db.Notifications.Add(new Notification { Message = $"Привет, {user.FirstName}!\nВы отменили бронирование №{selectedbooking.Code} на сумму {selectedbooking.TotalCost} грн.\n\nФильм: {film.Name}\nДата: {selectedbooking.Date}\nСеанс:  {selectedbooking.Time}", Time = $"{DateTime.Now.Day.ToString("00")}.{DateTime.Now.Month.ToString("00")}\n{DateTime.Now.Hour.ToString("00")}:{DateTime.Now.Minute.ToString("00")}", UserId = user.Id });
 
                 db.SaveChanges();
+                MessageBox.Show("Бронирование успешно удалено.");
             }
 
             try
@@ -305,7 +254,7 @@ namespace KINOwpf
             return data;
         }
 
-        private void Button_Click_7(object sender, RoutedEventArgs e)
+        private void ChangePath(object sender, RoutedEventArgs e)
         {
             OpenFileDialog folderBrowser = new OpenFileDialog();
             folderBrowser.ValidateNames = false;
@@ -326,7 +275,7 @@ namespace KINOwpf
             }
         }
 
-        private void Button_Click_8(object sender, RoutedEventArgs e)
+        private void DeleteSub(object sender, RoutedEventArgs e)
         {
             Film selected = (Film)subscriptionsGrid.SelectedItem;
 
@@ -337,6 +286,7 @@ namespace KINOwpf
                     films.RemoveObserver(x);
             }
             SubscriptionsRefresh();
+            MessageBox.Show("Подписка удалена.");
         }
     }
 }

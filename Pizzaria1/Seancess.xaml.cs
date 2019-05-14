@@ -138,7 +138,6 @@ namespace KINOwpf
                     var seldate = DateTime.Parse(datesList.SelectedValue.ToString());
                     date = db.Dates.First(x => x.Title == seldate);
                     filmdate = db.FilmsDates.First(x => x.FilmId == film.Id && x.DateId == date.Id);
-                    MessageBox.Show(date.Title.ToString());
 
                     var seances = db.FilmsDatesSeances.Where(x => x.FilmsDatesId == filmdate.Id).Select(x => x.SeanceId).ToArray();
                     var seancess = db.Seances.Where(x => seances.Contains(x.Id)).Select(x => x.Title).ToList();
@@ -156,7 +155,7 @@ namespace KINOwpf
             catch (Exception) { }
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void FreeTickets(object sender, RoutedEventArgs e)
         {
 
             main.title.Text = film.Name + "   " + date.Title.ToString("d") + "   " + seance.Title.ToString("t");
@@ -241,26 +240,21 @@ namespace KINOwpf
                 using (KinoContext db = new KinoContext())
                 {
                     seance = new Seance();
-                    MessageBox.Show(filmdate.Id + "   " + seance.Id + "             ");
                     foreach (var x in db.Seances)
                     {
                         if (x.Title.ToString().Contains(seancesList.SelectedValue.ToString()) == true)
                         {
-                            MessageBox.Show(x.Title.ToString() + "       " + seancesList.SelectedValue.ToString());
                             seance = x;
-                        MessageBox.Show(seance.Id.ToString());
                             break;
                         }
                     }
-                MessageBox.Show(filmdate.Id + "           " + seance.Id);
                     filmdateseance = db.FilmsDatesSeances.First(x => x.FilmsDatesId == filmdate.Id && x.SeanceId == seance.Id);
-                    MessageBox.Show(filmdateseance.Id.ToString());
                 }
             //}
             //catch (Exception) { }
         }
 
-        private void Button_Click_2(object sender, RoutedEventArgs e)
+        private void DeleteFilm(object sender, RoutedEventArgs e)
         {
                 bool delete = true;
                 Film selectedfilm = (Film)filmsGrid.SelectedItem;
@@ -291,8 +285,7 @@ namespace KINOwpf
                         DateTime a = DateTime.Now;
                         DateTime b = new DateTime(int.Parse(time[2]), int.Parse(time[1]), int.Parse(time[0]), int.Parse(date[0]), int.Parse(date[1]), 0);
                         var diff = b.Subtract(a).TotalMinutes;
-
-                        MessageBox.Show(diff.ToString());
+                    
                         if (diff > 0)
                         {
                             delete = false;
@@ -344,13 +337,13 @@ namespace KINOwpf
             
         }
 
-        private void Button_Click_1(object sender, RoutedEventArgs e)
+        private void AddFilm(object sender, RoutedEventArgs e)
         {
             main.GridPrincipal.Children.Clear();
             main.GridPrincipal.Children.Add(new NewFilmControl(main, this, film, false));
         }
 
-        private void Button_Click_3(object sender, RoutedEventArgs e)
+        private void EditFilm(object sender, RoutedEventArgs e)
         {
 
             main.GridPrincipal.Children.Clear();
@@ -358,7 +351,7 @@ namespace KINOwpf
 
         }
 
-        private void Button_Click_4(object sender, RoutedEventArgs e)
+        private void WatchTrailer(object sender, RoutedEventArgs e)
         {
             using (KinoContext db = new KinoContext())
             {

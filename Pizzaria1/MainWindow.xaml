@@ -89,9 +89,7 @@
             <Grid Margin="0">
                 <StackPanel HorizontalAlignment="Center" Orientation="Horizontal"/>
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="10 0">
-                    <Button Width="30" Height="30" Background="{x:Null}" BorderBrush="{x:Null}" Padding="0" Foreground="Gray" Margin="0 0 10 0">
-                        <materialDesign:PackIcon Kind="Settings"/>
-                    </Button>
+  
                     <Button x:Name="ButtonFechar" Width="30" Height="30" Background="{x:Null}" BorderBrush="{x:Null}" Padding="0" Foreground="Gray" Click="ButtonFechar_Click">
                         <materialDesign:PackIcon Kind="Power"/>
                     </Button>
@@ -120,13 +118,13 @@
 
 
             <ListView x:Name="ListViewMenu" Margin="0,170,0,100" Foreground="LightGray" FontFamily="Century Gothic" FontSize="18" SelectionChanged="ListViewMenu_SelectionChanged" SelectedIndex="2" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
-                <ListViewItem Height="60" Selected="ListViewItem_Selected_2">
+                <ListViewItem Height="60">
                     <StackPanel Orientation="Horizontal">
                         <materialDesign:PackIcon Kind="Account" Width="30" Height="30" VerticalAlignment="Center" Margin="5"/>
                         <TextBlock Text="Профиль" FontSize="17" VerticalAlignment="Center" Margin="20 0"/>
                     </StackPanel>
                 </ListViewItem>
-                <ListViewItem Height="60" Selected="ListViewItem_Selected">
+                <ListViewItem Height="60">
                     <StackPanel Orientation="Horizontal">
                         <materialDesign:PackIcon Kind="Movie" Width="30" Height="30" VerticalAlignment="Center" Margin="5"/>
                         <TextBlock Text="Сеансы" FontSize="17" VerticalAlignment="Center" Margin="20 0"/>

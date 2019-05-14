@@ -27,12 +27,17 @@ namespace KINOwpf
         public User user;
         public Seancess seancess;
         IEnumerable<StackPanel> panels;
+       
         public ZalControl(Seancess seancess)
         {
             InitializeComponent();
+
             panels = main.Children.OfType<StackPanel>();
             this.seancess = seancess;
-            
+
+            if (seancess.main.user == null)
+                order.Content = "Сохранить";
+
                 using (KinoContext db = new KinoContext())
                 {
                     if (seancess.main.user != null)
@@ -113,7 +118,7 @@ namespace KINOwpf
             return folderPath;
         }
 
-        private void Button_Click_1(object sender, RoutedEventArgs e)
+        private void Book(object sender, RoutedEventArgs e)
         {
             var num = 1;
             var date = seancess.seance.Title.ToString("t").Split(':');
@@ -289,7 +294,8 @@ namespace KINOwpf
                         db.Notifications.Add(new Notification { Message = $"Привет, {user.FirstName}!\nВы успешно совершили бронирование №{db.ReservationCodes.First(r => r.Id == codeid).Code} на сумму {totalprice} грн.\n\nФильм: \"{seancess.film.Name}\"\nДата: {seancess.date.Title.ToString("d")}\nСеанс:  {seancess.seance.Title.ToString("t")}", Time = $"{DateTime.Now.Day.ToString("00")}.{DateTime.Now.Month.ToString("00")}\n{DateTime.Now.Hour.ToString("00")}:{DateTime.Now.Minute.ToString("00")}", UserId = user.Id });
  
                     db.SaveChanges();
-
+                    seancess.main.GridPrincipal.Children.Clear();
+                    seancess.main.GridPrincipal.Children.Add(seancess);
                 }
 
             }
@@ -304,6 +310,12 @@ namespace KINOwpf
         private void retiree_Checked(object sender, RoutedEventArgs e)
         {
             student.IsChecked = false;
+        }
+
+        private void Return (object sender, RoutedEventArgs e)
+        {
+            seancess.main.GridPrincipal.Children.Clear();
+            seancess.main.GridPrincipal.Children.Add(seancess);
         }
     }
 }

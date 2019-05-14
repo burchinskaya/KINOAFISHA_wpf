@@ -60,7 +60,7 @@ namespace KINOwpf
 
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void AddFilm(object sender, RoutedEventArgs e)
         {
             main.GridPrincipal.Children.Clear();
             main.GridPrincipal.Children.Add(new NewFilmControl(main, this, selectedfilm, false));
@@ -82,7 +82,7 @@ namespace KINOwpf
             FilmRefresh();
         }
 
-        private void Button_Click_1(object sender, RoutedEventArgs e)
+        private void EditFilm(object sender, RoutedEventArgs e)
         {
             main.GridPrincipal.Children.Clear();
             main.GridPrincipal.Children.Add(new NewFilmControl(main, this, selectedfilm, true));
@@ -104,7 +104,7 @@ namespace KINOwpf
             FilmRefresh();
         }
 
-        private void Button_Click_2(object sender, RoutedEventArgs e)
+        private void DeleteFilm(object sender, RoutedEventArgs e)
         {
             using (KinoContext db = new KinoContext())
             {
@@ -119,7 +119,7 @@ namespace KINOwpf
             FilmRefresh();
         }
 
-        private void Button_Click_3(object sender, RoutedEventArgs e)
+        private void WatchTrailer(object sender, RoutedEventArgs e)
         {
             using (KinoContext db = new KinoContext())
                 Process.Start(db.Films.First(x => x.Id == selectedfilm.Id).Trailer);
@@ -139,17 +139,8 @@ namespace KINOwpf
             main.title.Text = "Добавление фильма в сеансы";
         }
 
-        private void Button_Click_4(object sender, RoutedEventArgs e)
+        private void Subscribe(object sender, RoutedEventArgs e)
         {
-            /*using (KinoContext db = new KinoContext())
-            {
-                var userid = db.Users.First(x => x.Id == main.user.Id).Id;
-                var filmid = db.Films.First(x => x.Id == selectedfilm.Id).Id;
-
-                db.Subscriptions.Add(new Subscription { UserId = userid, FilmId = filmid });
-                db.SaveChanges();
-            }*/
-
             var subs = selectedfilm.Subscribers;
 
             bool reg = true;
@@ -162,7 +153,10 @@ namespace KINOwpf
                 }
             }
             if (reg)
-            selectedfilm.RegisterObserver(main.user);
+            {
+                selectedfilm.RegisterObserver(main.user);
+                MessageBox.Show("Вы подписались на этот фильм");
+            }
         }
 
         public void FilmRefresh()

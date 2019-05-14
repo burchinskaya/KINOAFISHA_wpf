@@ -102,11 +102,7 @@ namespace Pizzaria1
                 admin = (Admin)person;
             else if (person is User)
                 user = (User)person;
-
-            if (user == null)
-                MessageBox.Show("Admin");
-            else MessageBox.Show("User");
-
+            
             this.allfilms = allfilms;
             GridPrincipal.Children.Clear();
             RefreshBookings();
@@ -197,20 +193,13 @@ namespace Pizzaria1
                     break;
             }
         }
-
-        public void Reg()
-        {
-        }
+        
 
         private void MoveCursorMenu(int index)
         {
             TrainsitionigContentSlide.OnApplyTemplate();
         }
-
-        private void ListViewItem_Selected(object sender, RoutedEventArgs e)
-        {
-
-        }
+        
 
         private void ButtonOpenMenu_Click(object sender, RoutedEventArgs e)
         {
@@ -223,21 +212,6 @@ namespace Pizzaria1
         {
             ButtonCloseMenu.Visibility = Visibility.Collapsed;
             ButtonOpenMenu.Visibility = Visibility.Visible;
-        }
-
-        private void ListViewItem_Selected_1(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void ListViewItem_Selected_2(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void ListViewItem_Selected_3(object sender, RoutedEventArgs e)
-        {
-
         }
     }
 }

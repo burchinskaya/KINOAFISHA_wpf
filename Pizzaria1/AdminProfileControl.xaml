@@ -108,9 +108,9 @@
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
 
-                <Button Style="{DynamicResource RoundCorner}" Height="55" Content="Куплено" FontFamily="Century Gothic" FontSize="20" Grid.Row="5" Grid.Column="0" Margin="20,0" Click="Button_Click_2" Foreground="White" />
-                <Button Style="{DynamicResource RoundCorner}" Content="Освободить" FontFamily="Century Gothic" FontSize="20" Height="55" Grid.Row="5" Grid.Column="1" Margin="20,0" Click="Button_Click_1" Foreground="White"/>
-                <Button Style="{DynamicResource RoundCorner}" Content="Обновить" FontFamily="Century Gothic" FontSize="20" Height="55" Grid.Row="5" Grid.Column="2" Margin="20,0" Click="Button_Click" Foreground="White"/>
+                <Button Style="{DynamicResource RoundCorner}" Height="55" Content="Куплено" FontFamily="Century Gothic" FontSize="20" Grid.Row="5" Grid.Column="0" Margin="20,0" Click="TicketsSold" Foreground="White" />
+                <Button Style="{DynamicResource RoundCorner}" Content="Освободить" FontFamily="Century Gothic" FontSize="20" Height="55" Grid.Row="5" Grid.Column="1" Margin="20,0" Click="TicketsFree" Foreground="White"/>
+                <Button Style="{DynamicResource RoundCorner}" Content="Обновить" FontFamily="Century Gothic" FontSize="20" Height="55" Grid.Row="5" Grid.Column="2" Margin="20,0" Click="RefreshOldBookings" Foreground="White"/>
             </Grid>
             <DataGrid x:Name="placesGrid" VerticalScrollBarVisibility="Visible" AutoGenerateColumns="False" Margin="10" Grid.Row="1" Background="#FFEEEEEE" FontFamily="Century Gothic" FontSize="18" Grid.Column="6" Grid.RowSpan="4" Grid.ColumnSpan="2">
                 <DataGrid.ColumnHeaderStyle>

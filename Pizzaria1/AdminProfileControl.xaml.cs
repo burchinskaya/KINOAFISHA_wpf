@@ -33,8 +33,6 @@ namespace KINOwpf
     /// </summary>
     public partial class AdminProfileControl : UserControl
     {
-        public int randcode;
-        byte[] poster;
         public Film film;
         public MainWindow main;
         public Seancess seancess;
@@ -89,7 +87,7 @@ namespace KINOwpf
         }
 
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void RefreshOldBookings(object sender, RoutedEventArgs e)
         {
             foreach (var x in main.allbookings)
             {
@@ -104,13 +102,14 @@ namespace KINOwpf
                     DeleteOrder(x);
                 }
             }
-            
+            MessageBox.Show("Удалены все неподтвержденные заказы.");
         }
 
-        private void Button_Click_1(object sender, RoutedEventArgs e)
+        private void TicketsFree(object sender, RoutedEventArgs e)
         {
             Booking booking = (Booking)bookingsGrid.SelectedItem;
             DeleteOrder(booking);
+            MessageBox.Show("Заказ отменен.");
         }
 
         public void DeleteOrder(Booking booking)
@@ -131,7 +130,7 @@ namespace KINOwpf
             PlacesGridRefresh();
         }
 
-        private void Button_Click_2(object sender, RoutedEventArgs e)
+        private void TicketsSold(object sender, RoutedEventArgs e)
         {
             Booking booking = (Booking)bookingsGrid.SelectedItem;
 
@@ -147,12 +146,13 @@ namespace KINOwpf
                     db.SaveChanges();
                 }
 
-                db.ReservationPlaces.RemoveRange(db.ReservationPlaces.Where(x => x.CodeId == booking.Code));
-                db.ReservationCodes.Remove(db.ReservationCodes.Find(reserv.Id));
-                db.SaveChanges();
+                DeleteOrder(booking);
             }
             main.RefreshBookings();
             BookingsGridRefresh();
+
+            MessageBox.Show("Бронь успешно подтверждена.");
         }
+        
     }
 }

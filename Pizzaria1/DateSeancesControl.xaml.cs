@@ -55,7 +55,6 @@ namespace KINOwpf
             this.main = main;
             this.seancess = seancess;
             this.film = film;
-            MessageBox.Show(film.Name);
             datesname = new List<DateMy>();
             seancesname = new List<SeanceMy>();
             currentdate = new List<SeanceMy>();
@@ -101,13 +100,13 @@ namespace KINOwpf
             }
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void Return(object sender, RoutedEventArgs e)
         {
             main.GridPrincipal.Children.Clear();
             main.GridPrincipal.Children.Add(seancess);
         }
 
-        private void Button_Click_1(object sender, RoutedEventArgs e)
+        private void AddDate(object sender, RoutedEventArgs e)
         {
             bool dublicate = false;
             DateTime newdate = DateTime.Parse(date.Text);
@@ -127,7 +126,7 @@ namespace KINOwpf
             }
         }
 
-        private void Button_Click_2(object sender, RoutedEventArgs e)
+        private void AddSeance(object sender, RoutedEventArgs e)
         {
             bool dublicate = false;
             DateTime newseance = DateTime.Parse(seance.Text);
@@ -180,10 +179,8 @@ namespace KINOwpf
             seancesGrid.ItemsSource = currentdate;
         }
 
-        private void Button_Click_3(object sender, RoutedEventArgs e)
+        private void Save(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show(film.Name);
-
             using (KinoContext db = new KinoContext())
             {
                 try
@@ -214,13 +211,11 @@ namespace KINOwpf
                         }
 
                         var dateid = db.Dates.First(d => d.Title == x.InFormat).Id;
-
-                        MessageBox.Show(dateid.ToString());
+                        
                         if (db.FilmsDates.Where(fd => fd.DateId == dateid && fd.FilmId == film.Id).Count() == 0)
                         {
                             db.FilmsDates.Add(new FilmsDates { DateId = dateid, FilmId = film.Id });
                             db.SaveChanges();
-                            MessageBox.Show(dateid.ToString() + "        " + film.Id);
                         }
 
                         foreach (var y in seancesname)
@@ -258,13 +253,18 @@ namespace KINOwpf
                             }
                         }
 
+                        MessageBox.Show("Внесенные изменения были успешно сохранены.");
                     }
                 }
                 catch { }
+
+
+                main.GridPrincipal.Children.Clear();
+                main.GridPrincipal.Children.Add(seancess);
             }
         }
 
-        private void Button_Click_4(object sender, RoutedEventArgs e)
+        private void DeleteDate(object sender, RoutedEventArgs e)
         {
             DateMy datefordelete = (DateMy)datesGrid.SelectedItem;
             datesname.Remove(datefordelete);
@@ -285,7 +285,7 @@ namespace KINOwpf
             catch (Exception) { }
         }
 
-        private void Button_Click_5(object sender, RoutedEventArgs e)
+        private void DeleteSeance(object sender, RoutedEventArgs e)
         {
 
             SeanceMy seancefordelete = (SeanceMy)seancesGrid.SelectedItem;

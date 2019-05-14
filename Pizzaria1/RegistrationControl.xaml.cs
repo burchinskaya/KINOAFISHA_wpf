@@ -29,7 +29,7 @@ namespace KINOwpf
             this.auth = auth;
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void Send(object sender, RoutedEventArgs e)
         {
             a = new Auth_Reg();
             num = a.Registration(namefield.Text, lastnamefield.Text, loginfield.Text, passwordfield.Password, emailfield.Text);

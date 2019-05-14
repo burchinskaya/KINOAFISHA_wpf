@@ -115,7 +115,7 @@ namespace KINOwpf
             }
         }
         
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void DownloadPoster(object sender, RoutedEventArgs e)
         {
             OpenFileDialog op = new OpenFileDialog();
             op.Filter = "Файлы изображений (*.jpg)|*.jpg";
@@ -155,7 +155,7 @@ namespace KINOwpf
             return data;
         }
 
-        private void Button_Click_1(object sender, RoutedEventArgs e)
+        private void AddGenre(object sender, RoutedEventArgs e)
         {
             bool dublicate = false;
             if (filmgenre.Text != "")
@@ -175,7 +175,7 @@ namespace KINOwpf
                 MessageBox.Show("Заполните поле жанра.");
         }
 
-        private void Button_Click_2(object sender, RoutedEventArgs e)
+        private void DeleteGenre(object sender, RoutedEventArgs e)
         {
             if (genresGrid.SelectedItem == null)
             {
@@ -193,7 +193,7 @@ namespace KINOwpf
             }
         }
 
-        private void Button_Click_3(object sender, RoutedEventArgs e)
+        private void SaveFilm(object sender, RoutedEventArgs e)
         {
             SaveFilm();
             using (KinoContext db = new KinoContext())
@@ -214,108 +214,114 @@ namespace KINOwpf
 
         private void SaveFilm()
         {
-            if (edit == true)
-            {
-                using (KinoContext db = new KinoContext())
-                {
-                    db.Films.First(x => x.Id == film.Id).Name = filmtitle.Text;
-                    db.Films.First(x => x.Id == film.Id).PosterByte = ImageToByte((BitmapImage)filmposter.Source);
-                    db.Films.First(x => x.Id == film.Id).RatingIMDb = float.Parse(filmIMDb.Text);
-                    db.Films.First(x => x.Id == film.Id).RatingKinopoisk = float.Parse(filmKinopoisk.Text);
-                    db.Films.First(x => x.Id == film.Id).Slogan = filmslogan.Text;
-                    db.Films.First(x => x.Id == film.Id).Trailer = trailer.Text;
-                    db.Films.First(x => x.Id == film.Id).Country = filmcountry.Text;
-                    db.Films.First(x => x.Id == film.Id).Description = filmdescription.Text;
-
-                    if (filmpremier.Visibility == Visibility.Visible)
-                    {
-                        db.Films.First(x => x.Id == film.Id).PremierDate = DateTime.Parse(filmpremier.Text);
-                        db.SaveChanges();
-                    }
-                    db.SaveChanges();
-
-                    db.FilmsGenres.RemoveRange(db.FilmsGenres.Where(x => x.FilmId == film.Id));
-                    db.SaveChanges();
-
-                    foreach (var y in genres)
-                    {
-                        if (db.Genres.Where(x => x.Name == y.Name).Count() == 0)
-                        {
-                            db.Genres.Add(y);
-                            db.SaveChanges();
-                        }
-
-                        var genresid = db.Genres.First(x => x.Name == y.Name).Id;
-
-                        db.FilmsGenres.Add(new FilmsGenres { FilmId = film.Id, GenreId = genresid });
-                        db.SaveChanges();
-                    }
-
-                    main.GridPrincipal.Children.Clear();
-                    try
-                    {
-                        main.GridPrincipal.Children.Add(seancess);
-                    }
-                    catch { premiers.FilmRefresh(); main.GridPrincipal.Children.Add(premiers); }
-                }
-            }
-
+            if (filmtitle.Text == "" || filmcountry.Text == "" || filmdescription.Text == "" || filmIMDb.Text == "" || filmKinopoisk.Text == "")
+                MessageBox.Show("Заполните все поля");
             else
-                using (KinoContext db = new KinoContext())
+            {
+                if (edit == true)
                 {
-                    film = new Film();
-
-                    film.Name = filmtitle.Text;
-                    film.Slogan = filmslogan.Text;
-                    film.PosterByte = poster;
-                    try
+                    using (KinoContext db = new KinoContext())
                     {
-                        film.RatingIMDb = float.Parse(filmIMDb.Text);
-                        film.RatingKinopoisk = float.Parse(filmKinopoisk.Text);
-                    }
-                    catch { }
-                    film.Description = filmdescription.Text;
-                    film.Country = filmcountry.Text;
-                    film.Trailer = trailer.Text;
+                        db.Films.First(x => x.Id == film.Id).Name = filmtitle.Text;
+                        db.Films.First(x => x.Id == film.Id).PosterByte = ImageToByte((BitmapImage)filmposter.Source);
+                        db.Films.First(x => x.Id == film.Id).RatingIMDb = float.Parse(filmIMDb.Text);
+                        db.Films.First(x => x.Id == film.Id).RatingKinopoisk = float.Parse(filmKinopoisk.Text);
+                        db.Films.First(x => x.Id == film.Id).Slogan = filmslogan.Text;
+                        db.Films.First(x => x.Id == film.Id).Trailer = trailer.Text;
+                        db.Films.First(x => x.Id == film.Id).Country = filmcountry.Text;
+                        db.Films.First(x => x.Id == film.Id).Description = filmdescription.Text;
 
-                    try
-                    {
-                        film.PremierDate = DateTime.Parse(filmpremier.Text);
-                    }
-                    catch { film.PremierDate = DateTime.Now; }
-
-                    if (isPremier)
-                        film.IsPremiere = true;
-
-                    db.Films.Add(film);
-                    db.SaveChanges();
-                    var filmid = db.Films.First(x => x.Name == film.Name).Id;
-
-                    foreach (Genre x in genres.ToArray())
-                    {
-                        if (db.Genres.Where(g => g.Name == x.Name).Count() == 0)
+                        if (filmpremier.Visibility == Visibility.Visible)
                         {
-                            db.Genres.Add(x);
+                            db.Films.First(x => x.Id == film.Id).PremierDate = DateTime.Parse(filmpremier.Text);
+                            db.SaveChanges();
+                        }
+                        db.SaveChanges();
+
+                        db.FilmsGenres.RemoveRange(db.FilmsGenres.Where(x => x.FilmId == film.Id));
+                        db.SaveChanges();
+
+                        foreach (var y in genres)
+                        {
+                            if (db.Genres.Where(x => x.Name == y.Name).Count() == 0)
+                            {
+                                db.Genres.Add(y);
+                                db.SaveChanges();
+                            }
+
+                            var genresid = db.Genres.First(x => x.Name == y.Name).Id;
+
+                            db.FilmsGenres.Add(new FilmsGenres { FilmId = film.Id, GenreId = genresid });
                             db.SaveChanges();
                         }
 
-                        var genreid = db.Genres.First(g => g.Name == x.Name).Id;
-
-                        db.FilmsGenres.Add(new FilmsGenres { FilmId = filmid, GenreId = genreid });
-                        db.SaveChanges();
-
+                        main.GridPrincipal.Children.Clear();
+                        try
+                        {
+                            main.GridPrincipal.Children.Add(seancess);
+                        }
+                        catch { premiers.FilmRefresh(); main.GridPrincipal.Children.Add(premiers); }
                     }
-
-                    main.GridPrincipal.Children.Clear();
-                    try
-                    {
-                        main.GridPrincipal.Children.Add(seancess);
-                    }
-                    catch { premiers.FilmRefresh(); main.GridPrincipal.Children.Add(premiers); }
                 }
+
+                else
+                    using (KinoContext db = new KinoContext())
+                    {
+                        film = new Film();
+
+                        film.Name = filmtitle.Text;
+                        film.Slogan = filmslogan.Text;
+                        film.PosterByte = poster;
+                        try
+                        {
+                            film.RatingIMDb = float.Parse(filmIMDb.Text);
+                            film.RatingKinopoisk = float.Parse(filmKinopoisk.Text);
+                        }
+                        catch { }
+                        film.Description = filmdescription.Text;
+                        film.Country = filmcountry.Text;
+                        film.Trailer = trailer.Text;
+
+                        try
+                        {
+                            film.PremierDate = DateTime.Parse(filmpremier.Text);
+                        }
+                        catch { film.PremierDate = DateTime.Now; }
+
+                        if (isPremier)
+                            film.IsPremiere = true;
+
+                        db.Films.Add(film);
+                        db.SaveChanges();
+                        var filmid = db.Films.First(x => x.Name == film.Name).Id;
+
+                        foreach (Genre x in genres.ToArray())
+                        {
+                            if (db.Genres.Where(g => g.Name == x.Name).Count() == 0)
+                            {
+                                db.Genres.Add(x);
+                                db.SaveChanges();
+                            }
+
+                            var genreid = db.Genres.First(g => g.Name == x.Name).Id;
+
+                            db.FilmsGenres.Add(new FilmsGenres { FilmId = filmid, GenreId = genreid });
+                            db.SaveChanges();
+
+                        }
+
+                        main.GridPrincipal.Children.Clear();
+                        try
+                        {
+                            main.GridPrincipal.Children.Add(seancess);
+                        }
+                        catch { premiers.FilmRefresh(); main.GridPrincipal.Children.Add(premiers); }
+                    }
+                MessageBox.Show("Фильм успешно сохранен.");
+            }
         }
 
-        private void Button_Click_4(object sender, RoutedEventArgs e)
+        private void EditSeances(object sender, RoutedEventArgs e)
         {
             SaveFilm();
             main.GridPrincipal.Children.Clear();

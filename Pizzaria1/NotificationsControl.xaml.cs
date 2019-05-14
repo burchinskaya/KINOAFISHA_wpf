@@ -102,13 +102,9 @@ namespace KINOwpf
                 }
             }
         }
+        
 
-        private void messagesGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-
-        }
-
-        private void Button_Click_1(object sender, RoutedEventArgs e)
+        private void Clear(object sender, RoutedEventArgs e)
         {
             using (KinoContext db = new KinoContext())
             {

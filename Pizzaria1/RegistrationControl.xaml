@@ -43,7 +43,7 @@
             <PasswordBox Foreground="Black" BorderThickness="0,0,0,2" BorderBrush="#FF1F0202"  Margin="10,5,25,5" x:Name="passwordfield" Grid.Row="5" Grid.ColumnSpan="3" FontFamily="Century Gothic" Grid.Column="3" Background="{x:Null}" FontSize="16" CaretBrush="White" />
 
             <Border Grid.Row="8" Grid.Column="2" Grid.ColumnSpan="4" CornerRadius="20" BorderThickness="2" Margin="53,7,47,25" Background="#FF1F0202">
-                <Button Height="45" Content="Отправить" Background="{x:Null}" FontFamily="Century Gothic" BorderThickness="0" FontSize="18" Grid.Row="6" Click="Button_Click" BorderBrush="#FF1C1C1C" Grid.ColumnSpan="4" Grid.Column="1" Foreground="White"/>
+                <Button Height="45" Content="Отправить" Background="{x:Null}" FontFamily="Century Gothic" BorderThickness="0" FontSize="18" Grid.Row="6" Click="Send" BorderBrush="#FF1C1C1C" Grid.ColumnSpan="4" Grid.Column="1" Foreground="White"/>
             </Border>
             <Label Content="Имя" Grid.Row="2" Foreground="#FF1F0202" FontFamily="Century Gothic" FontSize="16" Grid.Column="2" VerticalAlignment="Center" Margin="0,5,10,5" HorizontalAlignment="Right" Height="30" Width="43"/>
             <Label Content="Фамилия" Grid.Row="3" Foreground="#FF1F0202" FontFamily="Century Gothic" FontSize="16" Grid.Column="2" VerticalAlignment="Center" Margin="0,5,10,5" HorizontalAlignment="Right" Height="30" Width="85"/>
