@@ -49,6 +49,11 @@ namespace Pizzaria1
 
         private static MainWindow instance;
 
+        public MainWindow()
+        {
+
+        }
+
         public void RefreshBookings()
         {
             using (KinoContext db = new KinoContext())
@@ -112,6 +117,13 @@ namespace Pizzaria1
         {
             if (instance == null)
                 instance = new MainWindow(person, films);
+            return instance;
+        }
+
+        public static MainWindow getInstance()
+        {
+            if (instance == null)
+                instance = new MainWindow();
             return instance;
         }
 
@@ -179,6 +191,11 @@ namespace Pizzaria1
                     GridPrincipal.Children.Clear();
                     GridPrincipal.Children.Add(new Seancess(this));
                     break;
+                case 2:
+                    title.Text = "PopCorn";
+                    GridPrincipal.Children.Clear();
+                    GridPrincipal.Children.Add(new GameControl());
+                    break;
                 case 3:
                     title.Text = "Скоро на экранах";
                     GridPrincipal.Children.Clear();
@@ -212,6 +229,11 @@ namespace Pizzaria1
         {
             ButtonCloseMenu.Visibility = Visibility.Collapsed;
             ButtonOpenMenu.Visibility = Visibility.Visible;
+        }
+
+        private void ListViewItem_Selected(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

@@ -1,0 +1,982 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Хранилище KINOdbModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="__MigrationHistory">
+          <Key>
+            <PropertyRef Name="MigrationId" />
+            <PropertyRef Name="ContextKey" />
+          </Key>
+          <Property Name="MigrationId" Type="nvarchar" MaxLength="150" Nullable="false" />
+          <Property Name="ContextKey" Type="nvarchar" MaxLength="300" Nullable="false" />
+          <Property Name="Model" Type="varbinary(max)" Nullable="false" />
+          <Property Name="ProductVersion" Type="nvarchar" MaxLength="32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Admins">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Login" Type="nvarchar(max)" />
+          <Property Name="Password" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="Dates">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Title" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Films">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" />
+          <Property Name="Description" Type="nvarchar(max)" />
+          <Property Name="Poster" Type="nvarchar(max)" />
+          <Property Name="Trailer" Type="nvarchar(max)" />
+          <Property Name="Country" Type="nvarchar(max)" />
+          <Property Name="RatingIMDb" Type="real" Nullable="false" />
+          <Property Name="RatingKinopoisk" Type="real" Nullable="false" />
+          <Property Name="Slogan" Type="nvarchar(max)" />
+          <Property Name="PosterByte" Type="varbinary(max)" />
+          <Property Name="PremierDate" Type="datetime" Nullable="false" />
+          <Property Name="IsPremiere" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="FilmsDates">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FilmId" Type="int" />
+          <Property Name="DateId" Type="int" />
+        </EntityType>
+        <EntityType Name="FilmsDatesSeances">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FilmsDatesId" Type="int" />
+          <Property Name="SeanceId" Type="int" />
+        </EntityType>
+        <EntityType Name="FilmsGenres">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FilmId" Type="int" />
+          <Property Name="GenreId" Type="int" />
+        </EntityType>
+        <EntityType Name="Genres">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="Notifications">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Message" Type="nvarchar(max)" />
+          <Property Name="UserId" Type="int" />
+          <Property Name="Time" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="Prices">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Range" Type="int" Nullable="false" />
+          <Property Name="Cost" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ReservationCodes">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Code" Type="int" Nullable="false" />
+          <Property Name="UserId" Type="int" />
+          <Property Name="FilmDateSeanceId" Type="int" />
+          <Property Name="TotalPrice" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ReservationPlaces">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Range" Type="int" Nullable="false" />
+          <Property Name="Place" Type="int" Nullable="false" />
+          <Property Name="CodeId" Type="int" />
+          <Property Name="ReservationCode_Id" Type="int" />
+          <Property Name="Price" Type="int" Nullable="false" />
+          <Property Name="Student" Type="bit" Nullable="false" />
+          <Property Name="Retiree" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Seances">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Title" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SoldPlaces">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Range" Type="int" Nullable="false" />
+          <Property Name="Place" Type="int" Nullable="false" />
+          <Property Name="FilmDateSeanceId" Type="int" />
+        </EntityType>
+        <EntityType Name="Subscriptions">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserId" Type="int" />
+          <Property Name="FilmId" Type="int" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Login" Type="nvarchar(max)" />
+          <Property Name="Password" Type="nvarchar(max)" />
+          <Property Name="Email" Type="nvarchar(max)" />
+          <Property Name="FirstName" Type="nvarchar(max)" />
+          <Property Name="LastName" Type="nvarchar(max)" />
+          <Property Name="PathForTickets" Type="nvarchar(max)" />
+        </EntityType>
+        <Association Name="FK_dbo_FilmsDates_dbo_Dates_DateId">
+          <End Role="Dates" Type="Self.Dates" Multiplicity="0..1" />
+          <End Role="FilmsDates" Type="Self.FilmsDates" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Dates">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="FilmsDates">
+              <PropertyRef Name="DateId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_FilmsDates_dbo_Films_FilmId">
+          <End Role="Films" Type="Self.Films" Multiplicity="0..1" />
+          <End Role="FilmsDates" Type="Self.FilmsDates" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Films">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="FilmsDates">
+              <PropertyRef Name="FilmId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_FilmsDatesSeances_dbo_FilmsDates_FilmsDatesId">
+          <End Role="FilmsDates" Type="Self.FilmsDates" Multiplicity="0..1" />
+          <End Role="FilmsDatesSeances" Type="Self.FilmsDatesSeances" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FilmsDates">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="FilmsDatesSeances">
+              <PropertyRef Name="FilmsDatesId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_FilmsDatesSeances_dbo_Seances_SeanceId">
+          <End Role="Seances" Type="Self.Seances" Multiplicity="0..1" />
+          <End Role="FilmsDatesSeances" Type="Self.FilmsDatesSeances" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Seances">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="FilmsDatesSeances">
+              <PropertyRef Name="SeanceId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_FilmsGenres_dbo_Films_FilmId">
+          <End Role="Films" Type="Self.Films" Multiplicity="0..1" />
+          <End Role="FilmsGenres" Type="Self.FilmsGenres" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Films">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="FilmsGenres">
+              <PropertyRef Name="FilmId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_FilmsGenres_dbo_Genres_GenreId">
+          <End Role="Genres" Type="Self.Genres" Multiplicity="0..1" />
+          <End Role="FilmsGenres" Type="Self.FilmsGenres" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Genres">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="FilmsGenres">
+              <PropertyRef Name="GenreId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Notifications_dbo_Users_UserId">
+          <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+          <End Role="Notifications" Type="Self.Notifications" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Notifications">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_ReservationCodes_dbo_FilmsDatesSeances_FilmDateSeanceId">
+          <End Role="FilmsDatesSeances" Type="Self.FilmsDatesSeances" Multiplicity="0..1" />
+          <End Role="ReservationCodes" Type="Self.ReservationCodes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FilmsDatesSeances">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ReservationCodes">
+              <PropertyRef Name="FilmDateSeanceId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_ReservationCodes_dbo_Users_UserId">
+          <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+          <End Role="ReservationCodes" Type="Self.ReservationCodes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ReservationCodes">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_ReservationPlaces_dbo_ReservationCodes_ReservationCode_Id">
+          <End Role="ReservationCodes" Type="Self.ReservationCodes" Multiplicity="0..1" />
+          <End Role="ReservationPlaces" Type="Self.ReservationPlaces" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ReservationCodes">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ReservationPlaces">
+              <PropertyRef Name="ReservationCode_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_SoldPlaces_dbo_FilmsDatesSeances_FilmDateSeanceId">
+          <End Role="FilmsDatesSeances" Type="Self.FilmsDatesSeances" Multiplicity="0..1" />
+          <End Role="SoldPlaces" Type="Self.SoldPlaces" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FilmsDatesSeances">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SoldPlaces">
+              <PropertyRef Name="FilmDateSeanceId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Subscriptions_dbo_Films_FilmId">
+          <End Role="Films" Type="Self.Films" Multiplicity="0..1" />
+          <End Role="Subscriptions" Type="Self.Subscriptions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Films">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Subscriptions">
+              <PropertyRef Name="FilmId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Subscriptions_dbo_Users_UserId">
+          <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+          <End Role="Subscriptions" Type="Self.Subscriptions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Subscriptions">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Хранилище KINOdbModelContainer">
+          <EntitySet Name="__MigrationHistory" EntityType="Self.__MigrationHistory" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Admins" EntityType="Self.Admins" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Dates" EntityType="Self.Dates" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Films" EntityType="Self.Films" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="FilmsDates" EntityType="Self.FilmsDates" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="FilmsDatesSeances" EntityType="Self.FilmsDatesSeances" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="FilmsGenres" EntityType="Self.FilmsGenres" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Genres" EntityType="Self.Genres" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Notifications" EntityType="Self.Notifications" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Prices" EntityType="Self.Prices" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ReservationCodes" EntityType="Self.ReservationCodes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ReservationPlaces" EntityType="Self.ReservationPlaces" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Seances" EntityType="Self.Seances" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SoldPlaces" EntityType="Self.SoldPlaces" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Subscriptions" EntityType="Self.Subscriptions" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_dbo_FilmsDates_dbo_Dates_DateId" Association="Self.FK_dbo_FilmsDates_dbo_Dates_DateId">
+            <End Role="Dates" EntitySet="Dates" />
+            <End Role="FilmsDates" EntitySet="FilmsDates" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_FilmsDates_dbo_Films_FilmId" Association="Self.FK_dbo_FilmsDates_dbo_Films_FilmId">
+            <End Role="Films" EntitySet="Films" />
+            <End Role="FilmsDates" EntitySet="FilmsDates" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_FilmsDatesSeances_dbo_FilmsDates_FilmsDatesId" Association="Self.FK_dbo_FilmsDatesSeances_dbo_FilmsDates_FilmsDatesId">
+            <End Role="FilmsDates" EntitySet="FilmsDates" />
+            <End Role="FilmsDatesSeances" EntitySet="FilmsDatesSeances" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_FilmsDatesSeances_dbo_Seances_SeanceId" Association="Self.FK_dbo_FilmsDatesSeances_dbo_Seances_SeanceId">
+            <End Role="Seances" EntitySet="Seances" />
+            <End Role="FilmsDatesSeances" EntitySet="FilmsDatesSeances" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_FilmsGenres_dbo_Films_FilmId" Association="Self.FK_dbo_FilmsGenres_dbo_Films_FilmId">
+            <End Role="Films" EntitySet="Films" />
+            <End Role="FilmsGenres" EntitySet="FilmsGenres" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_FilmsGenres_dbo_Genres_GenreId" Association="Self.FK_dbo_FilmsGenres_dbo_Genres_GenreId">
+            <End Role="Genres" EntitySet="Genres" />
+            <End Role="FilmsGenres" EntitySet="FilmsGenres" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Notifications_dbo_Users_UserId" Association="Self.FK_dbo_Notifications_dbo_Users_UserId">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Notifications" EntitySet="Notifications" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_ReservationCodes_dbo_FilmsDatesSeances_FilmDateSeanceId" Association="Self.FK_dbo_ReservationCodes_dbo_FilmsDatesSeances_FilmDateSeanceId">
+            <End Role="FilmsDatesSeances" EntitySet="FilmsDatesSeances" />
+            <End Role="ReservationCodes" EntitySet="ReservationCodes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_ReservationCodes_dbo_Users_UserId" Association="Self.FK_dbo_ReservationCodes_dbo_Users_UserId">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="ReservationCodes" EntitySet="ReservationCodes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_ReservationPlaces_dbo_ReservationCodes_ReservationCode_Id" Association="Self.FK_dbo_ReservationPlaces_dbo_ReservationCodes_ReservationCode_Id">
+            <End Role="ReservationCodes" EntitySet="ReservationCodes" />
+            <End Role="ReservationPlaces" EntitySet="ReservationPlaces" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_SoldPlaces_dbo_FilmsDatesSeances_FilmDateSeanceId" Association="Self.FK_dbo_SoldPlaces_dbo_FilmsDatesSeances_FilmDateSeanceId">
+            <End Role="FilmsDatesSeances" EntitySet="FilmsDatesSeances" />
+            <End Role="SoldPlaces" EntitySet="SoldPlaces" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Subscriptions_dbo_Films_FilmId" Association="Self.FK_dbo_Subscriptions_dbo_Films_FilmId">
+            <End Role="Films" EntitySet="Films" />
+            <End Role="Subscriptions" EntitySet="Subscriptions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Subscriptions_dbo_Users_UserId" Association="Self.FK_dbo_Subscriptions_dbo_Users_UserId">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Subscriptions" EntitySet="Subscriptions" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="KINOdbModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="C__MigrationHistory">
+          <Key>
+            <PropertyRef Name="MigrationId" />
+            <PropertyRef Name="ContextKey" />
+          </Key>
+          <Property Name="MigrationId" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ContextKey" Type="String" MaxLength="300" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Model" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
+          <Property Name="ProductVersion" Type="String" MaxLength="32" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Admins">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Login" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Password" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Dates">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="FilmsDates" Relationship="Self.FK_dbo_FilmsDates_dbo_Dates_DateId" FromRole="Dates" ToRole="FilmsDates" />
+        </EntityType>
+        <EntityType Name="Films">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Poster" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Trailer" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Country" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="RatingIMDb" Type="Single" Nullable="false" />
+          <Property Name="RatingKinopoisk" Type="Single" Nullable="false" />
+          <Property Name="Slogan" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PosterByte" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="PremierDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="IsPremiere" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="FilmsDates" Relationship="Self.FK_dbo_FilmsDates_dbo_Films_FilmId" FromRole="Films" ToRole="FilmsDates" />
+          <NavigationProperty Name="FilmsGenres" Relationship="Self.FK_dbo_FilmsGenres_dbo_Films_FilmId" FromRole="Films" ToRole="FilmsGenres" />
+          <NavigationProperty Name="Subscriptions" Relationship="Self.FK_dbo_Subscriptions_dbo_Films_FilmId" FromRole="Films" ToRole="Subscriptions" />
+        </EntityType>
+        <EntityType Name="FilmsDates">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FilmId" Type="Int32" />
+          <Property Name="DateId" Type="Int32" />
+          <NavigationProperty Name="Dates" Relationship="Self.FK_dbo_FilmsDates_dbo_Dates_DateId" FromRole="FilmsDates" ToRole="Dates" />
+          <NavigationProperty Name="Films" Relationship="Self.FK_dbo_FilmsDates_dbo_Films_FilmId" FromRole="FilmsDates" ToRole="Films" />
+          <NavigationProperty Name="FilmsDatesSeances" Relationship="Self.FK_dbo_FilmsDatesSeances_dbo_FilmsDates_FilmsDatesId" FromRole="FilmsDates" ToRole="FilmsDatesSeances" />
+        </EntityType>
+        <EntityType Name="FilmsDatesSeances">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FilmsDatesId" Type="Int32" />
+          <Property Name="SeanceId" Type="Int32" />
+          <NavigationProperty Name="FilmsDates" Relationship="Self.FK_dbo_FilmsDatesSeances_dbo_FilmsDates_FilmsDatesId" FromRole="FilmsDatesSeances" ToRole="FilmsDates" />
+          <NavigationProperty Name="Seances" Relationship="Self.FK_dbo_FilmsDatesSeances_dbo_Seances_SeanceId" FromRole="FilmsDatesSeances" ToRole="Seances" />
+          <NavigationProperty Name="ReservationCodes" Relationship="Self.FK_dbo_ReservationCodes_dbo_FilmsDatesSeances_FilmDateSeanceId" FromRole="FilmsDatesSeances" ToRole="ReservationCodes" />
+          <NavigationProperty Name="SoldPlaces" Relationship="Self.FK_dbo_SoldPlaces_dbo_FilmsDatesSeances_FilmDateSeanceId" FromRole="FilmsDatesSeances" ToRole="SoldPlaces" />
+        </EntityType>
+        <EntityType Name="FilmsGenres">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FilmId" Type="Int32" />
+          <Property Name="GenreId" Type="Int32" />
+          <NavigationProperty Name="Films" Relationship="Self.FK_dbo_FilmsGenres_dbo_Films_FilmId" FromRole="FilmsGenres" ToRole="Films" />
+          <NavigationProperty Name="Genres" Relationship="Self.FK_dbo_FilmsGenres_dbo_Genres_GenreId" FromRole="FilmsGenres" ToRole="Genres" />
+        </EntityType>
+        <EntityType Name="Genres">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="FilmsGenres" Relationship="Self.FK_dbo_FilmsGenres_dbo_Genres_GenreId" FromRole="Genres" ToRole="FilmsGenres" />
+        </EntityType>
+        <EntityType Name="Notifications">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Message" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="UserId" Type="Int32" />
+          <Property Name="Time" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Users" Relationship="Self.FK_dbo_Notifications_dbo_Users_UserId" FromRole="Notifications" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="Prices">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Range" Type="Int32" Nullable="false" />
+          <Property Name="Cost" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ReservationCodes">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Code" Type="Int32" Nullable="false" />
+          <Property Name="UserId" Type="Int32" />
+          <Property Name="FilmDateSeanceId" Type="Int32" />
+          <Property Name="TotalPrice" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="FilmsDatesSeances" Relationship="Self.FK_dbo_ReservationCodes_dbo_FilmsDatesSeances_FilmDateSeanceId" FromRole="ReservationCodes" ToRole="FilmsDatesSeances" />
+          <NavigationProperty Name="Users" Relationship="Self.FK_dbo_ReservationCodes_dbo_Users_UserId" FromRole="ReservationCodes" ToRole="Users" />
+          <NavigationProperty Name="ReservationPlaces" Relationship="Self.FK_dbo_ReservationPlaces_dbo_ReservationCodes_ReservationCode_Id" FromRole="ReservationCodes" ToRole="ReservationPlaces" />
+        </EntityType>
+        <EntityType Name="ReservationPlaces">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Range" Type="Int32" Nullable="false" />
+          <Property Name="Place" Type="Int32" Nullable="false" />
+          <Property Name="CodeId" Type="Int32" />
+          <Property Name="ReservationCode_Id" Type="Int32" />
+          <Property Name="Price" Type="Int32" Nullable="false" />
+          <Property Name="Student" Type="Boolean" Nullable="false" />
+          <Property Name="Retiree" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="ReservationCodes" Relationship="Self.FK_dbo_ReservationPlaces_dbo_ReservationCodes_ReservationCode_Id" FromRole="ReservationPlaces" ToRole="ReservationCodes" />
+        </EntityType>
+        <EntityType Name="Seances">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="FilmsDatesSeances" Relationship="Self.FK_dbo_FilmsDatesSeances_dbo_Seances_SeanceId" FromRole="Seances" ToRole="FilmsDatesSeances" />
+        </EntityType>
+        <EntityType Name="SoldPlaces">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Range" Type="Int32" Nullable="false" />
+          <Property Name="Place" Type="Int32" Nullable="false" />
+          <Property Name="FilmDateSeanceId" Type="Int32" />
+          <NavigationProperty Name="FilmsDatesSeances" Relationship="Self.FK_dbo_SoldPlaces_dbo_FilmsDatesSeances_FilmDateSeanceId" FromRole="SoldPlaces" ToRole="FilmsDatesSeances" />
+        </EntityType>
+        <EntityType Name="Subscriptions">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="Int32" />
+          <Property Name="FilmId" Type="Int32" />
+          <NavigationProperty Name="Films" Relationship="Self.FK_dbo_Subscriptions_dbo_Films_FilmId" FromRole="Subscriptions" ToRole="Films" />
+          <NavigationProperty Name="Users" Relationship="Self.FK_dbo_Subscriptions_dbo_Users_UserId" FromRole="Subscriptions" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Login" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Password" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="FirstName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="LastName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PathForTickets" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Notifications" Relationship="Self.FK_dbo_Notifications_dbo_Users_UserId" FromRole="Users" ToRole="Notifications" />
+          <NavigationProperty Name="ReservationCodes" Relationship="Self.FK_dbo_ReservationCodes_dbo_Users_UserId" FromRole="Users" ToRole="ReservationCodes" />
+          <NavigationProperty Name="Subscriptions" Relationship="Self.FK_dbo_Subscriptions_dbo_Users_UserId" FromRole="Users" ToRole="Subscriptions" />
+        </EntityType>
+        <Association Name="FK_dbo_FilmsDates_dbo_Dates_DateId">
+          <End Role="Dates" Type="Self.Dates" Multiplicity="0..1" />
+          <End Role="FilmsDates" Type="Self.FilmsDates" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Dates">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="FilmsDates">
+              <PropertyRef Name="DateId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_FilmsDates_dbo_Films_FilmId">
+          <End Role="Films" Type="Self.Films" Multiplicity="0..1" />
+          <End Role="FilmsDates" Type="Self.FilmsDates" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Films">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="FilmsDates">
+              <PropertyRef Name="FilmId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_FilmsGenres_dbo_Films_FilmId">
+          <End Role="Films" Type="Self.Films" Multiplicity="0..1" />
+          <End Role="FilmsGenres" Type="Self.FilmsGenres" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Films">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="FilmsGenres">
+              <PropertyRef Name="FilmId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Subscriptions_dbo_Films_FilmId">
+          <End Role="Films" Type="Self.Films" Multiplicity="0..1" />
+          <End Role="Subscriptions" Type="Self.Subscriptions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Films">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Subscriptions">
+              <PropertyRef Name="FilmId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_FilmsDatesSeances_dbo_FilmsDates_FilmsDatesId">
+          <End Role="FilmsDates" Type="Self.FilmsDates" Multiplicity="0..1" />
+          <End Role="FilmsDatesSeances" Type="Self.FilmsDatesSeances" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FilmsDates">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="FilmsDatesSeances">
+              <PropertyRef Name="FilmsDatesId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_FilmsDatesSeances_dbo_Seances_SeanceId">
+          <End Role="Seances" Type="Self.Seances" Multiplicity="0..1" />
+          <End Role="FilmsDatesSeances" Type="Self.FilmsDatesSeances" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Seances">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="FilmsDatesSeances">
+              <PropertyRef Name="SeanceId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_ReservationCodes_dbo_FilmsDatesSeances_FilmDateSeanceId">
+          <End Role="FilmsDatesSeances" Type="Self.FilmsDatesSeances" Multiplicity="0..1" />
+          <End Role="ReservationCodes" Type="Self.ReservationCodes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FilmsDatesSeances">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ReservationCodes">
+              <PropertyRef Name="FilmDateSeanceId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_SoldPlaces_dbo_FilmsDatesSeances_FilmDateSeanceId">
+          <End Role="FilmsDatesSeances" Type="Self.FilmsDatesSeances" Multiplicity="0..1" />
+          <End Role="SoldPlaces" Type="Self.SoldPlaces" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FilmsDatesSeances">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SoldPlaces">
+              <PropertyRef Name="FilmDateSeanceId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_FilmsGenres_dbo_Genres_GenreId">
+          <End Role="Genres" Type="Self.Genres" Multiplicity="0..1" />
+          <End Role="FilmsGenres" Type="Self.FilmsGenres" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Genres">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="FilmsGenres">
+              <PropertyRef Name="GenreId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Notifications_dbo_Users_UserId">
+          <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+          <End Role="Notifications" Type="Self.Notifications" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Notifications">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_ReservationCodes_dbo_Users_UserId">
+          <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+          <End Role="ReservationCodes" Type="Self.ReservationCodes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ReservationCodes">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_ReservationPlaces_dbo_ReservationCodes_ReservationCode_Id">
+          <End Role="ReservationCodes" Type="Self.ReservationCodes" Multiplicity="0..1" />
+          <End Role="ReservationPlaces" Type="Self.ReservationPlaces" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ReservationCodes">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ReservationPlaces">
+              <PropertyRef Name="ReservationCode_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Subscriptions_dbo_Users_UserId">
+          <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+          <End Role="Subscriptions" Type="Self.Subscriptions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Subscriptions">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="KINOdbEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="C__MigrationHistory" EntityType="Self.C__MigrationHistory" />
+          <EntitySet Name="Admins" EntityType="Self.Admins" />
+          <EntitySet Name="Dates" EntityType="Self.Dates" />
+          <EntitySet Name="Films" EntityType="Self.Films" />
+          <EntitySet Name="FilmsDates" EntityType="Self.FilmsDates" />
+          <EntitySet Name="FilmsDatesSeances" EntityType="Self.FilmsDatesSeances" />
+          <EntitySet Name="FilmsGenres" EntityType="Self.FilmsGenres" />
+          <EntitySet Name="Genres" EntityType="Self.Genres" />
+          <EntitySet Name="Notifications" EntityType="Self.Notifications" />
+          <EntitySet Name="Prices" EntityType="Self.Prices" />
+          <EntitySet Name="ReservationCodes" EntityType="Self.ReservationCodes" />
+          <EntitySet Name="ReservationPlaces" EntityType="Self.ReservationPlaces" />
+          <EntitySet Name="Seances" EntityType="Self.Seances" />
+          <EntitySet Name="SoldPlaces" EntityType="Self.SoldPlaces" />
+          <EntitySet Name="Subscriptions" EntityType="Self.Subscriptions" />
+          <EntitySet Name="Users" EntityType="Self.Users" />
+          <AssociationSet Name="FK_dbo_FilmsDates_dbo_Dates_DateId" Association="Self.FK_dbo_FilmsDates_dbo_Dates_DateId">
+            <End Role="Dates" EntitySet="Dates" />
+            <End Role="FilmsDates" EntitySet="FilmsDates" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_FilmsDates_dbo_Films_FilmId" Association="Self.FK_dbo_FilmsDates_dbo_Films_FilmId">
+            <End Role="Films" EntitySet="Films" />
+            <End Role="FilmsDates" EntitySet="FilmsDates" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_FilmsGenres_dbo_Films_FilmId" Association="Self.FK_dbo_FilmsGenres_dbo_Films_FilmId">
+            <End Role="Films" EntitySet="Films" />
+            <End Role="FilmsGenres" EntitySet="FilmsGenres" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Subscriptions_dbo_Films_FilmId" Association="Self.FK_dbo_Subscriptions_dbo_Films_FilmId">
+            <End Role="Films" EntitySet="Films" />
+            <End Role="Subscriptions" EntitySet="Subscriptions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_FilmsDatesSeances_dbo_FilmsDates_FilmsDatesId" Association="Self.FK_dbo_FilmsDatesSeances_dbo_FilmsDates_FilmsDatesId">
+            <End Role="FilmsDates" EntitySet="FilmsDates" />
+            <End Role="FilmsDatesSeances" EntitySet="FilmsDatesSeances" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_FilmsDatesSeances_dbo_Seances_SeanceId" Association="Self.FK_dbo_FilmsDatesSeances_dbo_Seances_SeanceId">
+            <End Role="Seances" EntitySet="Seances" />
+            <End Role="FilmsDatesSeances" EntitySet="FilmsDatesSeances" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_ReservationCodes_dbo_FilmsDatesSeances_FilmDateSeanceId" Association="Self.FK_dbo_ReservationCodes_dbo_FilmsDatesSeances_FilmDateSeanceId">
+            <End Role="FilmsDatesSeances" EntitySet="FilmsDatesSeances" />
+            <End Role="ReservationCodes" EntitySet="ReservationCodes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_SoldPlaces_dbo_FilmsDatesSeances_FilmDateSeanceId" Association="Self.FK_dbo_SoldPlaces_dbo_FilmsDatesSeances_FilmDateSeanceId">
+            <End Role="FilmsDatesSeances" EntitySet="FilmsDatesSeances" />
+            <End Role="SoldPlaces" EntitySet="SoldPlaces" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_FilmsGenres_dbo_Genres_GenreId" Association="Self.FK_dbo_FilmsGenres_dbo_Genres_GenreId">
+            <End Role="Genres" EntitySet="Genres" />
+            <End Role="FilmsGenres" EntitySet="FilmsGenres" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Notifications_dbo_Users_UserId" Association="Self.FK_dbo_Notifications_dbo_Users_UserId">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Notifications" EntitySet="Notifications" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_ReservationCodes_dbo_Users_UserId" Association="Self.FK_dbo_ReservationCodes_dbo_Users_UserId">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="ReservationCodes" EntitySet="ReservationCodes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_ReservationPlaces_dbo_ReservationCodes_ReservationCode_Id" Association="Self.FK_dbo_ReservationPlaces_dbo_ReservationCodes_ReservationCode_Id">
+            <End Role="ReservationCodes" EntitySet="ReservationCodes" />
+            <End Role="ReservationPlaces" EntitySet="ReservationPlaces" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Subscriptions_dbo_Users_UserId" Association="Self.FK_dbo_Subscriptions_dbo_Users_UserId">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Subscriptions" EntitySet="Subscriptions" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище KINOdbModelContainer" CdmEntityContainer="KINOdbEntities">
+          <EntitySetMapping Name="C__MigrationHistory">
+            <EntityTypeMapping TypeName="KINOdbModel.C__MigrationHistory">
+              <MappingFragment StoreEntitySet="__MigrationHistory">
+                <ScalarProperty Name="MigrationId" ColumnName="MigrationId" />
+                <ScalarProperty Name="ContextKey" ColumnName="ContextKey" />
+                <ScalarProperty Name="Model" ColumnName="Model" />
+                <ScalarProperty Name="ProductVersion" ColumnName="ProductVersion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Admins">
+            <EntityTypeMapping TypeName="KINOdbModel.Admins">
+              <MappingFragment StoreEntitySet="Admins">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Login" ColumnName="Login" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Dates">
+            <EntityTypeMapping TypeName="KINOdbModel.Dates">
+              <MappingFragment StoreEntitySet="Dates">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Films">
+            <EntityTypeMapping TypeName="KINOdbModel.Films">
+              <MappingFragment StoreEntitySet="Films">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Poster" ColumnName="Poster" />
+                <ScalarProperty Name="Trailer" ColumnName="Trailer" />
+                <ScalarProperty Name="Country" ColumnName="Country" />
+                <ScalarProperty Name="RatingIMDb" ColumnName="RatingIMDb" />
+                <ScalarProperty Name="RatingKinopoisk" ColumnName="RatingKinopoisk" />
+                <ScalarProperty Name="Slogan" ColumnName="Slogan" />
+                <ScalarProperty Name="PosterByte" ColumnName="PosterByte" />
+                <ScalarProperty Name="PremierDate" ColumnName="PremierDate" />
+                <ScalarProperty Name="IsPremiere" ColumnName="IsPremiere" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FilmsDates">
+            <EntityTypeMapping TypeName="KINOdbModel.FilmsDates">
+              <MappingFragment StoreEntitySet="FilmsDates">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="FilmId" ColumnName="FilmId" />
+                <ScalarProperty Name="DateId" ColumnName="DateId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FilmsDatesSeances">
+            <EntityTypeMapping TypeName="KINOdbModel.FilmsDatesSeances">
+              <MappingFragment StoreEntitySet="FilmsDatesSeances">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="FilmsDatesId" ColumnName="FilmsDatesId" />
+                <ScalarProperty Name="SeanceId" ColumnName="SeanceId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FilmsGenres">
+            <EntityTypeMapping TypeName="KINOdbModel.FilmsGenres">
+              <MappingFragment StoreEntitySet="FilmsGenres">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="FilmId" ColumnName="FilmId" />
+                <ScalarProperty Name="GenreId" ColumnName="GenreId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Genres">
+            <EntityTypeMapping TypeName="KINOdbModel.Genres">
+              <MappingFragment StoreEntitySet="Genres">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Notifications">
+            <EntityTypeMapping TypeName="KINOdbModel.Notifications">
+              <MappingFragment StoreEntitySet="Notifications">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Message" ColumnName="Message" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Time" ColumnName="Time" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Prices">
+            <EntityTypeMapping TypeName="KINOdbModel.Prices">
+              <MappingFragment StoreEntitySet="Prices">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Range" ColumnName="Range" />
+                <ScalarProperty Name="Cost" ColumnName="Cost" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ReservationCodes">
+            <EntityTypeMapping TypeName="KINOdbModel.ReservationCodes">
+              <MappingFragment StoreEntitySet="ReservationCodes">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="FilmDateSeanceId" ColumnName="FilmDateSeanceId" />
+                <ScalarProperty Name="TotalPrice" ColumnName="TotalPrice" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ReservationPlaces">
+            <EntityTypeMapping TypeName="KINOdbModel.ReservationPlaces">
+              <MappingFragment StoreEntitySet="ReservationPlaces">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Range" ColumnName="Range" />
+                <ScalarProperty Name="Place" ColumnName="Place" />
+                <ScalarProperty Name="CodeId" ColumnName="CodeId" />
+                <ScalarProperty Name="ReservationCode_Id" ColumnName="ReservationCode_Id" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="Student" ColumnName="Student" />
+                <ScalarProperty Name="Retiree" ColumnName="Retiree" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Seances">
+            <EntityTypeMapping TypeName="KINOdbModel.Seances">
+              <MappingFragment StoreEntitySet="Seances">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SoldPlaces">
+            <EntityTypeMapping TypeName="KINOdbModel.SoldPlaces">
+              <MappingFragment StoreEntitySet="SoldPlaces">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Range" ColumnName="Range" />
+                <ScalarProperty Name="Place" ColumnName="Place" />
+                <ScalarProperty Name="FilmDateSeanceId" ColumnName="FilmDateSeanceId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Subscriptions">
+            <EntityTypeMapping TypeName="KINOdbModel.Subscriptions">
+              <MappingFragment StoreEntitySet="Subscriptions">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="FilmId" ColumnName="FilmId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="KINOdbModel.Users">
+              <MappingFragment StoreEntitySet="Users">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Login" ColumnName="Login" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="PathForTickets" ColumnName="PathForTickets" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

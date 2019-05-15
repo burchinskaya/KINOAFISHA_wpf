@@ -124,7 +124,7 @@
                         <TextBlock Text="Профиль" FontSize="17" VerticalAlignment="Center" Margin="20 0"/>
                     </StackPanel>
                 </ListViewItem>
-                <ListViewItem Height="60">
+                <ListViewItem Height="60" Selected="ListViewItem_Selected">
                     <StackPanel Orientation="Horizontal">
                         <materialDesign:PackIcon Kind="Movie" Width="30" Height="30" VerticalAlignment="Center" Margin="5"/>
                         <TextBlock Text="Сеансы" FontSize="17" VerticalAlignment="Center" Margin="20 0"/>

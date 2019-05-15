@@ -33,10 +33,11 @@ namespace KINOwpf
 
         private void Flash_Quran_Load(object sender, EventArgs e)
         {
-            /*Process process = Process.Start("QuranFull.exe");
-            process.WaitForInputIdle();
-            SбetParent(process.MainWindowHandle);
-            MoveWindow(process.MainWindowHandle, 0, 0, (int)this.Width - 90, (int)this.Height, true);*/
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            Process.Start("C:\\Users\\Admin\\Desktop\\POPCORN.exe");
         }
     }
 }

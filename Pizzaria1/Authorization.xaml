@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:KINOwpf"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d"
-        Title="Window1" Height="487.949" Width="800">
+        Title="Window1" Height="467.943" Width="800" WindowStyle="None">
     <materialDesign:TransitioningContent x:Name="TrainsitionigContentSlide" OpeningEffect="{materialDesign:TransitionEffect SlideInFromTop, Duration=0:0:0.8}">
         <Grid>
             <!--<StackPanel Background="White" Grid.ColumnSpan="4" Grid.RowSpan="8">
@@ -32,6 +32,7 @@
             <Button x:Name="auth" Visibility="Collapsed" BorderThickness="0" Content="Авторизация" Cursor="Hand" Background="{x:Null}" FontSize="30" Grid.ColumnSpan="2" VerticalAlignment="Center" FontFamily="Century Gothic"  Click="auth_Click" Grid.Column="1" Grid.Row="4" Height="50"/>
             <Button x:Name="reg" Visibility="Collapsed" BorderThickness="0" Content="Регистрация" Cursor="Hand" Background="{x:Null}" FontSize="30" Grid.ColumnSpan="2" VerticalAlignment="Center" FontFamily="Century Gothic"  Click="reg_Click" Grid.Column="1" Grid.Row="5" Height="50"/>
             <Grid x:Name="GridPrincipal" Grid.ColumnSpan="4" HorizontalAlignment="Left" Height="457" Grid.RowSpan="8" VerticalAlignment="Top" Width="792"/>
+            <Button Content="x" BorderBrush="{x:Null}" Margin="158,0,0,0" VerticalAlignment="Top" Height="34" Background="{x:Null}" Click="Button_Click_2" Grid.Column="3"/>
 
             <Grid.Background>
                 <VisualBrush>

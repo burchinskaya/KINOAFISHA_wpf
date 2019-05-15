@@ -96,7 +96,7 @@ namespace KINOwpf
 
         public void ChangeState()
         {
-            IsPremiere = false;
+            //IsPremiere = false;
             NotifyObservers();
         }
     }
@@ -249,5 +249,5 @@ namespace KINOwpf
         public virtual Film Film { get; set; }
         public virtual Genre Genre { get; set; }
     }
-    
+
 }

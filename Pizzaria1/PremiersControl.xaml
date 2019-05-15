@@ -55,7 +55,7 @@
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="Button">
-                        <Border Background="White">
+                        <Border Background = "{x:Null}">
                             <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
                         </Border>
                     </ControlTemplate>
@@ -67,7 +67,7 @@
     </UserControl.Resources>
 
     <materialDesign:TransitioningContent x:Name="TrainsitionigContentSlide" OpeningEffect="{materialDesign:TransitionEffect SlideInFromLeft, Duration=0:0:1.3}">
-        <Grid Background="White">
+        <Grid>
 
 
             <Grid.ColumnDefinitions>
@@ -118,7 +118,7 @@
             <Button Style="{DynamicResource SmallButton}" x:Name="plus" Grid.Column="1" Grid.Row="3" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FF6C131F" Margin="0,7,0,6" Height="Auto" Click="AddFilm">
                 <materialDesign:PackIcon Kind="Plus" Width="25" Height="25" Margin="0"/>
             </Button>
-            <Button Style="{DynamicResource SmallButton}" x:Name="minus" Grid.Column="1" Grid.Row="4" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FF6C131F" HorizontalAlignment="Left" Margin="0,6,0,7" Width="47" Height="Auto" Click="DeleteFilm">
+            <Button Style="{DynamicResource SmallButton}" x:Name="minus" Grid.Column="1" Grid.Row="4" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FF6C131F" HorizontalAlignment="Left" Margin="0,6,0,7" Width="50" Height="Auto" Click="DeleteFilm">
                 <materialDesign:PackIcon Kind="Minus" Width="25" Height="25" Margin="0,-5"/>
             </Button>
             <Button Style="{DynamicResource SmallButton}" x:Name="refresh" Grid.Column="1" Grid.Row="5" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FF6C131F"  Margin="0,7,0,6" Height="Auto" Click="EditFilm">

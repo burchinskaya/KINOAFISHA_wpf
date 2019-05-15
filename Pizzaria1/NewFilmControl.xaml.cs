@@ -214,7 +214,7 @@ namespace KINOwpf
 
         private void SaveFilm()
         {
-            if (filmtitle.Text == "" || filmcountry.Text == "" || filmdescription.Text == "" || filmIMDb.Text == "" || filmKinopoisk.Text == "")
+            if (filmtitle.Text == "" || filmcountry.Text == "" || filmdescription.Text == "")
                 MessageBox.Show("Заполните все поля");
             else
             {
@@ -254,7 +254,7 @@ namespace KINOwpf
                             db.FilmsGenres.Add(new FilmsGenres { FilmId = film.Id, GenreId = genresid });
                             db.SaveChanges();
                         }
-
+                        
                         main.GridPrincipal.Children.Clear();
                         try
                         {
@@ -287,7 +287,7 @@ namespace KINOwpf
                             film.PremierDate = DateTime.Parse(filmpremier.Text);
                         }
                         catch { film.PremierDate = DateTime.Now; }
-
+                        
                         if (isPremier)
                             film.IsPremiere = true;
 
@@ -309,7 +309,7 @@ namespace KINOwpf
                             db.SaveChanges();
 
                         }
-
+                        
                         main.GridPrincipal.Children.Clear();
                         try
                         {

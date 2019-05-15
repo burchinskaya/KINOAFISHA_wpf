@@ -52,7 +52,7 @@ namespace KINOwpf
             }
             
             filmsGridRefresh();
-            this.main = main;
+            this.main = MainWindow.getInstance();
 
             zal = new ZalControl(this);
         }
@@ -107,8 +107,8 @@ namespace KINOwpf
                     foreach (var x in genress)
                         s.Append(x + ", ");
                     s.Remove(s.Length - 2, 2);
+                                        
 
-                    
                     filmgenres.Text = s.ToString();
 
                     var dates = db.FilmsDates.Where(x => x.FilmId == film.Id).Select(x=>x.DateId).ToArray();
@@ -235,8 +235,8 @@ namespace KINOwpf
        
         private void seancesList_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-           // try
-            //{
+            try
+            {
                 using (KinoContext db = new KinoContext())
                 {
                     seance = new Seance();
@@ -250,8 +250,8 @@ namespace KINOwpf
                     }
                     filmdateseance = db.FilmsDatesSeances.First(x => x.FilmsDatesId == filmdate.Id && x.SeanceId == seance.Id);
                 }
-            //}
-            //catch (Exception) { }
+            }
+            catch (Exception) { }
         }
 
         private void DeleteFilm(object sender, RoutedEventArgs e)

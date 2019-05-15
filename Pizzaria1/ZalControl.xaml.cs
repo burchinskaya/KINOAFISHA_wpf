@@ -294,8 +294,6 @@ namespace KINOwpf
                         db.Notifications.Add(new Notification { Message = $"Привет, {user.FirstName}!\nВы успешно совершили бронирование №{db.ReservationCodes.First(r => r.Id == codeid).Code} на сумму {totalprice} грн.\n\nФильм: \"{seancess.film.Name}\"\nДата: {seancess.date.Title.ToString("d")}\nСеанс:  {seancess.seance.Title.ToString("t")}", Time = $"{DateTime.Now.Day.ToString("00")}.{DateTime.Now.Month.ToString("00")}\n{DateTime.Now.Hour.ToString("00")}:{DateTime.Now.Minute.ToString("00")}", UserId = user.Id });
  
                     db.SaveChanges();
-                    seancess.main.GridPrincipal.Children.Clear();
-                    seancess.main.GridPrincipal.Children.Add(seancess);
                 }
 
             }

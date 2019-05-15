@@ -38,26 +38,28 @@ namespace KINOwpf
         public PremiersControl(MainWindow main)
         {
             InitializeComponent();
-            if (main.user != null)
+            try
             {
-                plus.Visibility = Visibility.Collapsed;
-                minus.Visibility = Visibility.Collapsed;
-                refresh.Visibility = Visibility.Collapsed;
-                save.Visibility = Visibility.Collapsed;
-            }
-            else subscribe.IsEnabled = false;
+                if (main.user != null)
+                {
+                    plus.Visibility = Visibility.Collapsed;
+                    minus.Visibility = Visibility.Collapsed;
+                    refresh.Visibility = Visibility.Collapsed;
+                    save.Visibility = Visibility.Collapsed;
+                }
+                else subscribe.IsEnabled = false;
 
-            this.main = main;
-            timer = new DispatcherTimer();
-            
-            films = new List<Film>();
+                this.main = main;
+                timer = new DispatcherTimer();
 
-            
-            films = main.allfilms.Where(x => x.IsPremiere == true).ToList();
-            
-            selectedfilm = films.ElementAt(0);
-            FilmRefresh();
+                films = new List<Film>();
 
+
+                films = main.allfilms.Where(x => x.IsPremiere == true).ToList();
+
+                selectedfilm = films.ElementAt(0);
+                FilmRefresh();
+            }catch { }
         }
 
         private void AddFilm(object sender, RoutedEventArgs e)
@@ -185,7 +187,7 @@ namespace KINOwpf
                     foreach (var x in genress)
                         s.Append(x + ", ");
                     s.Remove(s.Length - 2, 2);
-
+                    
                     filmgenres.Text = s.ToString();
                 }
             }
@@ -257,7 +259,7 @@ namespace KINOwpf
                     filmrating.Text = ($"{db.Films.First(x => x.Id == selectedfilm.Id).PremierDate.ToString("d")}  ({days} : {hours.ToString("00")} : {minutes.ToString("00")} : {seconds.ToString("00")})");
             }
             catch { }
-            if (seconds - 1 >= 0)
+          if (seconds - 1 >= 0)
                 seconds--;
             else if (minutes - 1 >= 0)
             {

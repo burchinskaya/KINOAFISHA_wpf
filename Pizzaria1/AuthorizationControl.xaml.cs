@@ -71,7 +71,7 @@ namespace KINOwpf
         
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
-            main.Reg();
+          
         }
 
         private void TrainsitionigContentSlide_ContextMenuClosing(object sender, ContextMenuEventArgs e)

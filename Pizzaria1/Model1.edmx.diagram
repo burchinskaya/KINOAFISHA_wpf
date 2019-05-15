@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="920b7b642ae84a6884c4c8a22d378b5c" Name="Diagram1" ZoomLevel="90">
+        <EntityTypeShape EntityType="KINOdbModel.C__MigrationHistory" Width="1.5" PointX="14.25" PointY="3.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="KINOdbModel.Admins" Width="1.5" PointX="14.5" PointY="10.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="KINOdbModel.Dates" Width="1.5" PointX="10.625" PointY="3.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="KINOdbModel.Films" Width="1.5" PointX="12.5" PointY="3.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="KINOdbModel.FilmsDates" Width="1.5" PointX="8.75" PointY="4.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="KINOdbModel.FilmsDatesSeances" Width="1.5" PointX="6.625" PointY="6.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="KINOdbModel.FilmsGenres" Width="1.5" PointX="14.375" PointY="5.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="KINOdbModel.Genres" Width="1.5" PointX="14.5" PointY="8.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="KINOdbModel.Notifications" Width="1.5" PointX="10.625" PointY="5.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="KINOdbModel.Prices" Width="1.5" PointX="12.5" PointY="10.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="KINOdbModel.ReservationCodes" Width="1.5" PointX="8.875" PointY="9.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="KINOdbModel.ReservationPlaces" Width="1.5" PointX="6.625" PointY="9.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="KINOdbModel.Seances" Width="1.5" PointX="6.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KINOdbModel.SoldPlaces" Width="1.5" PointX="8.625" PointY="7.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="KINOdbModel.Subscriptions" Width="1.5" PointX="12.75" PointY="8.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="KINOdbModel.Users" Width="1.5" PointX="10.75" PointY="8.125" IsExpanded="true" />
+        <AssociationConnector Association="KINOdbModel.FK_dbo_FilmsDates_dbo_Dates_DateId" ManuallyRouted="false" />
+        <AssociationConnector Association="KINOdbModel.FK_dbo_FilmsDates_dbo_Films_FilmId" ManuallyRouted="false" />
+        <AssociationConnector Association="KINOdbModel.FK_dbo_FilmsGenres_dbo_Films_FilmId" ManuallyRouted="false" />
+        <AssociationConnector Association="KINOdbModel.FK_dbo_Subscriptions_dbo_Films_FilmId" ManuallyRouted="false" />
+        <AssociationConnector Association="KINOdbModel.FK_dbo_FilmsDatesSeances_dbo_FilmsDates_FilmsDatesId" ManuallyRouted="false" />
+        <AssociationConnector Association="KINOdbModel.FK_dbo_FilmsDatesSeances_dbo_Seances_SeanceId" ManuallyRouted="false" />
+        <AssociationConnector Association="KINOdbModel.FK_dbo_ReservationCodes_dbo_FilmsDatesSeances_FilmDateSeanceId" ManuallyRouted="false" />
+        <AssociationConnector Association="KINOdbModel.FK_dbo_SoldPlaces_dbo_FilmsDatesSeances_FilmDateSeanceId" ManuallyRouted="false" />
+        <AssociationConnector Association="KINOdbModel.FK_dbo_FilmsGenres_dbo_Genres_GenreId" ManuallyRouted="false" />
+        <AssociationConnector Association="KINOdbModel.FK_dbo_Notifications_dbo_Users_UserId" ManuallyRouted="false" />
+        <AssociationConnector Association="KINOdbModel.FK_dbo_ReservationCodes_dbo_Users_UserId" ManuallyRouted="false" />
+        <AssociationConnector Association="KINOdbModel.FK_dbo_ReservationPlaces_dbo_ReservationCodes_ReservationCode_Id" ManuallyRouted="false" />
+        <AssociationConnector Association="KINOdbModel.FK_dbo_Subscriptions_dbo_Users_UserId" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
